@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Log - JaegerDocs</title><meta name="Description" content="JaegerWang的个人博客"><meta property="og:title" content="Log" />
+<meta property="og:description" content="GoLevelDB —— Log LogWriter 先讲写日志的部分。 WriteableFile 我们先从可写文件讲起，先看定义（这里不讨论他的实现，只讨论如何使用）： class LEVELDB_EXPORT WritableFile { public: WritableFile() = default; WritableFile(const WritableFile&amp;) = delete; WritableFile&amp; operator=(const WritableFile&amp;) = delete; virtual ~WritableFile(); virtual" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/init/" /><meta property="article:section" content="" />
+<meta property="article:published_time" content="2021-04-28T01:13:08&#43;08:00" />
+<meta property="article:modified_time" content="2021-04-28T01:13:08&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Log"/>
+<meta name="twitter:description" content="GoLevelDB —— Log LogWriter 先讲写日志的部分。 WriteableFile 我们先从可写文件讲起，先看定义（这里不讨论他的实现，只讨论如何使用）： class LEVELDB_EXPORT WritableFile { public: WritableFile() = default; WritableFile(const WritableFile&amp;) = delete; WritableFile&amp; operator=(const WritableFile&amp;) = delete; virtual ~WritableFile(); virtual"/>
+<meta name="application-name" content="JaegerDocs">
+<meta name="apple-mobile-web-app-title" content="JaegerDocs"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/init/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Log",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/init\/"
+        },"genre": "page","wordcount":  2138 ,
+        "url": "http:\/\/example.org\/init\/","datePublished": "2021-04-28T01:13:08+08:00","dateModified": "2021-04-28T01:13:08+08:00","publisher": {
+            "@type": "Organization",
+            "name": "jaegerwang"},"author": {
+                "@type": "Person",
+                "name": "jaegerwang"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="JaegerDocs"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="JaegerDocs"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animated pulse faster">Log</h1><div class="content" id="content"><h1 id="goleveldb--log">GoLevelDB —— Log</h1>
+<h1 id="logwriter">LogWriter</h1>
+<p>先讲写日志的部分。</p>
+<h2 id="writeablefile">WriteableFile</h2>
+<p>我们先从可写文件讲起，先看定义（这里不讨论他的实现，只讨论如何使用）：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LEVELDB_EXPORT</span> <span class="n">WritableFile</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">WritableFile</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+  <span class="n">WritableFile</span><span class="p">(</span><span class="k">const</span> <span class="n">WritableFile</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">WritableFile</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">WritableFile</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">WritableFile</span><span class="p">();</span>
+
+  <span class="k">virtual</span> <span class="n">Status</span> <span class="nf">Append</span><span class="p">(</span><span class="k">const</span> <span class="n">Slice</span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Status</span> <span class="nf">Close</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Status</span> <span class="nf">Flush</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Status</span> <span class="nf">Sync</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><p>可写文件是一个抽象类，它定义了四种操作接口：</p>
+<ul>
+<li><code>Append</code>：向文件写缓冲区后追加一个切片</li>
+<li><code>Close</code>：关闭写缓冲区</li>
+<li><code>Flush</code>：通过系统调用，将写缓冲区的内容交给操作系统，让操作系统写入文件</li>
+<li><code>Sync</code>：通过系统调用，强制让操作系统将缓冲区内内容写入文件</li>
+</ul>
+<p>看完这四个接口的定义，会产生一个疑问：<code>Flush</code>/<code>Sync</code>之间区别何在？</p>
+<p>实质上<code>Flush</code>仅仅是将当前程序的写缓冲区中的内容拷贝到了操作系统写缓冲区，内容并没有真正被写入到文件，还需要等待操作系统将其写入文件。在执行<code>Flush</code>后若掉电，内容可能没有被写入。</p>
+<p>而<code>Sync</code>会强制将系统缓冲区的内容写入磁盘，这样可以保证：执行完成后内容已经写入到磁盘。此时掉电，内容不会丢失。了解更多，可以 <a href="https://linux.die.net/man/8/sync" target="_blank" rel="noopener noreffer">flow link</a></p>
+<p>可以看到，两者的区别在于：<code>Flush</code>的安全性较低，但是更快，<code>Sync</code>比较安全，但是较慢，两难全。</p>
+<h2 id="logwriter-1">LogWriter</h2>
+<p>接下来我们讨论 <code>LogWriter</code>， 我们将套路以下几个问题：</p>
+<ul>
+<li>写到哪里？</li>
+<li>写什么？</li>
+<li>特殊情况处理？</li>
+</ul>
+<h3 id="写到哪里">写到哪里</h3>
+<p>是的，写到前面的<code>WritableFile</code>中。</p>
+<h3 id="写什么">写什么</h3>
+<p>这就是这个文章中最重要的部分了，首先我们来学习一下：</p>
+<h4 id="日志信息格式">日志信息格式：</h4>
+<p>日志是由一条条信息组成的，在这里我们将探讨，每一条信息长什么样。</p>
+<p>首先，每条日志想要记录的就是一个字符串，在<code>LevelDB</code>中，字符串就是<code>Slice</code>。其次，为了方便读取、同时为了读取的安全性考虑，为每条日志封装了头部<code>Header</code>。</p>
+<p>封装后的日志结构如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png" /></p>
+<p>其中：</p>
+<ul>
+<li><code>check_sum</code>：与各种网络协议中的<code>check_sum</code>相同，用于检测信息是否出错</li>
+<li><code>lenth</code>：标记数据段长度</li>
+<li><code>type</code>：标记当前段的状态</li>
+</ul>
+<p>在这里，我们会产生一个疑问：这个<code>type</code>是做什么用的呢？这个问题，我们放在下一部分来讲。</p>
+<h4 id="日志文件格式">日志文件格式：</h4>
+<p>接下来，我们来讨论一条条日志信息，在文件中是如何排列的。</p>
+<p>首先，在<code>LevelDB</code>中，我们将日志文件分成若干个<code>Block</code>，其中每个<code>Block</code>大小为<code>32768Byte</code>，如下图所示。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png"
+        title="asd" /></p>
+<p>在理想情况下，日志信息的排列方式如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png" /></p>
+<p>但是，由于日志信息的长度不固定，这里的<code>Block</code>不可能完美的放完每个日志，所以我们需要对特殊情况进行讨论，请看下一小节。</p>
+<h3 id="特殊情况处理">特殊情况处理</h3>
+<h4 id="情况枚举">情况枚举</h4>
+<p>接着上一小节来讲，这里我们来看一下，可能出现哪些情况：</p>
+<ul>
+<li><strong>最好的情况</strong>：当前的Block剩余的空间能够塞下整条<code>Log</code></li>
+<li><strong>放不下的情况</strong>：当前Block剩余的空间不能塞下整条<code>Log</code>，这种情况可以细分为：
+<ul>
+<li><strong>放得下头</strong>：剩余空间大于等于<code>7Byte</code>，能够放下头</li>
+<li><strong>放不下头</strong>：剩余空间小于<code>7Byte</code>，放不下头了</li>
+</ul>
+</li>
+</ul>
+<h4 id="解决方案">解决方案</h4>
+<p>一句话概括：能直接在一个Block中塞进去就直接塞，塞不进去就拆成多条塞。</p>
+<p><code>TCP</code>协议中使用一个字段标记当前块是否为最后一块，这里也是如此：使用<code>type</code>字段标识当前快是哪一块，<code>type</code>字段可选值如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">enum</span> <span class="nc">RecordType</span> <span class="p">{</span>
+  <span class="c1">// Zero is reserved for preallocated files
+</span><span class="c1"></span>  <span class="n">kZeroType</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+
+  <span class="n">kFullType</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+
+  <span class="c1">// For fragments
+</span><span class="c1"></span>  <span class="n">kFirstType</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">kMiddleType</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">kLastType</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">};</span>
+</code></pre></div><p>这里，如果当前条目能够直接塞入当前的Block，那么就是<code>kFullType</code>，否则，就会将当前条目拆分为多条：</p>
+<ul>
+<li>第一条标记为：<code>kFirstType</code></li>
+<li>中间条目标记为：<code>kMiddleType</code></li>
+<li>最后一条标记为：<code>kLastType</code></li>
+</ul>
+<p>为了加强理解，我们看一个张图：它展示了：写入一个长度为<code>2 * BlockSize - HeaderSize</code>的<code>Record</code>后的Log文件</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png" /></p>
+<h3 id="golang-实现"><code>golang</code> 实现</h3>
+<p>请见<a href="https://github.com/goleveldb/goleveldb/tree/develop" target="_blank" rel="noopener noreffer">flow link</a> 目录：</p>
+<ul>
+<li><code>slice</code>：切片实现</li>
+<li><code>file</code>：文件接口声明</li>
+<li><code>log</code>：可写文件实现</li>
+</ul>
+<h1 id="logreader">LogReader</h1>
+<p>再讲读日志的部分，先明确：读日志的目标就是把刚才写进去的东西再读出来。</p>
+<h2 id="sequentialfile">SequentialFile</h2>
+<p>同样，讲一下对应的文件接口：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">LEVELDB_EXPORT</span> <span class="n">SequentialFile</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">SequentialFile</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+  <span class="n">SequentialFile</span><span class="p">(</span><span class="k">const</span> <span class="n">SequentialFile</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">SequentialFile</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">SequentialFile</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="k">virtual</span> <span class="o">~</span><span class="n">SequentialFile</span><span class="p">();</span>
+  <span class="k">virtual</span> <span class="n">Status</span> <span class="nf">Read</span><span class="p">(</span><span class="n">size_t</span> <span class="n">n</span><span class="p">,</span> <span class="n">Slice</span><span class="o">*</span> <span class="n">result</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">scratch</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">virtual</span> <span class="n">Status</span> <span class="nf">Skip</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div><p><code>SequentialFile</code>的中文含义是：顺序文件，意思就是他只能顺序读取，需要提供两个方法：</p>
+<ul>
+<li><code>Read</code>：从文件中读<code>n</code>个<code>byte</code>到<code>Slice</code>，其中<code>scratch</code>类似于缓冲区</li>
+<li><code>Skip</code>：跳过<code>n</code>个<code>byte</code></li>
+</ul>
+<h2 id="logreader-1">LogReader</h2>
+<p><code>LogReader</code>接口定义如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Reader</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="c1">// Interface for reporting errors.
+</span><span class="c1"></span>  <span class="k">class</span> <span class="nc">Reporter</span> <span class="p">{</span>
+   <span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">Reporter</span><span class="p">();</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">Corruption</span><span class="p">(</span><span class="n">size_t</span> <span class="n">bytes</span><span class="p">,</span> <span class="k">const</span> <span class="n">Status</span><span class="o">&amp;</span> <span class="n">status</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="n">Reader</span><span class="p">(</span><span class="n">SequentialFile</span><span class="o">*</span> <span class="n">file</span><span class="p">,</span> <span class="n">Reporter</span><span class="o">*</span> <span class="n">reporter</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">checksum</span><span class="p">,</span>
+         <span class="kt">uint64_t</span> <span class="n">initial_offset</span><span class="p">);</span>
+
+  <span class="n">Reader</span><span class="p">(</span><span class="k">const</span> <span class="n">Reader</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+  <span class="n">Reader</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">Reader</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+
+  <span class="o">~</span><span class="n">Reader</span><span class="p">();</span>
+  <span class="kt">bool</span> <span class="nf">ReadRecord</span><span class="p">(</span><span class="n">Slice</span><span class="o">*</span> <span class="n">record</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">scratch</span><span class="p">);</span>
+  <span class="kt">uint64_t</span> <span class="nf">LastRecordOffset</span><span class="p">();</span>
+ <span class="k">private</span><span class="o">:</span>
+  <span class="c1">// Extend record types with the following special values
+</span><span class="c1"></span>  <span class="k">enum</span> <span class="p">{</span>
+    <span class="n">kEof</span> <span class="o">=</span> <span class="n">kMaxRecordType</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">kBadRecord</span> <span class="o">=</span> <span class="n">kMaxRecordType</span> <span class="o">+</span> <span class="mi">2</span>
+  <span class="p">};</span>
+
+  <span class="kt">bool</span> <span class="nf">SkipToInitialBlock</span><span class="p">();</span>
+
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">ReadPhysicalRecord</span><span class="p">(</span><span class="n">Slice</span><span class="o">*</span> <span class="n">result</span><span class="p">);</span>
+
+  <span class="kt">void</span> <span class="nf">ReportCorruption</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">bytes</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">reason</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">ReportDrop</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">bytes</span><span class="p">,</span> <span class="k">const</span> <span class="n">Status</span><span class="o">&amp;</span> <span class="n">reason</span><span class="p">);</span>
+
+  <span class="n">SequentialFile</span><span class="o">*</span> <span class="k">const</span> <span class="n">file_</span><span class="p">;</span>
+  <span class="n">Reporter</span><span class="o">*</span> <span class="k">const</span> <span class="n">reporter_</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="k">const</span> <span class="n">checksum_</span><span class="p">;</span>
+  <span class="kt">char</span><span class="o">*</span> <span class="k">const</span> <span class="n">backing_store_</span><span class="p">;</span>
+  <span class="n">Slice</span> <span class="n">buffer_</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">eof_</span><span class="p">;</span>  <span class="c1">// Last Read() indicated EOF by returning &lt; kBlockSize
+</span><span class="c1"></span>
+  <span class="kt">uint64_t</span> <span class="n">last_record_offset_</span><span class="p">;</span>
+  <span class="kt">uint64_t</span> <span class="n">end_of_buffer_offset_</span><span class="p">;</span>
+
+  <span class="kt">uint64_t</span> <span class="k">const</span> <span class="n">initial_offset_</span><span class="p">;</span>
+
+  <span class="kt">bool</span> <span class="n">resyncing_</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>它对外提供了以下方法：</p>
+<ul>
+<li><code>ReadRecord</code>：从当前文件中读取一个<code>Record</code></li>
+<li><code>LastRecordOffst</code>：这个就是用于获取当前读取到的最后一个<code>Record</code>的偏移量</li>
+</ul>
+<p>除了对外的方法外，还需要特别在意：</p>
+<ul>
+<li><code>resyncing_</code>：这个置为<code>true</code>时会略过当前的<code>Record</code>，直接读下一个<code>Record</code>（通过忽略当前的<code>MiddleKind,LastKind</code>实现）</li>
+</ul>
+<p>此外，<code>Reader</code>中还定义了一个<code>Reporter</code>接口，用来进行错误报告。Reporter接口下一步再讲。</p>
+<h3 id="readrecord方法实现">ReadRecord方法实现</h3>
+<p>总体来说可以用这样一张图来概括：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png" /></p>
+<p>实质上就是去读一个个被分片了的<code>Record</code>，把他们封装成一个完整的<code>Record</code>。</p>
+<p>这其中，还需要关注一下读物理<code>Record</code>这一步，其过程如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png" /></p>
+<h3 id="代码实现flow-linkhttpsgithubcomgoleveldbgoleveldbtree6189ae1a9683b3553c70ee3171d437482fc74ee6">代码实现：<a href="https://github.com/goleveldb/goleveldb/tree/6189ae1a9683b3553c70ee3171d437482fc74ee6" target="_blank" rel="noopener noreffer">flow Link</a></h3>
+<p>目录：</p>
+<ul>
+<li><code>log</code>： 日志相关功能</li>
+</ul>
+</div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.84.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"id-1":"JaegerDocs","id-2":"JaegerDocs"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

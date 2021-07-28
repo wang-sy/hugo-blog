@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>LevelDB Memtable 设计与实现 - JaegerDocs</title><meta name="Description" content="Memtable即内存表，作为数据写入磁盘前的缓冲区，这篇文章讲解其数据格式与实现原理。"><meta property="og:title" content="LevelDB Memtable 设计与实现" />
+<meta property="og:description" content="Memtable即内存表，作为数据写入磁盘前的缓冲区，这篇文章讲解其数据格式与实现原理。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/leveldb/memtable/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-23T02:13:08&#43;08:00" />
+<meta property="article:modified_time" content="2021-06-23T02:13:08&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LevelDB Memtable 设计与实现"/>
+<meta name="twitter:description" content="Memtable即内存表，作为数据写入磁盘前的缓冲区，这篇文章讲解其数据格式与实现原理。"/>
+<meta name="application-name" content="JaegerDocs">
+<meta name="apple-mobile-web-app-title" content="JaegerDocs"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/posts/leveldb/memtable/" /><link rel="prev" href="http://example.org/posts/leveldb/log/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "LevelDB Memtable 设计与实现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/posts\/leveldb\/memtable\/"
+        },"genre": "posts","keywords": "LevelDB, 数据库","wordcount":  2790 ,
+        "url": "http:\/\/example.org\/posts\/leveldb\/memtable\/","datePublished": "2021-06-23T02:13:08+08:00","dateModified": "2021-06-23T02:13:08+08:00","publisher": {
+            "@type": "Organization",
+            "name": "jaegerwang"},"author": {
+                "@type": "Person",
+                "name": "jaegerwang"
+            },"description": "Memtable即内存表，作为数据写入磁盘前的缓冲区，这篇文章讲解其数据格式与实现原理。"
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="JaegerDocs"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="JaegerDocs"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">LevelDB Memtable 设计与实现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>jaegerwang</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/leveldb/"><i class="far fa-folder fa-fw"></i>LevelDB</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-23">2021-06-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2790 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#wath-is-memtable-">Wath is <code>Memtable</code> ?</a></li>
+    <li><a href="#records-in-memtable">Records in <code>Memtable</code>.</a>
+      <ul>
+        <li><a href="#varint编码"><code>Varint</code>编码</a></li>
+        <li><a href="#sequencenumber--valuetype字段意义"><code>sequenceNumber</code> &amp; <code>valueType</code>字段意义</a></li>
+      </ul>
+    </li>
+    <li><a href="#memtable-底层数据结构"><code>Memtable</code> 底层数据结构</a>
+      <ul>
+        <li><a href="#skiplist-基本原理"><code>skiplist</code> 基本原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#memtable-中完成crud"><code>Memtable</code> 中完成CRUD</a>
+      <ul>
+        <li><a href="#memtable-面对的场景"><code>Memtable</code> 面对的场景</a></li>
+        <li><a href="#memtable-解决问题的方法"><code>Memtable</code> 解决问题的方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#iterator-迭代器"><code>Iterator</code> 迭代器</a></li>
+    <li><a href="#代码-httpwwwgithubcomgoleveldbgoleveldb">代码: <a href="http://www.github.com/goleveldb/goleveldb">http://www.github.com/goleveldb/goleveldb</a></a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="goleveldb--memtable">GoLevelDB —— Memtable</h1>
+<p>在本章节中我们讲解<code>Memtable</code>的设计与实现。</p>
+<h2 id="wath-is-memtable-">Wath is <code>Memtable</code> ?</h2>
+<p><code>Memtable</code>是写入磁盘前的缓存表，在<code>levelDB</code>中一个<code>DB</code>实例会维护两个<code>Memtable</code>：</p>
+<ul>
+<li><code>mem</code>：内存表，用于缓存写入的数据；</li>
+<li><code>imm</code>：只读内存表；</li>
+</ul>
+<p>最新写入的数据会被写入到<code>mem</code>中，当<code>mem</code>写满后，将<code>mem</code>置为<code>imm</code>，并开始将<code>imm</code>同步到磁盘。</p>
+<p>基于上面的情况，我们的<code>memtable</code>只需要有以下三个接口：</p>
+<ul>
+<li><strong><code>Insert</code></strong>：插入一条<code>key-value</code>数据；</li>
+<li><strong><code>Get</code></strong>：通过<code>key</code>获取对应的<code>value</code>；</li>
+<li><strong><code>Iterator</code></strong>：生成内存表迭代器，用于遍历内存表；</li>
+</ul>
+<p>内存表中数据的删除操作，通过特殊的 <strong><code>Insert</code></strong> 操作完成，这个问题我们接下来会继续讨论。</p>
+<h2 id="records-in-memtable">Records in <code>Memtable</code>.</h2>
+<p>接下来讨论每条数据如何在内存表中存储的问题。</p>
+<p>在上面，我们说了<code>Memtable</code>存储的是<code>Key-Value</code>数据，但实质上，<code>Key</code>与<code>Value</code>不会分开存储，而是会整合成一条<code>Record</code>进行存储，这个<code>Record</code>的整合方法如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/record_fmt.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/record_fmt.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/record_fmt.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/record_fmt.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/record_fmt.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/record_fmt.png" /></p>
+<p>其中：</p>
+<ul>
+<li><code>KeyLength</code>：<code>Key</code>部分的字节数；</li>
+<li><code>KeyData</code>：<code>Key</code>部分的数据；</li>
+<li><code>sequenceNumber</code>：序列号（全局唯一）；</li>
+<li><code>valueType</code>：记录类型，有<code>typeDelete</code>, <code>typeData</code>两种，为<code>typeDelete</code>时，这条记录无效；</li>
+<li><code>ValueLength</code>：<code>Value</code>部分的字节数；</li>
+<li><code>ValueData</code>：<code>Value</code>部分的数据；</li>
+</ul>
+<h3 id="varint编码"><code>Varint</code>编码</h3>
+<p>在上面我们可以看到，<code>KeyLength</code>, <code>ValueLenght</code>是通过<code>Varint</code>进行编码的，这里我们简单讲一下什么是<code>Varint</code>以及用它有什么好处；</p>
+<h4 id="传统-int-编码存在的问题">传统 int 编码存在的问题</h4>
+<p>首先，<code>Varint</code>的编码方式非常简单，我们以一个<code>32 bits</code>数字为例：</p>
+<p>在日常场景中，<code>32 bits</code>能够表示的范围是<code>0 ~ 4294967295</code>，需要消耗<code>4 bytes</code>。</p>
+<ul>
+<li>可以看出，传统的编码方式存在缺陷 <strong>：我们大多数时候需要表示的数字只需要两个<code>bytes</code>就可以表示清楚，空间浪费很多！</strong></li>
+</ul>
+<h4 id="varint-编码解决问题的方法">varint 编码解决问题的方法</h4>
+<p>如果我们读数字的时候能一个<code>byte</code>一个<code>byte</code>的读，读到数字结束就不读了，那就能达到：</p>
+<ul>
+<li>节约空间；</li>
+<li>表示原本能够表示的范围；</li>
+</ul>
+<p>这两个要求了！</p>
+<p><code>Varint</code>用每一个<code>byte</code>的最高位表示当前<code>byte</code>是否是这个数字的最后一<code>byte</code>，这样就可以达到上面说的效果了。</p>
+<p>这种方法在小数字高频出现，大数字低频出现的场景中非常有效；在golang中，只需要使用：<code>binarys.Varint</code>方法就可以实现了；</p>
+<h3 id="sequencenumber--valuetype字段意义"><code>sequenceNumber</code> &amp; <code>valueType</code>字段意义</h3>
+<ul>
+<li>
+<p><code>sequenceNumber</code>不由<code>Memtable</code>维护，而是由上层模块传入，该数字全局唯一，随每次插入递增，相当于序列号；</p>
+</li>
+<li>
+<p><code>valueType</code>是用于标记数据是否有效的<code>byte</code>；</p>
+</li>
+</ul>
+<p>到此为止，我们已经了解了<code>Memtable</code>中每条记录长什么样子了；</p>
+<h2 id="memtable-底层数据结构"><code>Memtable</code> 底层数据结构</h2>
+<p>我们的<code>Memtable</code>需要进行<code>Insert</code>和<code>Get</code>操作，并且充当写磁盘的缓存，因此<code>Memtable</code>需要较高的性能。</p>
+<p>目前<code>Insert</code> &amp; <code>Get</code>操作比较快的数据结构有：</p>
+<ul>
+<li>红黑树：读写稳定<code>O(logN)</code>。<a href="https://github.com/wang-sy/rbtree" target="_blank" rel="noopener noreffer">我自己的实现</a></li>
+<li><code>skiplist</code>：在玄学加持下，读写理论<code>O(logN)</code>。</li>
+</ul>
+<p>但是由于红黑树的插入操作需要进行非常复杂的分类讨论，现在的很多开源项目（<code>redis</code>, <code>leveldb</code>等）都选择使用<code>skiplist</code>作为<code>KV</code>存储的底层数据结构；</p>
+<h3 id="skiplist-基本原理"><code>skiplist</code> 基本原理</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/skiplist_struct.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/skiplist_struct.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/skiplist_struct.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/skiplist_struct.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/skiplist_struct.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/skiplist_struct.png" /></p>
+<h4 id="skiplist的特性">skiplist的特性</h4>
+<p>从图的最左侧看起，这个图展示了一个<code>MaxLevel = 4</code>的<code>skiplist</code>，它是由四层链表组成的。</p>
+<p><code>skiplist</code>的特性可以从两个角度来看：</p>
+<ul>
+<li>在每一层内从左往右依次递增；</li>
+<li>从下向上，每一层的元素个数依次递减；</li>
+</ul>
+<h4 id="skiplist的查找">skiplist的查找</h4>
+<p>我们来看一下在这样的结构下，应该如何查找一个特定的元素：</p>
+<p>假设我们需要查询<code>9</code>：</p>
+<ul>
+<li>
+<p>我们从<code>header</code>开始，从高层向下层开始遍历；</p>
+</li>
+<li>
+<p>首先我们从最高层开始，能够找到的第一个数字是7，这个数字小于9，所以我们当前节点移动到<code>7</code>；</p>
+</li>
+<li>
+<p>由于<code>L3</code>的下一个节点是空节点，所以不再继续向前，而是查找<code>L2</code>的下一个节点；</p>
+</li>
+<li>
+<p>由于<code>L2</code>的下一个是10，大于我们想要查找的目标，所以也不再继续向前；</p>
+</li>
+<li>
+<p>经过多轮降低<code>Level</code>后，最终在<code>L0</code>找到9；</p>
+</li>
+</ul>
+<p>之所以这样的查找逻辑成立，是因为：对于同一位置的<code>next</code>节点，层数越高，<code>next</code>节点的值一定越大，在第一层找到最后一个节点后，降低<code>Level</code>的实质是对区间进行进一步缩小。</p>
+<h4 id="skiplist的插入">skiplist的插入</h4>
+<p>看懂了查找后，插入操作就非常简单了，插入只需要使得添加元素后的<code>skiplist</code>满足原有性质即可。</p>
+<p>插入值为12的元素时，具体的操作方法如下：</p>
+<ul>
+<li>随机一个插入元素的层数，在<code>0~3</code>之间；</li>
+<li>找到需要插入元素的位置（在这里是在10之后，在15之前）；</li>
+<li>对<code>0~level</code>之间的层数，分别执行链表的插入操作即可；</li>
+</ul>
+<h2 id="memtable-中完成crud"><code>Memtable</code> 中完成CRUD</h2>
+<p>通过上面的学习，我们知道<code>Memtable</code>通过封装<code>skiplist</code>以维护<code>Key-Value</code>数据对；在这一节中我们学习<code>leveldb</code>如何通过调整数据顺序完成内存表中数据的增删改查操作；</p>
+<h3 id="memtable-面对的场景"><code>Memtable</code> 面对的场景</h3>
+<ul>
+<li><code>Memtable</code>是写磁盘前的缓存；</li>
+<li><code>Memtable</code>只有<code>Insert</code>操作，没有<code>Update</code>，<code>Delete</code>操作，但是有需要实现这样一套功能；</li>
+</ul>
+<h3 id="memtable-解决问题的方法"><code>Memtable</code> 解决问题的方法</h3>
+<h4 id="从skiplist的排序入手">从skiplist的排序入手</h4>
+<p>我们已经知道：</p>
+<ul>
+<li><code>Memtable</code>通过<code>skiplist</code>进行数据存储</li>
+<li><code>skiplist</code>中的一条数据是<code>key/sequnceNumber/valueType/value</code>组成的；</li>
+</ul>
+<p>那么事实上我们可以从<code>skiplist</code>操作时的排序方法入手来解决上面的问题；</p>
+<h4 id="构建的排序方法">构建的排序方法</h4>
+<p>我们希望：</p>
+<ul>
+<li>对于相同的<code>Key</code>，使用拥有最新（也就是最大）<code>sequnceNumber</code>的那条记录，这样就能够完使得每次取出的都是对于该<code>key</code>最后一次操作后的结果；</li>
+<li>取出一条记录后，<code>Memtable</code>能够判断该数据是否被删除；</li>
+</ul>
+<p>排序的方法：</p>
+<ul>
+<li>先取出<code>userkey</code>进行排序；</li>
+<li>对于<code>userkey</code>相同的，通过<code>sequnceNumber</code>排序；</li>
+</ul>
+<p>附加的方法：</p>
+<ul>
+<li>当<code>valueType</code>为<code>typeDelete</code>时，表示该数据已经被删除；</li>
+</ul>
+<p>经过上面的规则，最终的<code>skiplist</code>中顺序排放的元素结构如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/nodes_in_memtable.png"
+        data-srcset="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/nodes_in_memtable.png, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/nodes_in_memtable.png 1.5x, https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/nodes_in_memtable.png 2x"
+        data-sizes="auto"
+        alt="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/nodes_in_memtable.png"
+        title="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/nodes_in_memtable.png" /></p>
+<ul>
+<li>绿色的<code>key1</code>节点的<code>seqNumber</code>较大，通过<code>key1</code>查询时，只会查询到绿色的节点，而不会查询到灰色的节点，这就实现了修改的操作；</li>
+<li>红色的节点的序列号也较大，同时他的<code>type</code>位被标记为<code>Delete</code>，所以在解析时会被认为已删除；</li>
+</ul>
+<h2 id="iterator-迭代器"><code>Iterator</code> 迭代器</h2>
+<p>最后，我们来了解<code>Memtable</code>的迭代器，这个没啥好讲的，迭代器迭代的对象是<code>skiplist</code>，但是由于存储对象相同，感觉迭代的是<code>Memtable</code>；</p>
+<p><code>iterator</code>有以下操作：</p>
+<ul>
+<li><code>next</code>：直接在<code>L0</code>访问下一节点实现；</li>
+<li><code>prev</code>：由于<code>skiplist</code>不是双向链表，需要进行一次搜索，搜索比当前节点小的节点即可；</li>
+<li><code>seek</code>：找到大于等于<code>key</code>的节点，通过<code>skiplist</code>实现；</li>
+</ul>
+<p>还有一些其他操作，都不重要了；</p>
+<h2 id="代码-httpwwwgithubcomgoleveldbgoleveldb">代码: <a href="http://www.github.com/goleveldb/goleveldb">http://www.github.com/goleveldb/goleveldb</a></h2></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-06-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leveldb/">LevelDB</a>,&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/leveldb/log/" class="prev" rel="prev" title="LevelDB Log 设计与实现"><i class="fas fa-angle-left fa-fw"></i>LevelDB Log 设计与实现</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.84.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"id-1":"JaegerDocs","id-2":"JaegerDocs"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
