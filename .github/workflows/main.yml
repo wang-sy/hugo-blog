@@ -37,4 +37,4 @@ jobs:
         shell: bash
         run: |
           tcb login --apiKeyId ${{ secrets.TENCENT_CLOUD_SECRET_ID }} --apiKey ${{ secrets.TENCENT_CLOUD_SECRET_KEY }}
-          tcb hosting deploy ./ -e jaegerdocs-1301596189
+          tcb hosting deploy ./ -e jaegerdocs-2gaxiioz4779613a
