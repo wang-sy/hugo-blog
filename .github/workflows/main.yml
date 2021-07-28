@@ -39,4 +39,4 @@ jobs:
       - name: Deply To OSS
         run: |
           ossutil rm -r -f oss://jaegerdocs/
-          ossutil cp -r -f dist oss://jaegerdocs/
+          ossutil cp -r -f public oss://jaegerdocs/
