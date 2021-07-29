@@ -21,7 +21,9 @@ jobs:
 
       - name: build content to public site
         working-directory: ./
-        run: hugo --minify --gc
+        run: |
+          make build
+          hugo --minify --gc
 
       - name: install nodejs
         uses: actions/setup-node@v2
