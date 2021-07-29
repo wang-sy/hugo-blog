@@ -3,4 +3,4 @@ clean:
 	rm -rf ./themes/LoveIt
 
 build:
-	git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
+	git clone https://github.com/wang-sy/LoveIt.git themes/LoveIt
