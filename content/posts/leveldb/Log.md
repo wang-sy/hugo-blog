@@ -1,5 +1,5 @@
 ---
-title: "LevelDB Log 设计与实现"
+title: "【LevelDB】 Log 设计与实现"
 date: 2021-04-28T01:13:08+08:00
 draft: false
 tags: ["LevelDB", "数据库"]
@@ -9,13 +9,11 @@ description: "Log即日志系统，在写入数据前会先通过Log对写入的
 ---
 <!--more-->
 
-# GoLevelDB —— Log
-
-# LogWriter
+## LogWriter
 
 先讲写日志的部分。
 
-## WriteableFile
+### WriteableFile
 
 我们先从可写文件讲起，先看定义（这里不讨论他的实现，只讨论如何使用）：
 
@@ -51,7 +49,7 @@ class LEVELDB_EXPORT WritableFile {
 
 可以看到，两者的区别在于：`Flush`的安全性较低，但是更快，`Sync`比较安全，但是较慢，两难全。
 
-## LogWriter
+### LogWriter
 
 接下来我们讨论 `LogWriter`， 我们将套路以下几个问题：
 
@@ -59,15 +57,15 @@ class LEVELDB_EXPORT WritableFile {
 - 写什么？
 - 特殊情况处理？
 
-### 写到哪里
+#### 写到哪里
 
 是的，写到前面的`WritableFile`中。
 
-### 写什么
+#### 写什么
 
 这就是这个文章中最重要的部分了，首先我们来学习一下：
 
-#### 日志信息格式：
+##### 日志信息格式：
 
 日志是由一条条信息组成的，在这里我们将探讨，每一条信息长什么样。
 
@@ -75,7 +73,7 @@ class LEVELDB_EXPORT WritableFile {
 
 封装后的日志结构如下：
 
-![](https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png)
+{{< figure src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_fmt.png" title="1. 日志数据格式" >}}
 
 其中：
 
@@ -93,11 +91,11 @@ class LEVELDB_EXPORT WritableFile {
 
 首先，在`LevelDB`中，我们将日志文件分成若干个`Block`，其中每个`Block`大小为`32768Byte`，如下图所示。
 
-![asd](https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png)
+{{< figure src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/log_file_devide_into_block.png" title="2. block排列" >}}
 
 在理想情况下，日志信息的排列方式如下：
 
-![](https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png)
+{{< figure src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/prefer_log_in_block.png" title="3. 预期的数据分布" >}}
 
 但是，由于日志信息的长度不固定，这里的`Block`不可能完美的放完每个日志，所以我们需要对特殊情况进行讨论，请看下一小节。
 
@@ -140,7 +138,7 @@ enum RecordType {
 
 为了加强理解，我们看一个张图：它展示了：写入一个长度为`2 * BlockSize - HeaderSize`的`Record`后的Log文件
 
-![](https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png)
+{{< figure src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/write_in_larger_slice.png" title="4. 跨Block日志条目" >}}
 
 ### `golang` 实现
 
@@ -152,11 +150,11 @@ enum RecordType {
 
 
 
-# LogReader
+## LogReader
 
 再讲读日志的部分，先明确：读日志的目标就是把刚才写进去的东西再读出来。
 
-## SequentialFile
+### SequentialFile
 
 同样，讲一下对应的文件接口：
 
@@ -179,7 +177,7 @@ class LEVELDB_EXPORT SequentialFile {
 - `Read`：从文件中读`n`个`byte`到`Slice`，其中`scratch`类似于缓冲区
 - `Skip`：跳过`n`个`byte`
 
-## LogReader
+### LogReader
 
 `LogReader`接口定义如下：
 
@@ -245,19 +243,16 @@ class Reader {
 
 
 
-### ReadRecord方法实现
+#### ReadRecord方法实现
 
 总体来说可以用这样一张图来概括：
 
-![](https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png)
+{{< figure src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_record.png" title="5. 读取日志流程" >}}
 
 实质上就是去读一个个被分片了的`Record`，把他们封装成一个完整的`Record`。
 
 这其中，还需要关注一下读物理`Record`这一步，其过程如下：
 
-![](https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png)
+{{< figure src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/read_phy_record.png" title="6. 恢复日志流程" >}}
 
-### 代码实现：[flow Link](https://github.com/goleveldb/goleveldb/tree/6189ae1a9683b3553c70ee3171d437482fc74ee6)
-
-目录： 
-- `log`： 日志相关功能
+#### 代码实现：[flow Link](https://github.com/goleveldb/goleveldb/tree/6189ae1a9683b3553c70ee3171d437482fc74ee6)
