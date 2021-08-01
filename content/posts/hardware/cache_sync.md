@@ -5,7 +5,7 @@ draft: false
 tags: ["CPU", "面试"]
 categories: ["hardware"]
 author: "jaegerwang"
-description: "Cache是CPUCore与Memory之间的桥梁，这篇文章讲解Cache如何保证CPU对其进行访问时的数据一致性问题。"
+description: "Cache是CPUCore与Memory之间的桥梁，这篇文章从MIPS单核CPU开始，逐层深入讲解多种情况下的缓存一致性问题。"
 ---
 <!--more-->
 
