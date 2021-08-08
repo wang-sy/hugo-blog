@@ -23,7 +23,7 @@ jobs:
         working-directory: ./
         run: |
           make build
-          hugo --minify --gc
+          hugo --minify --gc -e production
 
       - name: install nodejs
         uses: actions/setup-node@v2
