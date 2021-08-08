@@ -123,7 +123,20 @@ theme = "LoveIt"
     linkToMarkdown = true
     # LoveIt 新增 | 0.2.4 是否在 RSS 中显示全文内容
     rssFullText = false
-
+    
+    # LoveIt 更改 | 0.2.0 KaTeX 数学公式
+    [params.page.math]
+      enable = true
+      # 默认块定界符是 $$ ... $$ 和 \\[ ... \\]
+      blockLeftDelimiter = ""
+      blockRightDelimiter = ""
+      # 默认行内定界符是 $ ... $ 和 \\( ... \\)
+      inlineLeftDelimiter = ""
+      inlineRightDelimiter = ""
+      # KaTeX 插件 copy_tex
+      copyTex = true
+      # KaTeX 插件 mhchem
+      mhchem = true
   
 [menu]
   [[menu.main]]
