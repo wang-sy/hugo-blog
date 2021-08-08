@@ -16,6 +16,13 @@ theme = "LoveIt"
   version = "0.2.X"
   # 网站描述
   description = "JaegerWang的个人博客"
+  ## 配置 utteranc评论,教程参考 https://utteranc.es/
+  [params.utteranc]
+    enable = true
+    repo = "wang-sy/hugo-blog" ##换成自己得
+    issueTerm = "pathname"
+    theme = "github-light"
+
   # TopBar 配置.
   [params.header]
     [params.header.title]
@@ -33,7 +40,7 @@ theme = "LoveIt"
   [params.footer]
     enable = true
     # LoveIt 新增 | 0.2.0 自定义内容 (支持 HTML 格式)
-    custom = ''
+    custom = '<script src="https://utteranc.es/client.js" repo="wang-sy/hugo-blog" issue-term="title" theme="boxy-light" crossorigin="anonymous" async></script>'
     # LoveIt 新增 | 0.2.0 是否显示 Hugo 和主题信息
     hugo = true
     # LoveIt 新增 | 0.2.0 是否显示版权信息
