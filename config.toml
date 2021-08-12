@@ -1,4 +1,4 @@
-baseURL = "https://goleveldb.com"
+baseURL = "https://www.goleveldb.com"
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"
 # 网站语言, 仅在这里 CN 大写
@@ -40,7 +40,7 @@ theme = "LoveIt"
   [params.footer]
     enable = true
     # LoveIt 新增 | 0.2.0 自定义内容 (支持 HTML 格式)
-    custom = '<script src="https://utteranc.es/client.js" repo="wang-sy/hugo-blog" issue-term="title" theme="boxy-light" crossorigin="anonymous" async></script>'
+    custom = '<script src="https://utteranc.es/client.js" repo="wang-sy/hugo-blog" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>'
     # LoveIt 新增 | 0.2.0 是否显示 Hugo 和主题信息
     hugo = true
     # LoveIt 新增 | 0.2.0 是否显示版权信息
