@@ -143,6 +143,27 @@ public class TestMain : MonoBehaviour
 
 
 
+### c) macos 提示 DLLNotFound
+
+> DllNotFoundException: xlua assembly:<unknown assembly> type:<unknown type> member:(null)
+> XLua.LuaEnv..ctor () (at Assets/XLua/Src/LuaEnv.cs:66)
+> CSObjectWrapEditor.Generator..cctor () (at Assets/XLua/Src/Editor/Generator.cs:109)
+> Rethrow as TypeInitializationException: The type initializer for 'CSObjectWrapEditor.Generator' threw an exception.
+
+https://github.com/Tencent/xLua/issues/986 这个issue中有人反馈类似的问题，我们需要对`xlua`进行重新编译。
+
+
+
+进入`XLua`下的目录: `xLua/build`，执行`./make_osx_lua53.sh`
+
+编译出来新的`xlua.bundle`后，替换项目下的`Assets/Plugins/xlua.bundle`
+
+重新打开unity工程即可解决问题。
+
+
+
+
+
 # 二、
 
 
@@ -157,4 +178,3 @@ public class TestMain : MonoBehaviour
         <b>图2：为XLua添加 Define Symbols </b>
     </p>
 </center>
-
