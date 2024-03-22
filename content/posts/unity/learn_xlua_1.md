@@ -1,7 +1,7 @@
 ---
 title: 'unity + xlua 学习'
 date: 2024-03-19T19:16:11+08:00
-draft: true
+draft: false
 categories:
     - Unity
 tags:
@@ -162,19 +162,516 @@ https://github.com/Tencent/xLua/issues/986 这个issue中有人反馈类似的�
 
 
 
-
-
-# 二、
-
+# 二、使用Lua脚本代替 MonoBehavior
 
 
 
+## 1. 导入 LuaBehaviour.cs 
 
-**然后, 修改Define Symbols**:  打开`Edit > Project Settings > Player > OtherSettings > Script Complication > Scriptiong Define Symbols`，添加`HOTFIX_ENABLE`，点击`apply`：
+将`XLua`的`Examples`中的`LuaBehaviour.cs`导入项目：
+
+```c#
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using XLua;
+using System;
+
+[System.Serializable]
+public class Injection
+{
+    public string name;
+    public GameObject value;
+}
+
+[LuaCallCSharp]
+public class LuaBehaviour : MonoBehaviour
+{
+    public TextAsset luaScript;
+    public Injection[] injections;
+
+    internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
+    internal static float lastGCTime = 0;
+    internal const float GCInterval = 1;//1 second 
+
+    private Action luaStart;
+    private Action luaUpdate;
+    private Action luaOnDestroy;
+
+    private LuaTable scriptEnv;
+
+    void Awake()
+    {
+        scriptEnv = luaEnv.NewTable();
+
+        // 为每个脚本设置一个独立的环境，可一定程度上防止脚本间全局变量、函数冲突
+        LuaTable meta = luaEnv.NewTable();
+        meta.Set("__index", luaEnv.Global);
+        scriptEnv.SetMetaTable(meta);
+        meta.Dispose();
+
+        scriptEnv.Set("self", this);
+        foreach (var injection in injections)
+        {
+            scriptEnv.Set(injection.name, injection.value);
+        }
+
+        luaEnv.DoString(luaScript.text, "LuaTestScript", scriptEnv);
+
+        Action luaAwake = scriptEnv.Get<Action>("awake");
+        scriptEnv.Get("start", out luaStart);
+        scriptEnv.Get("update", out luaUpdate);
+        scriptEnv.Get("ondestroy", out luaOnDestroy);
+
+        if (luaAwake != null)
+        {
+            luaAwake();
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        if (luaStart != null)
+        {
+            luaStart();
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (luaUpdate != null)
+        {
+            luaUpdate();
+        }
+        if (Time.time - LuaBehaviour.lastGCTime > GCInterval)
+        {
+            luaEnv.Tick();
+            LuaBehaviour.lastGCTime = Time.time;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (luaOnDestroy != null)
+        {
+            luaOnDestroy();
+        }
+        luaOnDestroy = null;
+        luaUpdate = null;
+        luaStart = null;
+        scriptEnv.Dispose();
+        injections = null;
+    }
+}
+```
+
+
+
+这里：
+
+- 创建了`lua`虚拟机
+- 将`this`当前的这个`gameobject`作为`self`注入到脚本中
+- 如果想要注入其他的`gameobject`，可以通过`Injection`配置项进行配置
+- 通过`DoString`执行`lua`，随后获取`start`, `update`, `ondestroy`, `awake`函数，并且在相应的时机进行调用
+
+
+
+## 2. 创建lua脚本，并且进行绑定
+
+创建`AlwaysPrintLog.lua.txt`
+
+```lua
+function awake()
+	print("lua start...")
+end
+
+function start()
+	print("lua start...")
+end
+
+function update()
+    print("lua: current object is ", self.gameObject.name)
+end
+
+function ondestroy()
+    print("lua destroy")
+end
+```
+
+
+
+将我们的`LuaBehaviour`绑定到`Main Camera`上，然后将刚才写的`Lua`脚本帮上来：
 
 <center>
-    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240319171529548.png" alt="image-20240319171529548" style="zoom:50%;" />
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240321143742697.png" alt="image-20240321143742697" style="zoom: 67%;" />
     <p>
-        <b>图2：为XLua添加 Define Symbols </b>
+        <b>图6：绑定lua脚本</b>
     </p>
 </center>
+
+
+
+## 3. 编译运行
+
+老样子，我们直接编译运行即可：
+
+
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240321144138562.png" alt="image-20240321144138562" style="zoom: 50%;" />
+    <p>
+        <b>图7：lua behaviour 运行结果</b>
+    </p>
+</center>
+
+
+
+## 可能踩到的坑
+
+
+
+### a) lua 执行时找不到 this 下的变量 (attempt to index a nil value)
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/315050563-bb34c094-8491-4cd1-bb8d-9908e5b13f6b.png" style="zoom:50%;" />
+    <p>
+        <b>图8： lua 执行时找不到 this 下的变量 </b>
+    </p>
+</center>
+
+具体的过程我贴到[github]()https://github.com/Tencent/xLua/issues/1129中，简单来说，你需要：
+
+1. 将`Example/ExampleGenConfig.cs`复制到项目下
+2. 修改`UNITY_ANDROID`的宏定义为`UNITY_ANDROID || UNITY_WEBGL`
+
+```c#
+ //黑名单
+    [BlackList]
+    public static List<List<string>> BlackList = new List<List<string>>()  {
+                new List<string>(){"System.Xml.XmlNodeList", "ItemOf"},
+                new List<string>(){"UnityEngine.WWW", "movie"},
+    #if UNITY_WEBGL
+                new List<string>(){"UnityEngine.WWW", "threadPriority"},
+    #endif
+                new List<string>(){"UnityEngine.Texture2D", "alphaIsTransparency"},
+                new List<string>(){"UnityEngine.Security", "GetChainOfTrustValue"},
+                new List<string>(){"UnityEngine.CanvasRenderer", "onRequestRebuild"},
+                new List<string>(){"UnityEngine.Light", "areaSize"},
+                new List<string>(){"UnityEngine.Light", "lightmapBakeType"},
+    #if UNITY_ANDROID || UNITY_WEBGL
+                new List<string>(){"UnityEngine.Light", "SetLightDirty"},
+                new List<string>(){"UnityEngine.Light", "shadowRadius"},
+                new List<string>(){"UnityEngine.Light", "shadowAngle"},
+    #endif
+                new List<string>(){"UnityEngine.WWW", "MovieTexture"},
+                new List<string>(){"UnityEngine.WWW", "GetMovieTexture"},
+                new List<string>(){"UnityEngine.AnimatorOverrideController", "PerformOverrideClipListCleanup"},
+    #if !UNITY_WEBPLAYER
+                new List<string>(){"UnityEngine.Application", "ExternalEval"},
+    #endif
+                new List<string>(){"UnityEngine.GameObject", "networkView"}, //4.6.2 not support
+                new List<string>(){"UnityEngine.Component", "networkView"},  //4.6.2 not support
+                new List<string>(){"System.IO.FileInfo", "GetAccessControl", "System.Security.AccessControl.AccessControlSections"},
+                new List<string>(){"System.IO.FileInfo", "SetAccessControl", "System.Security.AccessControl.FileSecurity"},
+                new List<string>(){"System.IO.DirectoryInfo", "GetAccessControl", "System.Security.AccessControl.AccessControlSections"},
+                new List<string>(){"System.IO.DirectoryInfo", "SetAccessControl", "System.Security.AccessControl.DirectorySecurity"},
+                new List<string>(){"System.IO.DirectoryInfo", "CreateSubdirectory", "System.String", "System.Security.AccessControl.DirectorySecurity"},
+                new List<string>(){"System.IO.DirectoryInfo", "Create", "System.Security.AccessControl.DirectorySecurity"},
+                new List<string>(){"UnityEngine.MonoBehaviour", "runInEditMode"},
+            };
+```
+
+
+
+即可正常运行。
+
+
+
+# 三、使用 lua 实现 c# 接口
+
+上一小节中，我们使用`Lua`实现了一个`MonoBehavior`，实际开发中可能遇到的需求是：存在一个通用的抽象接口，希望能够加载不同的实现。这里不同的实现，希望实现在`Lua`中。这一小节，我们看看怎么样用`Lua`实现一个`C#`的接口。
+
+
+
+## 1. 希望被实现的接口
+
+假如我们想实现一个输入框，用户每次输入内容后，可以点击按钮，我们的程序根据用户不同的输入，进入到不同的逻辑中进行处理。
+
+其逻辑如下（硬写的话）：
+
+```c#
+using TMPro;
+using UnityEngine;
+
+public class UIDemoButtonClickHandler : MonoBehaviour
+{
+    public TMP_Text inputText;
+
+    public void OnClick()
+    {
+        string rawInputText = inputText.text;
+        if (rawInputText.Contains("fuck"))
+        {
+            Debug.Log($"user text: {rawInputText}, do not speak dirty word");
+        }
+        else
+        {
+            Debug.Log($"user text: {rawInputText}");
+        }
+    }
+}
+```
+
+
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240321171011293.png" alt="image-20240321171011293" style="zoom: 67%;" />
+    <p>
+        <b>图9： 根据不同的文本进入不同的逻辑 </b>
+    </p>
+</center>
+
+
+
+## 2. 尝试用lua让它变得更好
+
+上面这样的写法会遇到的问题是：每次维护都需要修改`c#`脚本并且重新编译，很麻烦
+
+我们可以开一个可配置的脚本，往里面配`stopword`和对应的脚本：
+
+```c#
+using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using XLua;
+
+[Serializable]
+public class LuaHandlerItem
+{
+    // 遇到这个词的时候, 走当前lua脚本进行处理.
+    public string stopWord;
+
+    // 使用这个脚本进行处理.
+    public TextAsset luaScript;
+}
+
+public class UIDemoButtonClickHandler : MonoBehaviour
+{
+    public TMP_Text inputText;
+
+    public List<LuaHandlerItem> luaHandlers;
+
+    public TextAsset defaultHandler;
+
+
+    internal static LuaEnv luaEnv = new LuaEnv(); //all lua behaviour shared one luaenv only!
+
+    [CSharpCallLua]
+    delegate void HandleTextFunc(string text);
+
+    public void OnClick()
+    {
+        foreach (LuaHandlerItem tryToUseHandler in luaHandlers)
+        {
+            if (!inputText.text.Contains(tryToUseHandler.stopWord))
+            {
+                continue;
+            }
+
+
+            ExecLuaHandleFunc(tryToUseHandler.luaScript);
+            return;
+        }
+
+        // 没找到.
+        ExecLuaHandleFunc(defaultHandler);
+    }
+
+    private void ExecLuaHandleFunc(TextAsset luaHandler)
+    {
+        LuaTable scriptEnv = luaEnv.NewTable();
+
+        LuaTable meta = luaEnv.NewTable();
+        meta.Set("__index", luaEnv.Global);
+        scriptEnv.SetMetaTable(meta);
+        meta.Dispose();
+
+        luaEnv.DoString(luaHandler.text, "UIDemoTextHandler", scriptEnv);
+
+
+        var handleFunc = scriptEnv.Get<HandleTextFunc>("handleText");
+        handleFunc(inputText.text);
+
+        return;
+    }
+}
+```
+
+
+
+这个脚本中，我们定义了一个可以配置的`List`，`List`中每一个Item代表一个配置项，配置适用的`stopword`和对应的脚本，如果找到了对应的`stopword`，就执行其脚本。
+
+获取到脚本后，我们定义了一个名为`HandleTextFunc`的委托（类似于函数指针），从`lua`中通过函数名将这个委托取出，进行调用即可。
+
+我们为此开发了三个脚本：
+
+**default**
+
+```lua
+function handleText(text)
+    print("lua handle text"..text)
+end
+```
+
+**fuck**
+
+```lua
+function handleText(text)
+    print("do not speak dirty words")
+end
+```
+
+**shit**
+
+```lua
+function handleText(text)
+    print("shit is not a good word")
+end
+```
+
+
+
+接下来在页面上进行绑定：
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240321194257180.png" alt="image-20240321194257180" style="zoom:50%;" />
+    <p>
+        <b>图10： 配置stopword到lua脚本的映射关系</b>
+    </p>
+</center>
+
+绑定完成后，我们编译并且运行即可：
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240321194355918.png" alt="image-20240321194355918" style="zoom:67%;" />
+    <p>
+        <b>图11： 函数式调用结果</b>
+    </p>
+</center>
+
+
+
+## 3. 给脚本系统加上oop
+
+上面的程序能够完成功能，但是不够优雅，我们可以给他搞上oop
+
+**首先定义好接口 & CreateFunc**
+
+```c#
+[CSharpCallLua]
+public interface LuaTextHandler
+{
+    string HandleText(string text);
+}
+
+[CSharpCallLua]
+public delegate LuaTextHandler CreateTextHandlerFunc();
+```
+
+
+
+
+
+**实现读取 & 调用**
+
+```c#
+private void ExecLuaHandleFunc(TextAsset luaHandler)
+{
+    LuaTable scriptEnv = luaEnv.NewTable();
+
+    LuaTable meta = luaEnv.NewTable();
+    meta.Set("__index", luaEnv.Global);
+    scriptEnv.SetMetaTable(meta);
+    meta.Dispose();
+
+    luaEnv.DoString(luaHandler.text, "UIDemoTextHandler", scriptEnv);
+
+
+    CreateTextHandlerFunc createHandlerFunc = scriptEnv.Get<CreateTextHandlerFunc>("CreateTextHandlerFunc");
+    LuaTextHandler handler = createHandlerFunc();
+
+    Debug.Log(handler.HandleText(inputText.text));
+
+    return;
+}
+```
+
+
+
+
+
+**编写lua脚本**
+
+```lua
+local text_handler_mt = {
+    __index = {
+        HandleText = function(self, text)
+            return "lua handle text"..text
+        end
+    }
+}
+
+function CreateTextHandlerFunc()
+    return setmetatable({}, text_handler_mt)
+end
+```
+
+
+
+```lua
+local text_handler_mt = {
+    __index = {
+        HandleText = function(self, text)
+            return "do not speak dirty words"
+        end
+    }
+}
+
+function CreateTextHandlerFunc()
+    return setmetatable({}, text_handler_mt)
+end
+```
+
+
+
+```lua
+local text_handler_mt = {
+    __index = {
+        HandleText = function(self, text)
+            return "shit is not a good word"
+        end
+    }
+}
+
+function CreateTextHandlerFunc()
+    return setmetatable({}, text_handler_mt)
+end
+```
+
+
+
+**接下来运行即可**
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240322105252713.png" alt="image-20240322105252713" style="zoom:67%;" />
+    <p>
+        <b>图11： oop调用结果</b>
+    </p>
+</center>
+
+
+
+
