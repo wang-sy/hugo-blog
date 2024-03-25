@@ -1,5 +1,5 @@
 ---
-title: 'unity + xlua 学习'
+title: '【xlua】基础功能 & 简单热更'
 date: 2024-03-19T19:16:11+08:00
 draft: false
 categories:
@@ -675,3 +675,120 @@ end
 
 
 
+# 四、热更新
+
+回顾第三节中提到的case，我们发现这种使用lua的方式必须预设好在什么地方使用lua才行，但是实际在开发过程中，我们的需求变化的非常迅速，很难预判的这么精准，这时候就可以使用热更新的方案。 这一节中我们进一步完善这个case，利用xlua提供的功能，使用lua直接替代原有的c#代码。
+
+
+
+## 1. 打开HOTFIX特性
+
+打开`Player Settings > Other Settings`，找到里面的`Script Compliation / Scripting Define Symbols` 选项，添加`HOTFIX_ENABLE`选项，点击`Apply`
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240325153312696.png" alt="image-20240325153312696" style="zoom:67%;" />
+    <p>
+        <b>图12： 打开 HOTFIX_ENABLE 编译选项</b>
+    </p>
+</center>
+
+接下来等待`Editor`部分重新编译后，点开`XLua`栏，发现`Hotfix Inject in Editor`选项出现，说明开启成功。
+
+
+
+## 2. 添加检查更新流程
+
+```mermaid
+graph LR
+
+游戏启动-->xlua热更替换
+xlua热更替换-->进入游戏画面
+```
+
+接下来我们在代码中实现上述流程，在游戏启动`Awake`过程中，我们植入可热更的`lua`脚本，对原有的`	c#`代码部分进行替换：
+
+
+
+### a. 将原有逻辑部分标记为可热更
+
+```c#
+[Hotfix]
+public class UIDemoButtonClickHandler : MonoBehaviour
+{
+    ... 中间部分没有变化，直接省略掉了 
+}
+```
+
+在原来的`UIDemoButtonClickHandler`类上，加上`Hotfix`的标签。
+
+
+
+### b. 添加xlua热更替换流程
+
+我们在场景中添加一个空`GameObject`，在其中绑定一个`GameObjet`，在`GameObject`上绑定脚本：
+
+```c#
+using UnityEngine;
+using XLua;
+
+public class CheckXluaHotfixOnGameAwake : MonoBehaviour
+{
+    LuaEnv luaenv = new LuaEnv();
+
+    public TextAsset makeHotfixLuaScript;
+
+    // Awake 在游戏启动阶段对部分逻辑进行hotfix替换.
+    void Awake()
+    {
+        if (makeHotfixLuaScript != null)
+        {
+            luaenv.DoString(makeHotfixLuaScript.text);
+        }
+    }
+}
+```
+
+
+
+接下来编写`lua`脚本对`UIDemoButtonClickHandler`中的逻辑进行替换：
+
+```lua
+xlua.hotfix(CS.UIDemoButtonClickHandler, 'OnClick', function(self)
+    print("lua: no check for text: " .. self.inputText.text)
+end)
+```
+
+
+
+## 3. 重新使用 xlua 生成代码 并注入
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240325155058194.png" alt="image-20240325155058194" style="zoom:67%;" />
+    <p>
+        <b>图13： 使用xlua重新生成代码</b>
+    </p>
+</center>
+
+重新`GenerateCode`, `Hotfix Inject in Editor`即可：
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240325155256174.png" alt="image-20240325155256174" style="zoom:50%;" />
+    <p>
+        <b>图14：inject 成功图示</b>
+    </p>
+</center>
+
+看到上图所示日志就说明成功。
+
+
+
+## 4. 编译运行
+
+直接运行代码，可以观察到原有逻辑已经被替换：
+
+<center>
+    <img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/image-20240325155720432.png" alt="image-20240325155720432" style="zoom:67%;" />
+    <p>
+        <b>图15：被替换后的程序表现</b>
+    </p>
+</center>
