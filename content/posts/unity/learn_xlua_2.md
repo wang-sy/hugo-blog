@@ -592,3 +592,223 @@ int main() {
 
 
 
+## 2. 更复杂的库支持
+
+如果所有库都像上面一样的话，那么lua中第三方库能够提供的服务就有点少了，因为我们在现实中往往面对的问题更加复杂，因此我们需要库能够提供更强的支持。
+
+我们这一节就希望将下面的这个c++类，开放给lua使用：
+
+```c++
+class MyPerson {
+public:
+    MyPerson(std::string  name, int age) :name_(std::move(name)), age_(age) {}
+
+    void set_name(const std::string& name) {name_ = name;}
+    [[nodiscard]] const std::string& get_name() const {return name_;}
+
+    void set_age(int age) {age_ = age;}
+    [[nodiscard]] int get_age() const {return age_;}
+private:
+    std::string name_;
+    int age_;
+};
+```
+
+
+
+### a. 使用userdata
+
+lua中为第三方库提供了userdata的机制，我们可以使用`lua_newuserdata`方法，分配一块指定大小的内存。
+
+这一方法与`malloc`有一点相像，都是会返回一块内存，不同的点在于lua会管理这块内存，我们不需要手动的控制释放的时机。
+
+
+
+按照以前的思路，我们可以这样：
+
+```c++
+#define LUA_MY_PERSON "MyPerson"
+
+static int create_my_person(lua_State* L) {
+    *reinterpret_cast<MyPerson**>(lua_newuserdata(L, sizeof(MyPerson*))) = new MyPerson(luaL_checkstring(L, 1),
+                                                                                        static_cast<int>(luaL_checkinteger(L, 2)));
+    luaL_setmetatable(L, LUA_MY_PERSON);
+
+    return 1;
+}
+
+static int my_person_get_age(lua_State* L){
+    auto* my_person = (*reinterpret_cast<MyPerson**>(luaL_checkudata(L, 1, LUA_MY_PERSON)));
+    lua_pushinteger(L, my_person->get_age());
+    return 1;
+}
+
+
+static int my_person_set_age(lua_State* L){
+    auto* my_person = (*reinterpret_cast<MyPerson**>(luaL_checkudata(L, 1, LUA_MY_PERSON)));
+    my_person->set_age(static_cast<int>(luaL_checkinteger(L, 2)));
+    return 0;
+}
+
+
+static int my_person_get_name(lua_State* L){
+    auto* my_person = (*reinterpret_cast<MyPerson**>(luaL_checkudata(L, 1, LUA_MY_PERSON)));
+    lua_pushstring(L, my_person->get_name().c_str());
+    return 1;
+}
+
+
+static int my_person_set_name(lua_State* L){
+    auto* my_person = (*reinterpret_cast<MyPerson**>(luaL_checkudata(L, 1, LUA_MY_PERSON)));
+    my_person->set_name(luaL_checkstring(L, 2));
+    return 0;
+}
+```
+
+
+
+但是在注册这个函数时，我们可以花些心思，注册方式的不同，决定了用户的使用方式，如果我们使用原来的方式的话，那么我们的库就只能这么使用：
+
+```lua
+mylib = require('mylib')
+
+my_person = mylib.create_my_person("jack", 18)
+print(mylib.get_name(my_person))
+```
+
+这种类似于c的面向对象风格在实际使用中并不好用。
+
+因此我们可以利用`metatable`，在lua中，每一个对象上可以绑一个`metatable`，我们这里不对`metatable`的机制做过多的讲解，可以理解为其它语言中的继承。
+
+这里我们的目标其实是拼出来一个这样的内容：
+
+```c++
+local my_person_metatable = {
+    __index = {
+        get_name = function(self)
+            return self.name
+        end,
+        get_age = function(self)
+            return self.age
+        end,
+        set_name = function(self, name)
+            self.name = name
+        end,
+        set_age = function(self, age)
+            self.age = age
+        end
+    }
+}
+
+local mylib = {
+    create_my_person = function(name, age)
+        my_person = {
+            name = name,
+            age = age,
+        }
+        return setmetatable(my_person, my_person_metatable)
+    end
+}
+
+
+myperson = mylib.create_my_person('jack', 18)
+
+print(myperson:get_name() .. "'s age is " .. myperson:get_age())
+
+myperson:set_age(30)
+myperson:set_name('jacck')
+
+print(myperson:get_name() .. "'s age is " .. myperson:get_age())
+```
+
+那么对应的注册代码就非常好实现了：
+
+```c++
+
+static const luaL_Reg my_lib[] = {
+        {"create_my_person", create_my_person},
+        {nullptr, nullptr}
+};
+
+static const luaL_Reg my_person_funcs[] = {
+        {"get_age", my_person_get_age},
+        {"set_age", my_person_set_age},
+        {"get_name", my_person_get_name},
+        {"set_name", my_person_set_name},
+        {nullptr, nullptr}
+};
+
+
+int luaopen_mylib(lua_State* L)
+{
+    luaL_newmetatable(L, LUA_MY_PERSON);
+
+    lua_newtable(L);
+    luaL_setfuncs(L, my_person_funcs, 0);
+    lua_setfield(L, -2, "__index");
+
+    lua_pop(L, -1);
+
+    luaL_newlib(L, my_lib);
+    return 1;
+}
+```
+
+
+
+编写代码进行验证，即可得到相同的结果：
+
+```c++
+#include <iostream>
+
+extern "C" {
+#include "lauxlib.h"
+#include "lualib.h"
+}
+
+extern "C" {
+LUALIB_API int luaopen_rapidjson(lua_State *L);
+}
+
+
+static const std::string kLuaCode = R"(
+local mylib = require('mylib')
+
+my_person = mylib.create_my_person("jack", 18)
+print(my_person:get_name().."'s age is "..my_person:get_age())
+
+my_person:set_age(30)
+my_person:set_name('jacck')
+
+print(my_person:get_name().."'s age is "..my_person:get_age())
+)";
+
+
+LUALIB_API int luaopen_mylib(lua_State* L);
+
+int main() {
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
+
+    luaL_requiref(L, "rapidjson", luaopen_rapidjson, 0);
+    lua_pop(L, 1);
+
+    luaL_requiref(L, "mylib", luaopen_mylib, 0);
+    lua_pop(L, 1);
+
+    luaL_dostring(L, kLuaCode.c_str());
+
+    return 0;
+}
+
+```
+
+
+
+> ```c++
+> jack's age is 18
+> jacck's age is 30
+> ```
+
+
+
