@@ -1552,5 +1552,208 @@ public object Remove(int pos)
 
 
 
-#### 调用 c# 对象
+#### 调用 c# 对象相关的方法
+
+**函数调用**
+
+回顾一下之前`c#`中的函数：
+
+```c++
+[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+static int SetName(IntPtr L)
+{
+    try
+    {
+        ToLua.CheckArgsCount(L, 2);
+        MyPerson obj = (MyPerson)ToLua.CheckObject<MyPerson>(L, 1);
+        string arg0 = ToLua.CheckString(L, 2);
+        obj.SetName(arg0);
+        return 0;
+    }
+    catch (Exception e)
+    {
+        return LuaDLL.toluaL_exception(L, e);
+    }
+}
+```
+
+这个函数被注释为[`MonoPInvokeCallbackAttribute`](http://docs.go-mono.com/?link=T%3aMonoTouch.MonoPInvokeCallbackAttribute)，文档中对其的解释为：
+
+> 此属性对静态函数有效，Mono 的预前编译器使用它来生成支持本机调用回调到托管代码所需的代码。
+>
+> 您必须指定调用此代码的委托的类型。
+
+
+
+所以相当于编译时通过`Marshal.GetFunctionPointerForDelegate(func);`拿到的函数地址，给到`luavm`后调用时，会调用到`Mono`编译器生成的可以直接调用的地址。
+
+**getter setter & 下标访问**
+
+当我们使用`RegVar`注册成员变量时，会将该变量的`getter`, `setter`注册到该类的`metatable`下的`&getter_tag`, `&setter_tag`这两个`key`对应的`table`中。
+
+在lua中访问成员时，由于该成员没有在`table`中注册，因此会将成员访问请求转发到`__index`中进行处理。
+
+在`BeginClass`时，为所有`metatable`设置了`__index = class_index_event()`，接下来就看一下`class_index_event`是如何与之前注册的表一起工作的：
+
+```c++
+
+static int class_index_event(lua_State *L)
+{
+	int t = lua_type(L, 1);
+
+    if (t == LUA_TUSERDATA)
+    {    	
+        lua_getfenv(L,1);
+
+        if (!lua_rawequal(L, -1, TOLUA_NOPEER))     // stack: t k env
+        {
+            // 由于这里只讨论userdata，所以不会进入到这个分支，直接忽略.
+        };
+
+        lua_settop(L,2);                                        				
+    	lua_pushvalue(L, 1);						// stack: obj key obj	
+
+    	while (lua_getmetatable(L, -1) != 0)
+    	{        	
+        	lua_remove(L, -2);						// stack: obj key mt
+
+			if (lua_isnumber(L,2))                 	// check if key is a numeric value
+			{		    
+		    	lua_pushstring(L,".geti");
+		    	lua_rawget(L,-2);                   // stack: obj key mt func
+
+		    	if (lua_isfunction(L,-1))
+		    	{
+		        	lua_pushvalue(L,1);
+		        	lua_pushvalue(L,2);
+		        	lua_call(L,2,1);
+		        	return 1;
+		    	}
+			}
+			else
+        	{
+        		lua_pushvalue(L, 2);			    // stack: obj key mt key
+        		lua_rawget(L, -2);					// stack: obj key mt value        
+
+        		if (!lua_isnil(L, -1))
+        		{
+        	    	return 1;
+        		}
+                
+                lua_pop(L, 1);
+				lua_pushlightuserdata(L, &gettag);        	
+        		lua_rawget(L, -2);					//stack: obj key mt tget
+
+        		if (lua_istable(L, -1))
+        		{
+        	    	lua_pushvalue(L, 2);			//stack: obj key mt tget key
+        	    	lua_rawget(L, -2);           	//stack: obj key mt tget value 
+
+        	    	if (lua_isfunction(L, -1))
+        	    	{
+        	        	lua_pushvalue(L, 1);
+        	        	lua_call(L, 1, 1);
+        	        	return 1;
+        	    	}                    
+        		}
+    		}
+
+            lua_settop(L, 3);
+        }
+
+        lua_settop(L, 2);
+        int *udata = (int*)lua_touserdata(L, 1);
+
+        if (*udata == LUA_NULL_USERDATA)
+        {
+            return luaL_error(L, "attemp to index %s on a nil value", lua_tostring(L, 2));   
+        }
+        
+        if (toluaflags & FLAG_INDEX_ERROR)
+        {
+            return luaL_error(L, "field or property %s does not exist", lua_tostring(L, 2));
+        }        
+    }
+    else if(t == LUA_TTABLE)
+    {
+        // 由于这里只讨论userdata，所以不会进入到这个分支，直接忽略.
+    }
+
+    lua_pushnil(L);
+    return 1;
+}
+```
+
+
+
+在用户编写: `my_object.target_field`时，实际上由`class_index_event(my_object, "target_field")`方法进行处理。
+
+结合之前`BeginClass`部分谈到的根据继承关系设置的`metatable`链条来看，这里会顺着`c#`中的继承关系逐层向下进行查找。
+
+对于每一层`metatable`：
+
+- 尝试直接在`metatable`中通过用户访问的字段直接获取到值，如果能拿到的话就直接返回
+- 尝试获取`getter_table`，并且在`getter_table`中通过相应的字段找到`getter`函数，如果能找到的话，就调用这个`getter`函数，获取值。
+- 什么都找不到就去找下一层继承关系的`metatable`(也就是对当前的`metatable`取`metatable`)
+
+当遍历完所有的`metatable`后，还是找不到时，就返回`nil`。
+
+
+
+可以看到，这里可能会存在用户使用数字下标来访问的情况，如：
+
+```lua
+local num = myarray[10]
+```
+
+这种情况就会在递归寻找的过程中查找是否有`.geti`方法，如果有的话就用`.geti`来获取。
+
+
+
+其中`.geti`实现如下：
+
+```c#
+// System_ArrayWrap.cs
+[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+static int get_Item(IntPtr L)
+{
+    try
+    {
+        Array obj = ToLua.ToObject(L, 1) as Array;
+
+        if (obj == null)
+        {
+            throw new LuaException("trying to index an invalid object reference");                
+        }
+
+        int index = (int)LuaDLL.lua_tointeger(L, 2);
+
+        if (index >= obj.Length)
+        {
+            throw new LuaException("array index out of bounds: " + index + " " + obj.Length);                
+        }
+
+        Type t = obj.GetType().GetElementType();
+
+        if (t.IsValueType)
+        {
+            // 特殊类型的处理, 这里不重要，忽略...
+        }            
+
+        object val = obj.GetValue(index);
+        ToLua.Push(L, val);
+        return 1;
+    }
+    catch (Exception e)
+    {
+        return LuaDLL.toluaL_exception(L, e);
+    }
+}
+```
+
+
+
+
+
+
 
