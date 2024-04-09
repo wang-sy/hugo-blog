@@ -1,5 +1,5 @@
 ---
-title: '【xlua】基础功能 & 简单热更'
+title: '【unity】XLua 基础功能 & 简单热更'
 date: 2024-03-19T19:16:11+08:00
 draft: false
 categories:
@@ -7,6 +7,7 @@ categories:
 tags:
     - Unity
     - XLua
+    - Lua
 ---
 XLua 实现了 unity 中 c# 脚本与 lua 脚本之间的互调功能，并且提供了热更的能力，这篇文章学习 XLua 的使用
 <!--more-->
