@@ -615,7 +615,7 @@ print_person_info(person)
 local person = MyPerson.Create('jack', 18)
 
 function print_person_info(print_person)
-    print(print_person:GetName()..""'s age is ""..print_person:GetAge())
+    print(print_person:GetName().."'s age is "..print_person:GetAge())
 end
 
 print_person_info(person)
