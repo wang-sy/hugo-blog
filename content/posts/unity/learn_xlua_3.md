@@ -1753,7 +1753,64 @@ static int get_Item(IntPtr L)
 
 
 
+# 3. 对于现有方法的讨论
+
+以刚才的`MyPerson`为例，他在整体流程中的所有相关操作如下：
 
 
 
+<center>
+<img src="https://goleveldb-1301596189.cos.ap-guangzhou.myqcloud.com/UserData%20%E7%9B%B8%E5%85%B3%E4%BA%A4%E4%BA%92%20(1).svg" alt="UserData 相关交互 (1)" />
+    <p>
+        <b>图10：userdata 相关交互流程</b>
+    </p>
+</center>
 
+现有方案中，`luavm`与`c#`, `luavm`与`tolua_runtime`之间的交互中，涉及到`app`环境与`wasm`环境的切换，可能产生问题，可能产生问题的环节有三个：
+
+1. `tolua_runtime`调用`lua_newuserdata`；
+2. `luavm`通过`RegFunction`提供的函数指针调用`wasm`中的`c#`函数；
+3. `luavm`垃圾回收时的内存释放；
+
+
+
+接下来分开讨论。
+
+
+
+### a.  lua_newuserdata的处理
+
+`lua_newuserdata`的功能类似于`malloc`，会根据调用者给出的参数开出一片特定大小的内存，返回给调用者，供调用者使用。
+
+在当前项目中的问题是`lua_newuserdata`开的内存开在`app`环境中，而`runtime`跑在`wasm`中，无法直接使用。
+
+能够解决这个问题的方法是，`lua_newuserdata`时同时开一片同样大小的`wasm`的内存，作为返回值返回给调用者，但是在实现的细节上存在两种方案：
+
+1. 在`wrap`层调用`lua_newuserdata`后，调用`wasm`的内存分配器再分配同一片内存；
+2. 直接修改`lua`中`lua_newuserdata`的代码，在调用`luaM_realloc_`时动手，只分配`wasm`内存，而不分配`app`内存，这样可以少用点空间。
+
+
+
+第二种方案会侵入到`luavm`内部，可能会有一些开发量，但是好处是能节省一半的空间，目前没有仔细研究`protobuf`,`json`这些第三方库创建`userdata`的逻辑，如果只使用`tolua`中的`userdata`只记录`index`的这种思路的话，那这里改动能节省下来的空间就很小，但是如果会大片大片开内存的话，还是能节省很多空间的。
+
+### b. luavm到wasm的函数调用
+
+这里`il2cpp`后，拿到委托的地址，应该是一个`wasm`地址，那这里 `luavm`从 `table`拿到回调地址后调用时是如何处理的？能够正确的完成调用么？
+
+
+
+### c. lauvm垃圾回收时正确回收内存
+
+lua5.1中的垃圾回收分为以下阶段：
+
+> lu_byte gcstate：存放GC状态，分别有以下几种：GCSpause（暂停阶段）、GCSpropagate（传播阶段，用于遍历灰色节点检查对象的引用情况）、GCSsweepstring（字符串回收阶段），GCSsweep（回收阶段，用于对除了字符串之外的所有其他数据类型进行回收）和GCSfinalize（终止阶段）。
+
+
+
+在`gcsweep`阶段会对执行`freeobj`来对各种类型的数据进行回收，对于`userdata`会直接`luaM_freemem(L, o, sizeudata(gco2u(o)));`来回收相应的内存。
+
+随后在`gcsfinalize`阶段，会遍历所有待`finalize`的`userdata`，对于每一个`userdata`，调用`GCTM`方法尝试调用其注册的`__gc`方法。
+
+
+
+在这个阶段如果不做修改，`luavm`是无法正确释放`wasm`中的内存的，这里比较合适的方案就是在`GCTM`这个阶段，执行完`__gc`方法后，对于要`finalize`的对象，找到其对应的`wasm`地址，进行释放。
