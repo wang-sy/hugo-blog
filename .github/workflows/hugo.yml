@@ -49,4 +49,11 @@ jobs:
           SECRET_KEY: ${{ secrets.COS_SECRETKEY }}
         run: |
           pip install --upgrade tencentcloud-sdk-python
-          python flush-dns.py -i $SECRET_ID -k $SECRET_KEY          
+          python scripts/flush-dns.py -i $SECRET_ID -k $SECRET_KEY      
+      
+      - name: Upload to COS
+        env:
+          BAIDU_TOKEN: ${{  secrets.BAIDU_TOKEN }}
+        run: |
+          pip install requests lxml
+          python scripts/registry-to-baidu.py
