@@ -15,6 +15,8 @@ urls = ""
 for url in tree.xpath("//sitemapindex:loc/text()", namespaces=namespaces):
     urls += url.strip() + '\n'
 
+print(urls)
+
 headers = {
     'User-Agent': 'curl/7.12.1',
     'Host': 'data.zz.baidu.com',
