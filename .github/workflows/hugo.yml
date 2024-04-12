@@ -51,7 +51,7 @@ jobs:
           pip install --upgrade tencentcloud-sdk-python
           python scripts/flush-dns.py -i $SECRET_ID -k $SECRET_KEY      
       
-      - name: Upload to COS
+      - name: Registry to Baidu
         env:
           BAIDU_TOKEN: ${{  secrets.BAIDU_TOKEN }}
         run: |
