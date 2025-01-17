@@ -6,7 +6,7 @@ theme = "LoveIt"
 # 网站标题
 title = "SaiyuDoc"
 # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
-description = "Raylan yao的博客"
+description = "Saiyu Wang 的博客"
 
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
 languageCode = "zh-CN"
@@ -16,7 +16,7 @@ languageName = "简体中文"
 hasCJKLanguage = true
 
 # 默认每页列表显示的文章数目
-paginate = 12
+paginate = 10
 
 # 是否使用 robots.txt
 enableRobotsTXT = true
@@ -25,6 +25,10 @@ enableRobotsTXT = true
 # 是否使用 emoji 代码
 enableEmoji = true
 
+# 分页设置
+[pagination]
+  pagerSize = 10
+  
 # 作者配置
 [author]
   name = "王赛宇"
@@ -40,7 +44,11 @@ enableEmoji = true
   # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
   post = ""
   # LoveIt 新增 | 0.2.5 是否为标题显示打字机动画
-  typeit = false
+  typeit = true
+
+[params.Author]
+  name = "王赛宇"
+  email = "panicwang@outlook.com"
 
 # 主页配置
 [params.home]
