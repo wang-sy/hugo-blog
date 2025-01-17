@@ -33,15 +33,18 @@ jobs:
         run: hugo --minify
 
       - name: Configure coscmd
-        env:
-          SECRET_ID: ${{ secrets.COS_SECRETID }}
-          SECRET_KEY: ${{ secrets.COS_SECRETKEY }}
-          BUCKET: ${{ secrets.HUGO_COS_BUCKET }}
-          REGION: ${{ secrets.HUGO_COS_REGION }}
-        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
-
-      - name: Upload to COS
-        run: coscmd upload -rfs --delete public/ /
+        uses: Bluefissure/tencent-cos-action@v0.1.1
+        with:
+          # COSCMD args, detail: https://cloud.tencent.com/document/product/436/10976
+          args: upload -rfs --delete public/ /
+          # Tencent cloud SecretId, from: https://console.cloud.tencent.com/cam/capi
+          secret_id: ${{ secrets.COS_SECRETID }}
+          # Tencent cloud SecretKey, from: https://console.cloud.tencent.com/cam/capi
+          secret_key: ${{ secrets.COS_SECRETKEY }}
+          # COS bucket name
+          bucket: ${{ secrets.HUGO_COS_BUCKET }}
+          # COS bucket region, detail: https://cloud.tencent.com/document/product/436/6224
+          region: ${{ secrets.HUGO_COS_REGION }}
 
       - name: Flush CDN
         env:
