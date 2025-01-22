@@ -34,6 +34,27 @@ enableEmoji = true
   name = "王赛宇"
   email = "panicwang@outlook.com"
 
+[params.footer]
+    enable = true
+    # Custom content (HTML format is supported)
+    # 自定义内容 (支持 HTML 格式)
+    custom = '<script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?c4b67d619017210e246bec7396f800e8";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>'
+    # whether to show Hugo and theme info
+    # 是否显示 Hugo 和主题信息
+    hugo = true
+    # whether to show copyright info
+    # 是否显示版权信息
+    copyright = true
+    # whether to show the author
+    # 是否显示作者
+    author = true
+    # site creation time
+    # 网站创立年份
+    since = 2019
+    # ICP info only in China (HTML format is supported)
+    # ICP 备案信息，仅在中国使用 (支持 HTML 格式)
+    icp = "<a href='https://beian.miit.gov.cn/'>粤ICP备2024224097号</a>"
+
 [params.header.title]
   # LOGO 的 URL
   logo = "/favicon.svg"
