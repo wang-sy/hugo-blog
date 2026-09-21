@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="984" viewBox="0 0 1200 984" role="img" aria-labelledby="rdfig-11-title rdfig-11-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-11-title">页面、CLI 和流水线，查询同一张发布单</title>
+<desc id="rdfig-11-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-11-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-11-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="984" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 14</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >页面、CLI 和流水线，查询同一张发布单</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >发布请求超时以后，三个入口都使用原操作编号继续查。</text>
+<rect x="56" y="213" width="328" height="112" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="220" y="259" fill="#233C35" font-size="30" font-weight="650" text-anchor="middle" >交互界面</text>
+<text x="220" y="296" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="middle" >人来操作</text>
+<path d="M 220 335 V 369 H 600" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"  />
+<rect x="436" y="213" width="328" height="112" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="600" y="259" fill="#233C35" font-size="30" font-weight="650" text-anchor="middle" >命令行</text>
+<text x="600" y="296" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="middle" >人或 Agent 调用</text>
+<path d="M 600 335 V 369 H 600" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"  />
+<rect x="816" y="213" width="328" height="112" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="980" y="259" fill="#233C35" font-size="30" font-weight="650" text-anchor="middle" >流水线</text>
+<text x="980" y="296" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="middle" >流程自动调用</text>
+<path d="M 980 335 V 369 H 600" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"  />
+<path d="M 600 370 V 406" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-11-arrow)" />
+<rect x="48" y="419" width="1104" height="278" rx="22" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="80" y="469" fill="#DCEBB1" font-size="30" font-weight="650" text-anchor="start" >同一张持久化操作记录 · A</text>
+<rect x="80" y="506" width="320" height="81" rx="12" fill="#365346" stroke="none" stroke-width="1"/>
+<text x="240" y="557" fill="#FFFFFF" font-size="29" font-weight="550" text-anchor="middle" >发布到哪个目标</text>
+<rect x="440" y="506" width="320" height="81" rx="12" fill="#365346" stroke="none" stroke-width="1"/>
+<text x="600" y="557" fill="#FFFFFF" font-size="29" font-weight="550" text-anchor="middle" >使用哪一份制品</text>
+<rect x="800" y="506" width="320" height="81" rx="12" fill="#365346" stroke="none" stroke-width="1"/>
+<text x="960" y="557" fill="#FFFFFF" font-size="29" font-weight="550" text-anchor="middle" >执行到哪个阶段</text>
+<line x1="80" y1="613" x2="1120" y2="613" stroke="#577364" stroke-width="1" />
+<text x="600" y="658" fill="#D6E2D7" font-size="28" font-weight="500" text-anchor="middle" >目标与环境    ·    不可变摘要    ·    当前操作状态</text>
+<text x="49" y="752" fill="#233C35" font-size="24" font-weight="600" text-anchor="start" >查询结果分别处理</text>
+<rect x="48" y="777" width="258" height="68" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<circle cx="78" cy="811" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="103" y="821" fill="#316650" font-size="26" font-weight="600" text-anchor="start" >成功</text>
+<rect x="330" y="777" width="258" height="68" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<circle cx="360" cy="811" r="5" fill="#B65D3D" stroke="none" stroke-width="1"/>
+<text x="385" y="821" fill="#B65D3D" font-size="26" font-weight="600" text-anchor="start" >失败</text>
+<rect x="612" y="777" width="258" height="68" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<circle cx="642" cy="811" r="5" fill="#45677F" stroke="none" stroke-width="1"/>
+<text x="667" y="821" fill="#45677F" font-size="26" font-weight="600" text-anchor="start" >结果未知</text>
+<rect x="894" y="777" width="258" height="68" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="924" cy="811" r="5" fill="#6D7D75" stroke="none" stroke-width="1"/>
+<text x="949" y="821" fill="#6D7D75" font-size="26" font-weight="600" text-anchor="start" >仍在执行</text>
+<text x="600" y="888" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="middle" >仍在执行就继续等待；结果未知，先恢复对原操作的查询。</text>
+<line x1="48" y1="912" x2="1152" y2="912" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="946" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="954" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >人和 Agent 使用同一个操作编号，避免各自再发起一次发布。</text>
+</svg>

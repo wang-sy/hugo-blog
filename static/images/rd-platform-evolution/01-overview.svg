@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="974" viewBox="0 0 1200 974" role="img" aria-labelledby="rdfig-01-title rdfig-01-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-01-title">只改了入口，为什么要部署三个服务？</title>
+<desc id="rdfig-01-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-01-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-01-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="974" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 01</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >只改了入口，为什么要部署三个服务？</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >一次生成请求，会连续经过入口、任务调度和 Agent 执行。</text>
+<rect x="48" y="211" width="352" height="32" rx="8" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="224" y="233" fill="#B65D3D" font-size="17" font-weight="600" text-anchor="middle" >原来：按代码改动生成部署任务</text>
+<rect x="48" y="270" width="340" height="151" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="72" y="316" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >请求入口</text>
+<text x="72" y="358" fill="#316650" font-size="24" font-weight="500" text-anchor="start" >改过代码，触发部署</text>
+<text x="72" y="392" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >个人实例已就绪</text>
+<rect x="430" y="270" width="340" height="151" rx="16" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="454" y="316" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >任务调度</text>
+<text x="454" y="358" fill="#B65D3D" font-size="24" font-weight="500" text-anchor="start" >代码没改，未带上部署</text>
+<text x="454" y="392" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >个人环境缺少这一段</text>
+<rect x="812" y="270" width="340" height="151" rx="16" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="836" y="316" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >Agent 执行</text>
+<text x="836" y="358" fill="#B65D3D" font-size="24" font-weight="500" text-anchor="start" >代码没改，未带上部署</text>
+<text x="836" y="392" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >个人环境缺少这一段</text>
+<path d="M 397 344 H 418" fill="none" stroke="#B65D3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-01-warm)" />
+<path d="M 778 344 H 801" fill="none" stroke="#B65D3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-01-warm)" stroke-dasharray="4 6"/>
+<text x="50" y="462" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >入口的部署成功，不能补上调度和执行缺失的个人实例。</text>
+<line x1="48" y1="496" x2="1152" y2="496" stroke="#D7DED5" stroke-width="2" />
+<rect x="48" y="528" width="352" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="224" y="550" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >调整后：把三个服务编成发布组</text>
+<rect x="48" y="587" width="1104" height="139" rx="18" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="68" y="608" width="300" height="97" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="218" y="648" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >请求入口</text>
+<text x="218" y="684" fill="#316650" font-size="23" font-weight="500" text-anchor="middle" >同一条个人环境</text>
+<path d="M 377 658 H 438" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-01-arrow)" />
+<rect x="450" y="608" width="300" height="97" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="600" y="648" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >任务调度</text>
+<text x="600" y="684" fill="#316650" font-size="23" font-weight="500" text-anchor="middle" >同一条个人环境</text>
+<path d="M 759 658 H 820" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-01-arrow)" />
+<rect x="832" y="608" width="300" height="97" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="982" y="648" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >Agent 执行</text>
+<text x="982" y="684" fill="#316650" font-size="23" font-weight="500" text-anchor="middle" >同一条个人环境</text>
+<text x="600" y="763" fill="#233C35" font-size="24" font-weight="400" text-anchor="middle" >请求与异步消息继续携带环境标记，后续调用留在这条链里。</text>
+<rect x="48" y="797" width="382" height="72" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<rect x="452" y="797" width="700" height="72" rx="12" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="72" y="842" fill="#233C35" font-size="26" font-weight="600" text-anchor="start" >构建：三个服务并行</text>
+<text x="478" y="842" fill="#DCEBB1" font-size="26" font-weight="600" text-anchor="start" >部署：Agent 执行 → 任务调度 → 请求入口</text>
+<line x1="48" y1="902" x2="1152" y2="902" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="936" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="944" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >没有改代码的依赖服务，也可能是这次联调必须部署的部分。</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="872" viewBox="0 0 1200 872" role="img" aria-labelledby="rdfig-08-title rdfig-08-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-08-title">CI 交出精确制品，平台接过发布执行</title>
+<desc id="rdfig-08-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-08-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-08-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="872" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 10</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >CI 交出精确制品，平台接过发布执行</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >移交执行权之后，平台失败也不能回到旧脚本直接改集群。</text>
+<rect x="48" y="225" width="340" height="189" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="72" y="261" fill="#316650" font-size="22" font-weight="650" text-anchor="start" >01</text>
+<line x1="115" y1="254" x2="361" y2="254" stroke="#D7DED5" stroke-width="1" />
+<text x="72" y="309" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >CI 构建</text>
+<text x="72" y="352" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >记录源码与构建输入</text>
+<text x="72" y="386" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >产出并推送镜像</text>
+<rect x="430" y="225" width="340" height="189" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="454" y="261" fill="#316650" font-size="22" font-weight="650" text-anchor="start" >02</text>
+<line x1="497" y1="254" x2="743" y2="254" stroke="#D7DED5" stroke-width="1" />
+<text x="454" y="309" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >登记制品</text>
+<text x="454" y="352" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >使用不可变 digest</text>
+<text x="454" y="386" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >关联成功的构建任务</text>
+<rect x="812" y="225" width="340" height="189" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="836" y="261" fill="#316650" font-size="22" font-weight="650" text-anchor="start" >03</text>
+<line x1="879" y1="254" x2="1125" y2="254" stroke="#D7DED5" stroke-width="1" />
+<text x="836" y="309" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >平台检查目标</text>
+<text x="836" y="352" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >确认目标与环境</text>
+<text x="836" y="386" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >检查制品及配置兼容性</text>
+<rect x="812" y="489" width="340" height="189" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="836" y="525" fill="#316650" font-size="22" font-weight="650" text-anchor="start" >04</text>
+<line x1="879" y1="518" x2="1125" y2="518" stroke="#D7DED5" stroke-width="1" />
+<text x="836" y="573" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >Worker 执行</text>
+<text x="836" y="616" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >先保存操作记录</text>
+<text x="836" y="650" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >再更新目标与等待就绪</text>
+<rect x="430" y="489" width="340" height="189" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="454" y="525" fill="#316650" font-size="22" font-weight="650" text-anchor="start" >05</text>
+<line x1="497" y1="518" x2="743" y2="518" stroke="#D7DED5" stroke-width="1" />
+<text x="454" y="573" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >核对运行版本</text>
+<text x="454" y="616" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >读取实际实例</text>
+<text x="454" y="650" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >与本次发布的制品对照</text>
+<rect x="48" y="489" width="340" height="189" rx="16" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="72" y="525" fill="#DCEBB1" font-size="22" font-weight="650" text-anchor="start" >06</text>
+<line x1="115" y1="518" x2="361" y2="518" stroke="#527060" stroke-width="1" />
+<text x="72" y="573" fill="#FFFFFF" font-size="29" font-weight="650" text-anchor="start" >业务验收</text>
+<text x="72" y="616" fill="#D8E3D8" font-size="24" font-weight="400" text-anchor="start" >验证用户路径</text>
+<text x="72" y="650" fill="#D8E3D8" font-size="24" font-weight="400" text-anchor="start" >确认最终业务结果</text>
+<path d="M 394 320 H 420" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-08-arrow)" />
+<path d="M 776 320 H 802" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-08-arrow)" />
+<path d="M 982 423 V 479" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-08-arrow)" />
+<path d="M 804 583 H 779" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-08-arrow)" />
+<path d="M 422 583 H 397" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-08-arrow)" />
+<text x="960" y="460" fill="#316650" font-size="21" font-weight="500" text-anchor="end" >继续核对</text>
+<rect x="48" y="716" width="1104" height="66" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="72" y="758" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >声明预发布阶段的服务，晋级时复用同一制品和兼容配置的验证依据。</text>
+<line x1="48" y1="800" x2="1152" y2="800" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="834" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="842" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >构建、发布、运行与业务验收，回答的是不同的问题。</text>
+</svg>

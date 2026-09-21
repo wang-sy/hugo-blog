@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="868" viewBox="0 0 1200 868" role="img" aria-labelledby="rdfig-04-title rdfig-04-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-04-title">HTTP 返回 200，生成任务可能才刚入队</title>
+<desc id="rdfig-04-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-04-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-04-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="868" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 06</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >HTTP 返回 200，生成任务可能才刚入队</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >入口接收、单次调用与最终任务，各自记录成功和失败。</text>
+<text x="74" y="226" fill="#6D7D75" font-size="20" font-weight="500" text-anchor="start" >发生在哪一层</text>
+<text x="374" y="226" fill="#6D7D75" font-size="20" font-weight="500" text-anchor="start" >这一层确认了什么</text>
+<text x="808" y="226" fill="#6D7D75" font-size="20" font-weight="500" text-anchor="start" >接下来仍需确认</text>
+<rect x="48" y="249" width="1104" height="86" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<path d="M 83 314 V 341 H 97 V 361" fill="none" stroke="#316650" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  />
+<circle cx="83" cy="292" r="18" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="83" y="300" fill="#FFFFFF" font-size="22" font-weight="650" text-anchor="middle" >1</text>
+<text x="172" y="302" fill="#233C35" font-size="27" font-weight="600" text-anchor="start" >HTTP 入口</text>
+<text x="374" y="301" fill="#233C35" font-size="25" font-weight="400" text-anchor="start" >返回 200，接收生成请求</text>
+<line x1="778" y1="271" x2="778" y2="313" stroke="#D7DED5" stroke-width="1" />
+<text x="808" y="300" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >任务是否真正开始</text>
+<rect x="48" y="348" width="1104" height="86" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<path d="M 97 413 V 440 H 111 V 460" fill="none" stroke="#316650" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  />
+<circle cx="97" cy="391" r="18" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="97" y="399" fill="#FFFFFF" font-size="22" font-weight="650" text-anchor="middle" >2</text>
+<text x="172" y="401" fill="#233C35" font-size="27" font-weight="600" text-anchor="start" >队列与调度</text>
+<text x="374" y="400" fill="#233C35" font-size="25" font-weight="400" text-anchor="start" >任务开始执行，记录等待</text>
+<line x1="778" y1="370" x2="778" y2="412" stroke="#D7DED5" stroke-width="1" />
+<text x="808" y="399" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >执行是否持续推进</text>
+<rect x="48" y="447" width="1104" height="86" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<path d="M 111 512 V 539 H 125 V 559" fill="none" stroke="#316650" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  />
+<circle cx="111" cy="490" r="18" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="111" y="498" fill="#FFFFFF" font-size="22" font-weight="650" text-anchor="middle" >3</text>
+<text x="172" y="500" fill="#233C35" font-size="27" font-weight="600" text-anchor="start" >模型与工具</text>
+<text x="374" y="499" fill="#233C35" font-size="25" font-weight="400" text-anchor="start" >执行状态、失败与重试</text>
+<line x1="778" y1="469" x2="778" y2="511" stroke="#D7DED5" stroke-width="1" />
+<text x="808" y="498" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >是否产出可交付结果</text>
+<rect x="48" y="546" width="1104" height="86" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<path d="M 125 611 V 638 H 139 V 658" fill="none" stroke="#316650" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  />
+<circle cx="125" cy="589" r="18" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="125" y="597" fill="#FFFFFF" font-size="22" font-weight="650" text-anchor="middle" >4</text>
+<text x="172" y="599" fill="#233C35" font-size="27" font-weight="600" text-anchor="start" >产物交付</text>
+<text x="374" y="598" fill="#233C35" font-size="25" font-weight="400" text-anchor="start" >输出存在，并且能够使用</text>
+<line x1="778" y1="568" x2="778" y2="610" stroke="#D7DED5" stroke-width="1" />
+<text x="808" y="597" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >是否完成用户的目标</text>
+<rect x="48" y="645" width="1104" height="86" rx="12" fill="#233C35" stroke="none" stroke-width="1"/>
+<circle cx="139" cy="688" r="18" fill="#DCEBB1" stroke="none" stroke-width="1"/>
+<text x="139" y="696" fill="#233C35" font-size="22" font-weight="650" text-anchor="middle" >5</text>
+<text x="172" y="698" fill="#FFFFFF" font-size="27" font-weight="600" text-anchor="start" >业务结果</text>
+<text x="374" y="697" fill="#DCEBB1" font-size="25" font-weight="400" text-anchor="start" >用户目标与最终结果一致</text>
+<line x1="778" y1="667" x2="778" y2="709" stroke="#4E685C" stroke-width="1" />
+<text x="808" y="696" fill="#D5E0D7" font-size="23" font-weight="400" text-anchor="start" >按业务口径完成验收</text>
+<line x1="48" y1="796" x2="1152" y2="796" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="830" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="838" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >最终失败率按任务结果统计；一次调用重试失败，单独留在调用层。</text>
+</svg>

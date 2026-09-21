@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="926" viewBox="0 0 1200 926" role="img" aria-labelledby="rdfig-07-title rdfig-07-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-07-title">85 起告警，为什么发出了 460 条通知？</title>
+<desc id="rdfig-07-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-07-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-07-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="926" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 09</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >85 起告警，为什么发出了 460 条通知？</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >一次 24 小时审查的样本：发送未见重复，事件几乎都被归为 P1。</text>
+<rect x="48" y="224" width="360" height="433" rx="22" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="78" y="272" fill="#DCEBB1" font-size="29" font-weight="650" text-anchor="start" >当时查到的情况</text>
+<circle cx="85" cy="315" r="4" fill="#DCEBB1" stroke="none" stroke-width="1"/>
+<text x="104" y="323" fill="#FFFFFF" font-size="25" font-weight="400" text-anchor="start" >85 起新告警</text>
+<circle cx="85" cy="372" r="4" fill="#DCEBB1" stroke="none" stroke-width="1"/>
+<text x="104" y="380" fill="#FFFFFF" font-size="25" font-weight="400" text-anchor="start" >其中 84 起为 P1</text>
+<circle cx="85" cy="429" r="4" fill="#DCEBB1" stroke="none" stroke-width="1"/>
+<text x="104" y="437" fill="#FFFFFF" font-size="25" font-weight="400" text-anchor="start" >送达了 460 条通知</text>
+<circle cx="85" cy="486" r="4" fill="#DCEBB1" stroke="none" stroke-width="1"/>
+<text x="104" y="494" fill="#FFFFFF" font-size="25" font-weight="400" text-anchor="start" >账本未见重复提交</text>
+<line x1="78" y1="549" x2="378" y2="549" stroke="#4D6859" stroke-width="1" />
+<text x="78" y="591" fill="#CDDCCD" font-size="24" font-weight="400" text-anchor="start" >事件分类与多人通知，</text>
+<text x="78" y="626" fill="#CDDCCD" font-size="24" font-weight="400" text-anchor="start" >共同放大了打断次数</text>
+<line x1="408" y1="463" x2="481" y2="463" stroke="#316650" stroke-width="3" />
+<circle cx="489" cy="463" r="8" fill="#316650" stroke="none" stroke-width="1"/>
+<path d="M 489 463 V 300 H 557" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-07-arrow)" />
+<path d="M 489 463 H 557" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-07-arrow)" />
+<path d="M 489 463 V 626 H 557" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-07-arrow)" />
+<rect x="570" y="236" width="582" height="129" rx="16" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<rect x="592" y="256" width="46" height="32" rx="8" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="615" y="278" fill="#B65D3D" font-size="17" font-weight="600" text-anchor="middle" >P1</text>
+<text x="655" y="281" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >即时通知</text>
+<text x="592" y="332" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >正式环境：持续服务失败、最终任务失败</text>
+<rect x="570" y="399" width="582" height="129" rx="16" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="592" y="419" width="46" height="32" rx="8" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="615" y="441" fill="#316650" font-size="17" font-weight="600" text-anchor="middle" >P2</text>
+<text x="655" y="444" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >按小时汇总</text>
+<text x="592" y="495" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >性能、容量与缓存成本，按影响调整</text>
+<rect x="570" y="562" width="582" height="129" rx="16" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<rect x="592" y="582" width="46" height="32" rx="8" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="615" y="604" fill="#45677F" font-size="17" font-weight="600" text-anchor="middle" >P3</text>
+<text x="655" y="607" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >只保留事件</text>
+<text x="592" y="658" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >额度不足等预期限制，留下诊断线索</text>
+<rect x="48" y="726" width="1104" height="97" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="76" y="765" fill="#316650" font-size="23" font-weight="600" text-anchor="start" >通知投递</text>
+<text x="212" y="765" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >单独确认是否送达</text>
+<line x1="585" y1="744" x2="585" y2="774" stroke="#D7DED5" stroke-width="1" />
+<text x="618" y="765" fill="#316650" font-size="23" font-weight="600" text-anchor="start" >恢复通知</text>
+<text x="754" y="765" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >P1 默认等待 5 分钟</text>
+<text x="76" y="802" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >信号严重程度、所处环境、消息送达情况，各自表达清楚。</text>
+<line x1="48" y1="854" x2="1152" y2="854" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="888" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="896" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >先修正事件分类，再分别核对引擎应用状态与通知是否送达。</text>
+</svg>

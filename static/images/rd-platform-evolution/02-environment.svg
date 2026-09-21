@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="756" viewBox="0 0 1200 756" role="img" aria-labelledby="rdfig-02-title rdfig-02-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-02-title">环境选择，要跟着请求走到底</title>
+<desc id="rdfig-02-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-02-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-02-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="756" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 04</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >环境选择，要跟着请求走到底</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >个人入口只是起点，后面的调度、执行与异步链路仍需保持一致。</text>
+<rect x="48" y="203" width="1104" height="258" rx="20" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="72" y="223" width="250" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="197" y="245" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >一次请求的环境上下文</text>
+<rect x="72" y="277" width="226" height="104" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="185" y="317" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >个人入口</text>
+<text x="185" y="353" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >识别环境选择</text>
+<path d="M 304 329 H 338" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-02-arrow)" />
+<rect x="350" y="277" width="226" height="104" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="463" y="317" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >任务调度</text>
+<text x="463" y="353" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >选择对应链路</text>
+<path d="M 582 329 H 616" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-02-arrow)" />
+<rect x="628" y="277" width="226" height="104" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="741" y="317" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >任务执行</text>
+<text x="741" y="353" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >延续环境身份</text>
+<path d="M 860 329 H 894" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-02-arrow)" />
+<rect x="906" y="277" width="226" height="104" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="1019" y="317" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >模板与沙箱</text>
+<text x="1019" y="353" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >按策略选依赖</text>
+<path d="M 185 384 V 417 H 1019 V 389" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-02-arrow)" stroke-dasharray="6 6"/>
+<rect x="336" y="397" width="528" height="40" rx="0" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="600" y="426" fill="#316650" font-size="24" font-weight="500" text-anchor="middle" >经过异步消息，环境标记仍然保留</text>
+<rect x="48" y="496" width="540" height="153" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<rect x="612" y="496" width="540" height="153" rx="16" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<rect x="72" y="516" width="204" height="32" rx="8" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="174" y="538" fill="#316650" font-size="17" font-weight="600" text-anchor="middle" >允许共享的依赖</text>
+<text x="74" y="582" fill="#233C35" font-size="23" font-weight="400" text-anchor="start" >按明确策略共享或回退</text>
+<text x="74" y="616" fill="#233C35" font-size="23" font-weight="400" text-anchor="start" >入口独立，不等于所有资源都隔离</text>
+<rect x="636" y="516" width="220" height="32" rx="8" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="746" y="538" fill="#B65D3D" font-size="17" font-weight="600" text-anchor="middle" >缺少关键个人服务</text>
+<text x="638" y="582" fill="#233C35" font-size="23" font-weight="400" text-anchor="start" >显式报错，或先补齐依赖</text>
+<text x="638" y="616" fill="#233C35" font-size="23" font-weight="400" text-anchor="start" >把边界说明白，联调结果才可信</text>
+<line x1="48" y1="684" x2="1152" y2="684" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="718" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="726" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >环境隔离的边界，需要覆盖真实的调用链。</text>
+</svg>

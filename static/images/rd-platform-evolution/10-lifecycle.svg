@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="980" viewBox="0 0 1200 980" role="img" aria-labelledby="rdfig-10-title rdfig-10-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-10-title">同名的新实例，不能被旧任务删掉</title>
+<desc id="rdfig-10-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-10-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-10-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="980" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 13</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >同名的新实例，不能被旧任务删掉</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >环境关闭后重开：名称可以复用，资源 UID 和环境代次不能复用。</text>
+<rect x="48" y="211" width="1104" height="225" rx="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<rect x="72" y="233" width="204" height="32" rx="8" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="174" y="255" fill="#B65D3D" font-size="17" font-weight="600" text-anchor="middle" >旧环境 · 第一代</text>
+<text x="72" y="311" fill="#233C35" font-size="28" font-weight="600" text-anchor="start" >合并请求关闭</text>
+<text x="72" y="355" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >阻止继续发布</text>
+<text x="72" y="390" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >进入回收流程</text>
+<path d="M 378 348 H 438" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-10-arrow)" />
+<text x="454" y="311" fill="#233C35" font-size="28" font-weight="600" text-anchor="start" >等待并冻结</text>
+<text x="454" y="355" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >等待已有执行租约结束</text>
+<text x="454" y="390" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >冻结目标，阻止旧执行者</text>
+<path d="M 760 348 H 820" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-10-arrow)" />
+<text x="836" y="311" fill="#233C35" font-size="28" font-weight="600" text-anchor="start" >精确删除</text>
+<text x="836" y="355" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >使用记录的 UID A</text>
+<text x="836" y="390" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >核对删除结果</text>
+<path d="M 980 444 V 470 H 602 V 486" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-10-arrow)" />
+<rect x="48" y="499" width="1104" height="204" rx="18" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="72" y="519" width="224" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="184" y="541" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >重开以后 · 新一代</text>
+<text x="72" y="594" fill="#233C35" font-size="28" font-weight="600" text-anchor="start" >等旧代回收结束</text>
+<text x="72" y="637" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >没有确认已删除</text>
+<text x="72" y="672" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >就先等待</text>
+<path d="M 378 631 H 438" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-10-arrow)" />
+<text x="454" y="594" fill="#233C35" font-size="28" font-weight="600" text-anchor="start" >登记新一代</text>
+<text x="454" y="637" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >新的创建操作</text>
+<text x="454" y="672" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >新的资源 UID B</text>
+<path d="M 760 631 H 820" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-10-arrow)" />
+<text x="836" y="594" fill="#233C35" font-size="28" font-weight="600" text-anchor="start" >允许复用名称</text>
+<text x="836" y="637" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >名称可以相同</text>
+<text x="836" y="672" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >实际对象已经不同</text>
+<rect x="48" y="743" width="1104" height="129" rx="18" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="72" y="785" fill="#233C35" font-size="27" font-weight="600" text-anchor="start" >迟到的旧清理任务再次执行</text>
+<text x="72" y="833" fill="#B65D3D" font-size="27" font-weight="600" text-anchor="start" >删除条件：UID A     ≠     当前新资源：UID B</text>
+<rect x="898" y="779" width="230" height="60" rx="12" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="1013" y="819" fill="#DCEBB1" font-size="27" font-weight="650" text-anchor="middle" >拒绝删除</text>
+<line x1="48" y1="908" x2="1152" y2="908" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="942" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="950" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >确认旧资源已删除后才复用名称；重试始终核对本代资源身份。</text>
+</svg>

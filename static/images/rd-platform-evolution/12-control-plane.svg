@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1010" viewBox="0 0 1200 1010" role="img" aria-labelledby="rdfig-12-title rdfig-12-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-12-title">业务请求怎么走，发布指令怎么走</title>
+<desc id="rdfig-12-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-12-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-12-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1010" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 02</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >业务请求怎么走，发布指令怎么走</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >应用服务承接用户请求；正式控制面负责更新这些服务。</text>
+<rect x="48" y="207" width="1104" height="167" rx="18" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="72" y="225" width="110" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="127" y="247" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >业务请求</text>
+<rect x="72" y="281" width="172" height="66" rx="10" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="158" y="323" fill="#233C35" font-size="27" font-weight="600" text-anchor="middle" >产品用户</text>
+<path d="M 256 314 H 352" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<rect x="364" y="281" width="236" height="66" rx="10" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="482" y="323" fill="#233C35" font-size="27" font-weight="600" text-anchor="middle" >业务入口</text>
+<path d="M 612 314 H 780" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<text x="696" y="295" fill="#316650" font-size="21" font-weight="500" text-anchor="middle" >按环境路由</text>
+<rect x="794" y="227" width="334" height="124" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="961" y="264" fill="#233C35" font-size="26" font-weight="650" text-anchor="middle" >调度 / 执行等应用服务</text>
+<text x="961" y="305" fill="#316650" font-size="22" font-weight="400" text-anchor="middle" >个人 · 共享测试</text>
+<text x="961" y="336" fill="#316650" font-size="22" font-weight="400" text-anchor="middle" >预发布 · 正式</text>
+<rect x="48" y="417" width="1104" height="461" rx="18" fill="#FFFFFF" stroke="#D7DED5" stroke-width="2"/>
+<rect x="72" y="439" width="145" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="144.5" y="461" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >正式控制面</text>
+<text x="240" y="462" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >验证身份、保存操作、领取执行、核对结果</text>
+<rect x="72" y="511" width="248" height="108" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="96" y="550" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >页面 / CLI</text>
+<text x="96" y="588" fill="#316650" font-size="22" font-weight="400" text-anchor="start" >校验人的身份与权限</text>
+<rect x="72" y="666" width="248" height="108" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="96" y="705" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >CI</text>
+<text x="96" y="743" fill="#45677F" font-size="22" font-weight="400" text-anchor="start" >核对构建任务与来源</text>
+<path d="M 332 565 H 376" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<path d="M 332 721 H 354 V 584 H 376" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<rect x="388" y="511" width="220" height="263" rx="14" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="498" y="551" fill="#233C35" font-size="29" font-weight="650" text-anchor="middle" >平台 HTTP</text>
+<line x1="412" y1="574" x2="584" y2="574" stroke="#D7DED5" stroke-width="2" />
+<text x="498" y="618" fill="#233C35" font-size="23" font-weight="400" text-anchor="middle" >解析发布目标</text>
+<text x="498" y="657" fill="#233C35" font-size="23" font-weight="400" text-anchor="middle" >登记精确制品</text>
+<text x="498" y="696" fill="#233C35" font-size="23" font-weight="400" text-anchor="middle" >保存发布意图</text>
+<text x="498" y="735" fill="#233C35" font-size="23" font-weight="400" text-anchor="middle" >返回操作编号</text>
+<path d="M 620 642 H 657" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<path d="M 670 582 A 85 20 0 0 1 840 582 L 840 706 A 85 20 0 0 1 670 706 Z" fill="#233C35"/>
+<ellipse cx="755" cy="582" rx="85" ry="20" fill="#316650" stroke="#F7F7F2" stroke-width="2"/>
+<path d="M 670 671 A 85 20 0 0 0 840 671" stroke="#789482" stroke-width="2" fill="none"/>
+<text x="755" y="626" fill="#FFFFFF" font-size="23" font-weight="600" text-anchor="middle" >PostgreSQL</text>
+<text x="755" y="665" fill="#DCEBB1" font-size="20" font-weight="500" text-anchor="middle" >发布单 / 租约</text>
+<text x="755" y="758" fill="#6D7D75" font-size="20" font-weight="400" text-anchor="middle" >提交后可被领取</text>
+<path d="M 852 642 H 893" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<rect x="906" y="511" width="222" height="263" rx="14" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="1017" y="551" fill="#DCEBB1" font-size="28" font-weight="650" text-anchor="middle" >持久 Worker</text>
+<line x1="930" y1="574" x2="1104" y2="574" stroke="#567061" stroke-width="2" />
+<text x="1017" y="618" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >领取有效操作</text>
+<text x="1017" y="657" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >更新目标实例</text>
+<text x="1017" y="696" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >读取运行状态</text>
+<text x="1017" y="735" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >保存执行进度</text>
+<path d="M 1017 499 V 382 H 1061 V 361" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-12-arrow)" />
+<text x="991" y="405" fill="#316650" font-size="21" font-weight="550" text-anchor="end" >更新与核验</text>
+<line x1="72" y1="805" x2="1128" y2="805" stroke="#D7DED5" stroke-width="2" />
+<text x="600" y="844" fill="#233C35" font-size="25" font-weight="500" text-anchor="middle" >目标环境决定更新哪里；平台运行角色决定谁能执行。</text>
+<line x1="48" y1="938" x2="1152" y2="938" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="972" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="980" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >管理平台不转发产品请求；新的发布依赖控制面正常运行。</text>
+</svg>

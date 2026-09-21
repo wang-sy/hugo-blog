@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="990" viewBox="0 0 1200 990" role="img" aria-labelledby="rdfig-06-title rdfig-06-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-06-title">查正式环境日志，先把预发布排除</title>
+<desc id="rdfig-06-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-06-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-06-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="990" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 08</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >查正式环境日志，先把预发布排除</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >两套环境可能共用生产配置，仅筛选 env=prod 并不足够。</text>
+<path d="M 53 210 H 707 L 683 286 H 77 Z" fill="#E5EDE2"/>
+<text x="380" y="257" fill="#233C35" font-size="28" font-weight="600" text-anchor="middle" >服务的目标声明</text>
+<path d="M 719 248 H 779" fill="none" stroke="#D7DED5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  stroke-dasharray="4 7"/>
+<circle cx="815" cy="246" r="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="815" y="254" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >1</text>
+<text x="849" y="241" fill="#233C35" font-size="25" font-weight="600" text-anchor="start" >读取实际目标</text>
+<text x="849" y="274" fill="#6D7D75" font-size="21" font-weight="400" text-anchor="start" >确认集群与部署对象</text>
+<path d="M 96 306 H 664 L 640 382 H 120 Z" fill="#FFFFFF"/>
+<text x="380" y="353" fill="#233C35" font-size="28" font-weight="600" text-anchor="middle" >完整实例范围</text>
+<path d="M 676 344 H 779" fill="none" stroke="#D7DED5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  stroke-dasharray="4 7"/>
+<circle cx="815" cy="342" r="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="815" y="350" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >2</text>
+<text x="849" y="337" fill="#233C35" font-size="25" font-weight="600" text-anchor="start" >匹配完整实例名</text>
+<text x="849" y="370" fill="#6D7D75" font-size="21" font-weight="400" text-anchor="start" >环境字段相同也不混查</text>
+<path d="M 139 402 H 621 L 597 478 H 163 Z" fill="#E5EDE2"/>
+<text x="380" y="449" fill="#233C35" font-size="28" font-weight="600" text-anchor="middle" >SLS 条件过滤</text>
+<path d="M 633 440 H 779" fill="none" stroke="#D7DED5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  stroke-dasharray="4 7"/>
+<circle cx="815" cy="438" r="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="815" y="446" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >3</text>
+<text x="849" y="433" fill="#233C35" font-size="25" font-weight="600" text-anchor="start" >约束查询条件</text>
+<text x="849" y="466" fill="#6D7D75" font-size="21" font-weight="400" text-anchor="start" >时间、级别、请求与实例</text>
+<path d="M 182 498 H 578 L 554 574 H 206 Z" fill="#FFFFFF"/>
+<text x="380" y="545" fill="#233C35" font-size="28" font-weight="600" text-anchor="middle" >逐条核对归属</text>
+<path d="M 590 536 H 779" fill="none" stroke="#D7DED5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  stroke-dasharray="4 7"/>
+<circle cx="815" cy="534" r="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="815" y="542" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >4</text>
+<text x="849" y="529" fill="#233C35" font-size="25" font-weight="600" text-anchor="start" >检查返回的每条记录</text>
+<text x="849" y="562" fill="#6D7D75" font-size="21" font-weight="400" text-anchor="start" >无法确认归属就不混入</text>
+<path d="M 225 594 H 535 L 511 670 H 249 Z" fill="#233C35"/>
+<text x="380" y="641" fill="#DCEBB1" font-size="28" font-weight="600" text-anchor="middle" >固定窗口翻页</text>
+<path d="M 547 632 H 779" fill="none" stroke="#D7DED5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  stroke-dasharray="4 7"/>
+<circle cx="815" cy="630" r="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="815" y="638" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >5</text>
+<text x="849" y="625" fill="#233C35" font-size="25" font-weight="600" text-anchor="start" >时间与条件绑定游标</text>
+<text x="849" y="658" fill="#6D7D75" font-size="21" font-weight="400" text-anchor="start" >下一页沿用原查询窗口</text>
+<text x="49" y="755" fill="#233C35" font-size="25" font-weight="600" text-anchor="start" >查询状态，也要说清楚</text>
+<rect x="48" y="781" width="352" height="105" rx="14" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="70" y="820" fill="#316650" font-size="25" font-weight="600" text-anchor="start" >完成 · 无匹配</text>
+<text x="70" y="857" fill="#233C35" font-size="22" font-weight="400" text-anchor="start" >这次查询没有找到结果</text>
+<rect x="424" y="781" width="352" height="105" rx="14" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="446" y="820" fill="#B65D3D" font-size="25" font-weight="600" text-anchor="start" >扫描中 · 部分结果</text>
+<text x="446" y="857" fill="#233C35" font-size="22" font-weight="400" text-anchor="start" >数据仍未收集完整</text>
+<rect x="800" y="781" width="352" height="105" rx="14" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="822" y="820" fill="#45677F" font-size="25" font-weight="600" text-anchor="start" >未配置 · 查询失败</text>
+<text x="822" y="857" fill="#233C35" font-size="22" font-weight="400" text-anchor="start" >当前无法给出判断</text>
+<line x1="48" y1="918" x2="1152" y2="918" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="952" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="960" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >“没有查到”与“没有查完”，应该得到不同的解释。</text>
+</svg>

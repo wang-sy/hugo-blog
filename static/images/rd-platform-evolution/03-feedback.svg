@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="896" viewBox="0 0 1200 896" role="img" aria-labelledby="rdfig-03-title rdfig-03-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-03-title">同一台 Runner，为什么还会重复准备缓存？</title>
+<desc id="rdfig-03-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-03-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-03-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="896" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 05</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >同一台 Runner，为什么还会重复准备缓存？</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >缓存跟着 builder 保存；builder 按并发槽拆开，缓存也会跟着分开。</text>
+<rect x="48" y="213" width="536" height="398" rx="20" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<rect x="616" y="213" width="536" height="398" rx="20" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="72" y="237" width="310" height="32" rx="8" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="227" y="259" fill="#B65D3D" font-size="17" font-weight="600" text-anchor="middle" >以前：每个并发槽各用一个</text>
+<rect x="640" y="237" width="310" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="795" y="259" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >调整后：一台 Runner 共用</text>
+<rect x="72" y="299" width="224" height="91" rx="12" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="184" y="337" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >并发槽 1</text>
+<text x="184" y="370" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >构建任务</text>
+<rect x="336" y="299" width="224" height="91" rx="12" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="448" y="337" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >并发槽 2</text>
+<text x="448" y="370" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >构建任务</text>
+<rect x="640" y="299" width="224" height="91" rx="12" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="752" y="337" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >并发槽 1</text>
+<text x="752" y="370" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >构建任务</text>
+<rect x="904" y="299" width="224" height="91" rx="12" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="1016" y="337" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >并发槽 2</text>
+<text x="1016" y="370" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="middle" >构建任务</text>
+<path d="M 184 398 V 458" fill="none" stroke="#B65D3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-03-warm)" />
+<rect x="72" y="470" width="224" height="110" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="184" y="510" fill="#B65D3D" font-size="26" font-weight="600" text-anchor="middle" >builder A</text>
+<text x="184" y="550" fill="#233C35" font-size="23" font-weight="400" text-anchor="middle" >各自保存缓存</text>
+<path d="M 448 398 V 458" fill="none" stroke="#B65D3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-03-warm)" />
+<rect x="336" y="470" width="224" height="110" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="448" y="510" fill="#B65D3D" font-size="26" font-weight="600" text-anchor="middle" >builder B</text>
+<text x="448" y="550" fill="#233C35" font-size="23" font-weight="400" text-anchor="middle" >各自保存缓存</text>
+<path d="M 752 398 V 426 H 884 V 458" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-03-arrow)" />
+<path d="M 1016 398 V 426 H 884" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  />
+<rect x="640" y="470" width="488" height="110" rx="12" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="884" y="510" fill="#DCEBB1" font-size="27" font-weight="600" text-anchor="middle" >按 Runner 固定 builder</text>
+<text x="884" y="550" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >多个并发槽复用本地构建缓存</text>
+<text x="49" y="658" fill="#233C35" font-size="27" font-weight="600" text-anchor="start" >还有一种等待，可以直接省掉</text>
+<rect x="48" y="685" width="470" height="97" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="72" y="719" fill="#B65D3D" font-size="20" font-weight="600" text-anchor="start" >旧结果汇总任务</text>
+<text x="72" y="758" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >检出源码 → 读取结果 → 汇总</text>
+<path d="M 536 735 H 598" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-03-arrow)" />
+<rect x="616" y="685" width="536" height="97" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="640" y="719" fill="#316650" font-size="20" font-weight="600" text-anchor="start" >调整后</text>
+<text x="640" y="758" fill="#233C35" font-size="26" font-weight="600" text-anchor="start" >读取上游结果 → 汇总</text>
+<line x1="48" y1="824" x2="1152" y2="824" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="858" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="866" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >先确认缓存能否复用、输入是否必要，再优化编译本身。</text>
+</svg>

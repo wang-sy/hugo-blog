@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1146" viewBox="0 0 1200 1146" role="img" aria-labelledby="rdfig-14-title rdfig-14-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-14-title">租约过期以后，旧 Worker 还会回来</title>
+<desc id="rdfig-14-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-14-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-14-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1146" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 12</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >租约过期以后，旧 Worker 还会回来</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >同一张发布单可以被接管；迟到的执行结果不能覆盖新代次。</text>
+<rect x="60" y="213" width="320" height="73" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="220" y="260" fill="#B65D3D" font-size="28" font-weight="650" text-anchor="middle" >Worker A</text>
+<line x1="220" y1="301" x2="220" y2="1017" stroke="#D7DED5" stroke-width="2" stroke-dasharray="5 7"/>
+<rect x="440" y="213" width="320" height="73" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="600" y="260" fill="#316650" font-size="28" font-weight="650" text-anchor="middle" >发布记录 · A</text>
+<line x1="600" y1="301" x2="600" y2="1017" stroke="#D7DED5" stroke-width="2" stroke-dasharray="5 7"/>
+<rect x="820" y="213" width="320" height="73" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="980" y="260" fill="#45677F" font-size="28" font-weight="650" text-anchor="middle" >Worker B</text>
+<line x1="980" y1="301" x2="980" y2="1017" stroke="#D7DED5" stroke-width="2" stroke-dasharray="5 7"/>
+<path d="M 586 353 H 234" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-14-arrow)" />
+<text x="410" y="334" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >领取：第 7 代执行权</text>
+<rect x="62" y="393" width="316" height="108" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="220" y="435" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >向集群发出更新</text>
+<text x="220" y="475" fill="#B65D3D" font-size="23" font-weight="400" text-anchor="middle" >进程暂停 / 响应延迟</text>
+<rect x="442" y="532" width="316" height="81" rx="12" fill="#FFFFFF" stroke="#D7DED5" stroke-width="1"/>
+<text x="600" y="566" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >第 7 代租约到期</text>
+<text x="600" y="597" fill="#6D7D75" font-size="21" font-weight="400" text-anchor="middle" >任务可以重新领取</text>
+<path d="M 614 667 H 966" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-14-arrow)" />
+<text x="790" y="648" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >接管：第 8 代执行权</text>
+<rect x="834" y="705" width="292" height="97" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="980" y="746" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >继续原发布单</text>
+<text x="980" y="782" fill="#45677F" font-size="23" font-weight="400" text-anchor="middle" >持有新的有效租约</text>
+<path d="M 234 818 H 586" fill="none" stroke="#B65D3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-14-warm)" />
+<text x="410" y="798" fill="#B65D3D" font-size="24" font-weight="550" text-anchor="middle" >迟到的进度：第 7 代</text>
+<rect x="442" y="845" width="316" height="68" rx="12" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="600" y="887" fill="#B65D3D" font-size="25" font-weight="650" text-anchor="middle" >当前为 8，拒绝写回 7</text>
+<path d="M 966 970 H 614" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-14-arrow)" />
+<text x="790" y="950" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >提交第 8 代进度</text>
+<rect x="401" y="994" width="398" height="47" rx="10" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="600" y="1026" fill="#316650" font-size="23" font-weight="550" text-anchor="middle" >代次、身份与有效租约都要匹配</text>
+<line x1="48" y1="1074" x2="1152" y2="1074" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1108" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1116" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >代次限制旧 Worker 写回；外部更新还要核对资源身份与版本。</text>
+</svg>
