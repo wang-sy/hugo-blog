@@ -7,7 +7,7 @@
 </defs>
 <rect width="1200" height="984" rx="22" fill="#F7F7F2"/>
 <rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
-<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 14</text>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 16</text>
 <text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
 <text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >页面、CLI 和流水线，查询同一张发布单</text>
 <text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >发布请求超时以后，三个入口都使用原操作编号继续查。</text>

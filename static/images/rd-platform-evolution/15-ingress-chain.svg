@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1220" viewBox="0 0 1200 1220" role="img" aria-labelledby="rdfig-15-title rdfig-15-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-15-title">从 NLB 到 RPC，入口分了几层</title>
+<desc id="rdfig-15-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-15-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-15-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1220" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 02</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >从 NLB 到 RPC，入口分了几层</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >Gateway 与 WAP 分别适配客户端，复用内部业务服务。</text>
+<rect x="48" y="213" width="272" height="111" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="184" y="255" fill="#233C35" font-size="29" font-weight="650" text-anchor="middle" >Web / 移动端</text>
+<text x="184" y="296" fill="#6D7D75" font-size="20" font-weight="400" text-anchor="middle" >发起 HTTP / WebSocket</text>
+<rect x="464" y="213" width="272" height="111" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="600" y="255" fill="#233C35" font-size="29" font-weight="650" text-anchor="middle" >NLB</text>
+<text x="600" y="296" fill="#6D7D75" font-size="20" font-weight="400" text-anchor="middle" >连接分发 · 后端健康检查</text>
+<rect x="880" y="213" width="272" height="111" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="1016" y="255" fill="#233C35" font-size="29" font-weight="650" text-anchor="middle" >Nginx</text>
+<text x="1016" y="296" fill="#6D7D75" font-size="20" font-weight="400" text-anchor="middle" >HTTP 路由 · 连接代理</text>
+<path d="M 332 267 H 452" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-arrow)" />
+<path d="M 748 267 H 868" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-arrow)" />
+<rect x="48" y="382" width="422" height="180" rx="16" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="72" y="402" width="94" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="119" y="424" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >连接层</text>
+<text x="72" y="481" fill="#233C35" font-size="26" font-weight="600" text-anchor="start" >NLB 后端跟随 Pod 更新</text>
+<text x="72" y="521" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >调用方保留稳定入口</text>
+<text x="72" y="552" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >HTTP 路径由下一层判断</text>
+<path d="M 936 336 V 366 H 600 V 599" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  />
+<text x="626" y="414" fill="#316650" font-size="24" font-weight="550" text-anchor="start" >按 HTTP 路径</text>
+<text x="626" y="450" fill="#316650" font-size="24" font-weight="550" text-anchor="start" >选择接入服务</text>
+<path d="M 1092 336 V 426" fill="none" stroke="#B65D3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-warm)" />
+<path d="M 1000 426 V 336" fill="none" stroke="#B65D3D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-warm)" />
+<text x="974" y="400" fill="#B65D3D" font-size="18" font-weight="500" text-anchor="end" >身份</text>
+<text x="1110" y="400" fill="#B65D3D" font-size="18" font-weight="500" text-anchor="start" >认证</text>
+<rect x="880" y="440" width="272" height="151" rx="14" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="1016" y="483" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >统一认证服务</text>
+<text x="1016" y="525" fill="#B65D3D" font-size="22" font-weight="400" text-anchor="middle" >校验凭证与会话</text>
+<text x="1016" y="558" fill="#B65D3D" font-size="22" font-weight="400" text-anchor="middle" >返回认证结果与身份</text>
+<text x="1016" y="623" fill="#6D7D75" font-size="20" font-weight="400" text-anchor="middle" >Nginx 覆盖下游身份信息</text>
+<path d="M 600 599 V 628 H 303 V 680" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-arrow)" />
+<path d="M 600 628 H 897 V 680" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-arrow)" />
+<rect x="365" y="648" width="470" height="31" rx="0" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="600" y="670" fill="#316650" font-size="23" font-weight="550" text-anchor="middle" >Hertz · HTTP / WebSocket 接入</text>
+<rect x="48" y="692" width="510" height="159" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<rect x="642" y="692" width="510" height="159" rx="16" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="76" y="737" fill="#233C35" font-size="32" font-weight="650" text-anchor="start" >Gateway</text>
+<text x="670" y="737" fill="#233C35" font-size="32" font-weight="650" text-anchor="start" >WAP</text>
+<text x="76" y="780" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >编辑器的完整交互</text>
+<text x="76" y="815" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >参数与权限检查 · 请求 / 返回适配</text>
+<text x="670" y="780" fill="#45677F" font-size="24" font-weight="400" text-anchor="start" >移动端创建与对话</text>
+<text x="670" y="815" fill="#45677F" font-size="24" font-weight="400" text-anchor="start" >收窄输入 · 映射客户端事件</text>
+<path d="M 303 863 V 932" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-arrow)" />
+<path d="M 897 863 V 932" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-15-arrow)" />
+<text x="330" y="908" fill="#316650" font-size="24" font-weight="600" text-anchor="start" >Kitex RPC</text>
+<text x="924" y="908" fill="#316650" font-size="24" font-weight="600" text-anchor="start" >Kitex RPC</text>
+<rect x="48" y="946" width="1104" height="165" rx="18" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="76" y="986" fill="#DCEBB1" font-size="29" font-weight="650" text-anchor="start" >内部业务服务</text>
+<text x="1124" y="985" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="end" >按用例调用原有能力</text>
+<text x="235" y="1036" fill="#FFFFFF" font-size="28" font-weight="550" text-anchor="middle" >项目与版本</text>
+<line x1="421" y1="1014" x2="421" y2="1046" stroke="#527060" stroke-width="1" />
+<text x="600" y="1036" fill="#FFFFFF" font-size="28" font-weight="550" text-anchor="middle" >任务调度</text>
+<line x1="786" y1="1014" x2="786" y2="1046" stroke="#527060" stroke-width="1" />
+<text x="965" y="1036" fill="#FFFFFF" font-size="28" font-weight="550" text-anchor="middle" >Agent 执行</text>
+<text x="600" y="1080" fill="#D5E0D7" font-size="24" font-weight="400" text-anchor="middle" >业务状态与任务生命周期，留在各自的服务</text>
+<line x1="48" y1="1148" x2="1152" y2="1148" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1182" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1190" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >连接分发、HTTP 协议适配、业务 RPC，各自承担不同的变化。</text>
+</svg>

@@ -7,7 +7,7 @@
 </defs>
 <rect width="1200" height="926" rx="22" fill="#F7F7F2"/>
 <rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
-<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 09</text>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 11</text>
 <text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
 <text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >85 起告警，为什么发出了 460 条通知？</text>
 <text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >一次 24 小时审查的样本：发送未见重复，事件几乎都被归为 P1。</text>

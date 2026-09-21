@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1124" viewBox="0 0 1200 1124" role="img" aria-labelledby="rdfig-16-title rdfig-16-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-16-title">先创建项目，再连接执行过程</title>
+<desc id="rdfig-16-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-16-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-16-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1124" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 03</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >先创建项目，再连接执行过程</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >HTTP 返回项目对象；WebSocket 与内部 RPC 流继续传递命令和进度。</text>
+<rect x="50" y="213" width="280" height="78" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="190" y="261" fill="#316650" font-size="28" font-weight="650" text-anchor="middle" >客户端</text>
+<line x1="190" y1="305" x2="190" y2="1010" stroke="#D7DED5" stroke-width="2" stroke-dasharray="5 7"/>
+<rect x="460" y="213" width="280" height="78" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="600" y="261" fill="#45677F" font-size="28" font-weight="650" text-anchor="middle" >WAP 接入</text>
+<line x1="600" y1="305" x2="600" y2="1010" stroke="#D7DED5" stroke-width="2" stroke-dasharray="5 7"/>
+<rect x="870" y="213" width="280" height="78" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="1010" y="261" fill="#316650" font-size="28" font-weight="650" text-anchor="middle" >调度 / 业务 RPC</text>
+<line x1="1010" y1="305" x2="1010" y2="1010" stroke="#D7DED5" stroke-width="2" stroke-dasharray="5 7"/>
+<path d="M 204 353 H 586" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="395" y="333" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >HTTP：提交用户输入</text>
+<path d="M 614 429 H 996" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="805" y="409" fill="#233C35" font-size="23" font-weight="550" text-anchor="middle" >RPC：创建项目，启动首轮</text>
+<path d="M 996 505 H 614" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="805" y="485" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >返回项目对象</text>
+<path d="M 586 575 H 204" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="395" y="555" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >HTTP 响应结束</text>
+<rect x="48" y="612" width="1104" height="63" rx="12" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="600" y="653" fill="#DCEBB1" font-size="26" font-weight="550" text-anchor="middle" >生成任务继续运行，不等待客户端保持这条 HTTP 连接</text>
+<path d="M 204 741 H 586" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="395" y="721" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >WebSocket：连接项目</text>
+<text x="632" y="759" fill="#45677F" font-size="22" font-weight="500" text-anchor="start" >核对项目权限，建立桥接</text>
+<path d="M 614 834 H 996" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="805" y="814" fill="#233C35" font-size="23" font-weight="550" text-anchor="middle" >Kitex 双向流：命令 / 订阅</text>
+<path d="M 996 918 H 614" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="805" y="898" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >业务状态与内部事件</text>
+<path d="M 586 992 H 204" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-16-arrow)" />
+<text x="395" y="972" fill="#233C35" font-size="24" font-weight="550" text-anchor="middle" >映射后的进度 / 本轮结果</text>
+<line x1="48" y1="1052" x2="1152" y2="1052" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1086" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1094" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >断开连接结束观察；停止生成，需要带当前轮次身份的明确指令。</text>
+</svg>
