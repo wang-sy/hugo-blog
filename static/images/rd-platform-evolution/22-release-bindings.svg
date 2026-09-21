@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1324" viewBox="0 0 1200 1324" role="img" aria-labelledby="rdfig-22-title rdfig-22-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-22-title">上线，究竟把哪些东西绑在了一起</title>
+<desc id="rdfig-22-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-22-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-22-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1324" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 13</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >上线，究竟把哪些东西绑在了一起</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >服务多了以后，发布需要保存可核对的来源、目标和运行身份。</text>
+<rect x="48" y="215" width="88" height="32" rx="8" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="92" y="237" fill="#B65D3D" font-size="17" font-weight="600" text-anchor="middle" >早期</text>
+<rect x="176" y="213" width="292" height="78" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="322" y="262" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >提交来源 / 人员</text>
+<path d="M 479 252 H 506" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-22-arrow)" />
+<rect x="518" y="213" width="292" height="78" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="664" y="262" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >固定云应用</text>
+<path d="M 821 252 H 848" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-22-arrow)" />
+<rect x="860" y="213" width="292" height="78" rx="12" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="1006" y="262" fill="#233C35" font-size="26" font-weight="600" text-anchor="middle" >更新镜像</text>
+<text x="177" y="337" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >绑定主要留在 CI 变量和应用映射表里。</text>
+<line x1="48" y1="378" x2="1152" y2="378" stroke="#D7DED5" stroke-width="2" />
+<rect x="48" y="410" width="132" height="32" rx="8" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="114" y="432" fill="#FFFFFF" font-size="17" font-weight="600" text-anchor="middle" >逐步收敛</text>
+<text x="205" y="435" fill="#233C35" font-size="26" font-weight="600" text-anchor="start" >平台保存发布操作，Worker 执行并读取实际结果</text>
+<rect x="48" y="480" width="1104" height="116" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="86" cy="521" r="19" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="86" y="529" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >01</text>
+<text x="124" y="529" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >代码与制品</text>
+<text x="73" y="570" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >这份镜像从哪里来</text>
+<line x1="381" y1="504" x2="381" y2="572" stroke="#D7DED5" stroke-width="2" />
+<text x="411" y="550" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >提交 / 构建任务 → 镜像 digest</text>
+<path d="M 600 602 V 614" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-22-arrow)" />
+<rect x="48" y="619" width="1104" height="116" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="86" cy="660" r="19" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="86" y="668" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >02</text>
+<text x="124" y="668" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >制品与目标</text>
+<text x="73" y="709" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >允许更新哪个对象</text>
+<line x1="381" y1="643" x2="381" y2="711" stroke="#D7DED5" stroke-width="2" />
+<text x="411" y="689" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >逻辑服务 + 环境 → 部署对象 + 配置身份</text>
+<path d="M 600 741 V 753" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-22-arrow)" />
+<rect x="48" y="758" width="1104" height="116" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="86" cy="799" r="19" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="86" y="807" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >03</text>
+<text x="124" y="807" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >目标与流量</text>
+<text x="73" y="848" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >新实例接到了什么流量</text>
+<line x1="381" y1="782" x2="381" y2="850" stroke="#D7DED5" stroke-width="2" />
+<text x="411" y="828" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >实例标签 → Service → 入口后端集合</text>
+<path d="M 600 880 V 892" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-22-arrow)" />
+<rect x="48" y="897" width="1104" height="116" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="86" cy="938" r="19" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="86" y="946" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >04</text>
+<text x="124" y="946" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >实例与观测</text>
+<text x="73" y="987" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >看到的是哪次部署</text>
+<line x1="381" y1="921" x2="381" y2="989" stroke="#D7DED5" stroke-width="2" />
+<text x="411" y="967" fill="#233C35" font-size="25" font-weight="500" text-anchor="start" >服务 / 环境 / 实例 → 指标与日志范围</text>
+<path d="M 600 1019 V 1031" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-22-arrow)" />
+<rect x="48" y="1036" width="1104" height="116" rx="14" fill="#233C35" stroke="none" stroke-width="1"/>
+<circle cx="86" cy="1077" r="19" fill="#DCEBB1" stroke="none" stroke-width="1"/>
+<text x="86" y="1085" fill="#233C35" font-size="22" font-weight="650" text-anchor="middle" >05</text>
+<text x="124" y="1085" fill="#FFFFFF" font-size="28" font-weight="650" text-anchor="start" >操作与验收</text>
+<text x="73" y="1126" fill="#D8E2D8" font-size="22" font-weight="400" text-anchor="start" >这次改动是否真的可用</text>
+<line x1="381" y1="1060" x2="381" y2="1128" stroke="#4E685C" stroke-width="2" />
+<text x="411" y="1106" fill="#DCEBB1" font-size="25" font-weight="500" text-anchor="start" >同一发布记录 → 实际运行结果 → 功能检查</text>
+<line x1="48" y1="1252" x2="1152" y2="1252" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1286" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1294" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >Pod Ready 只证明其中一段；路由、观测和业务结果仍需对上。</text>
+</svg>

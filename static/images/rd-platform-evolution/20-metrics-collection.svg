@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1110" viewBox="0 0 1200 1110" role="img" aria-labelledby="rdfig-20-title rdfig-20-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-20-title">指标在哪里采集，在哪里存，怎样查到它</title>
+<desc id="rdfig-20-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-20-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-20-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1110" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 08</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >指标在哪里采集，在哪里存，怎样查到它</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >Runtime 已有指标；后续把跨服务采集口径、模板和目标范围接起来。</text>
+<rect x="48" y="214" width="352" height="167" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="71" y="256" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >协议与调用</text>
+<text x="71" y="303" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >Hertz HTTP</text>
+<text x="71" y="339" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >Kitex RPC</text>
+<rect x="424" y="214" width="352" height="167" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="447" y="256" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >异步与业务</text>
+<text x="447" y="303" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >队列等待 / 积压</text>
+<text x="447" y="339" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >任务最终结果</text>
+<rect x="800" y="214" width="352" height="167" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="823" y="256" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >依赖与资源</text>
+<text x="823" y="303" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >GORM / Redis Hook</text>
+<text x="823" y="339" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >调用量 / 耗时 / 错误</text>
+<path d="M 224 392 V 420 H 444 V 450" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-20-arrow)" />
+<path d="M 600 392 V 420 H 444 V 450" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-20-arrow)" />
+<path d="M 976 392 V 420 H 444" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  />
+<rect x="48" y="464" width="788" height="107" rx="14" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="442" y="506" fill="#233C35" font-size="29" font-weight="650" text-anchor="middle" >统一标签与上报组件</text>
+<text x="442" y="545" fill="#316650" font-size="24" font-weight="400" text-anchor="middle" >服务 · 运行环境 · 实例 · 方法 / 状态</text>
+<rect x="872" y="464" width="280" height="107" rx="14" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="896" y="506" fill="#45677F" font-size="27" font-weight="650" text-anchor="start" >云监控 API</text>
+<text x="896" y="545" fill="#45677F" font-size="23" font-weight="400" text-anchor="start" >另行读取资源指标</text>
+<path d="M 442 583 V 607 H 224 V 628" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-20-arrow)" />
+<rect x="48" y="642" width="352" height="111" rx="14" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="224" y="688" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >PushGateway</text>
+<text x="224" y="727" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="middle" >接收服务定期推送</text>
+<path d="M 416 697 H 458" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-20-arrow)" />
+<rect x="472" y="642" width="364" height="111" rx="14" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="654" y="688" fill="#DCEBB1" font-size="29" font-weight="650" text-anchor="middle" >Prometheus</text>
+<text x="654" y="727" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >保存时间序列 · 执行查询</text>
+<path d="M 850 697 H 892" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-20-arrow)" />
+<rect x="906" y="642" width="246" height="111" rx="14" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="1029" y="688" fill="#45677F" font-size="28" font-weight="650" text-anchor="middle" >Grafana</text>
+<text x="1029" y="727" fill="#45677F" font-size="23" font-weight="400" text-anchor="middle" >面板与告警规则</text>
+<rect x="48" y="817" width="1104" height="174" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="73" y="860" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >研发平台：决定查询的是谁</text>
+<rect x="73" y="889" width="335" height="58" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="240.5" y="927" fill="#233C35" font-size="22" font-weight="550" text-anchor="middle" >服务能力 → 监控模板</text>
+<rect x="440" y="889" width="335" height="58" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="607.5" y="927" fill="#233C35" font-size="22" font-weight="550" text-anchor="middle" >部署目标 → 实例范围</text>
+<rect x="800" y="889" width="326" height="58" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="963" y="927" fill="#233C35" font-size="22" font-weight="550" text-anchor="middle" >环境与资源 → 关联线索</text>
+<path d="M 654 805 V 767" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-20-arrow)" />
+<text x="696" y="790" fill="#316650" font-size="21" font-weight="500" text-anchor="start" >限定查询范围</text>
+<line x1="48" y1="1038" x2="1152" y2="1038" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1072" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1080" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >声明了监控能力，不代表已有样本；没有数据时需要明确暴露缺口。</text>
+</svg>

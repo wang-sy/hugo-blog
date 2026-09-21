@@ -7,7 +7,7 @@
 </defs>
 <rect width="1200" height="974" rx="22" fill="#F7F7F2"/>
 <rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
-<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 01</text>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 04</text>
 <text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
 <text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >只改了入口，为什么要部署三个服务？</text>
 <text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >一次生成请求，会连续经过入口、任务调度和 Agent 执行。</text>

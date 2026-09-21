@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1262" viewBox="0 0 1200 1262" role="img" aria-labelledby="rdfig-18-title rdfig-18-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-18-title">灰度选路的四轮调整</title>
+<desc id="rdfig-18-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-18-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-18-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1262" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 02</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >灰度选路的四轮调整</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >从维护地址表，到让每次请求和任务都带着自己的环境选择。</text>
+<rect x="48" y="214" width="1104" height="214" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="87" cy="256" r="20" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="87" y="264" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >01</text>
+<text x="124" y="264" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >固定地址映射</text>
+<text x="73" y="312" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >环境写在配置表里</text>
+<rect x="385" y="241" width="220" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="495" y="283" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >Nginx 环境表</text>
+<path d="M 616 274 H 648" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="660" y="241" width="220" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="770" y="283" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >NLB 地址 / 端口</text>
+<path d="M 891 274 H 923" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="935" y="241" width="192" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="1031" y="283" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >固定应用</text>
+<text x="385" y="365" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >好处：两三个服务时，目标直观。</text>
+<text x="385" y="400" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >瓶颈：应用、端口、下游地址，要同步维护。</text>
+<rect x="48" y="452" width="1104" height="214" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="87" cy="494" r="20" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="87" y="502" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >02</text>
+<text x="124" y="502" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >命名空间发现</text>
+<text x="73" y="550" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >环境跟部署位置走</text>
+<rect x="385" y="479" width="220" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="495" y="521" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >当前命名空间</text>
+<path d="M 616 512 H 648" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="660" y="479" width="220" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="770" y="521" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >同名服务</text>
+<path d="M 891 512 H 923" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="935" y="479" width="192" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="1031" y="521" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >共享基线</text>
+<text x="908" y="567" fill="#316650" font-size="18" font-weight="500" text-anchor="middle" >缺失时</text>
+<text x="385" y="603" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >变化：服务发现接管实例地址。</text>
+<text x="385" y="638" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >限制：环境身份依赖调用方所在的命名空间。</text>
+<rect x="48" y="690" width="1104" height="214" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<circle cx="87" cy="732" r="20" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="87" y="740" fill="#316650" font-size="22" font-weight="650" text-anchor="middle" >03</text>
+<text x="124" y="740" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >服务名前缀</text>
+<text x="73" y="788" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >环境跟进程身份走</text>
+<rect x="385" y="717" width="220" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="495" y="759" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >进程环境</text>
+<path d="M 616 750 H 648" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="660" y="717" width="220" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="770" y="759" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >带前缀服务名</text>
+<path d="M 891 750 H 923" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="935" y="717" width="192" height="66" rx="10" fill="#F7F7F2" stroke="none" stroke-width="1"/>
+<text x="1031" y="759" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >个人 / 共享实例</text>
+<text x="385" y="841" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >变化：同一命名空间容纳多组服务。</text>
+<text x="385" y="876" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >限制：共享进程无法只靠自身配置区分每条请求。</text>
+<rect x="48" y="928" width="1104" height="214" rx="16" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<circle cx="87" cy="970" r="20" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="87" y="978" fill="#FFFFFF" font-size="22" font-weight="650" text-anchor="middle" >04</text>
+<text x="124" y="978" fill="#233C35" font-size="29" font-weight="650" text-anchor="start" >请求上下文</text>
+<text x="73" y="1026" fill="#6D7D75" font-size="22" font-weight="400" text-anchor="start" >环境跟调用和任务走</text>
+<rect x="385" y="955" width="220" height="66" rx="10" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="495" y="997" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >HTTP 上下文</text>
+<path d="M 616 988 H 648" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="660" y="955" width="220" height="66" rx="10" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="770" y="997" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >RPC 元信息</text>
+<path d="M 891 988 H 923" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-18-arrow)" />
+<rect x="935" y="955" width="192" height="66" rx="10" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="1031" y="997" fill="#233C35" font-size="22" font-weight="600" text-anchor="middle" >消息属性</text>
+<text x="385" y="1079" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >变化：每一跳继续按同一环境选路。</text>
+<text x="385" y="1114" fill="#316650" font-size="23" font-weight="400" text-anchor="start" >约束：关键调度与执行必须同环境，缺失就失败。</text>
+<line x1="48" y1="1190" x2="1152" y2="1190" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1224" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1232" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >按分支创建与回收环境，是资源生命周期的变化，单独管理。</text>
+</svg>

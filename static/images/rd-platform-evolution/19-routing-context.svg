@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1084" viewBox="0 0 1200 1084" role="img" aria-labelledby="rdfig-19-title rdfig-19-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
+<title id="rdfig-19-title">进程在共享环境，请求仍可走个人链路</title>
+<desc id="rdfig-19-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
+<defs>
+<marker id="rdfig-19-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="rdfig-19-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="1200" height="1084" rx="22" fill="#F7F7F2"/>
+<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 03</text>
+<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
+<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >进程在共享环境，请求仍可走个人链路</text>
+<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >入口、RPC 发现和消息消费，使用同一次环境选择。</text>
+<rect x="48" y="216" width="1104" height="106" rx="14" fill="#233C35" stroke="none" stroke-width="1"/>
+<text x="74" y="257" fill="#DCEBB1" font-size="28" font-weight="650" text-anchor="start" >一次个人联调请求</text>
+<text x="74" y="295" fill="#FFFFFF" font-size="24" font-weight="400" text-anchor="start" >环境选择通过校验后进入上下文；认证与权限仍独立处理。</text>
+<rect x="68" y="354" width="198" height="32" rx="8" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="167" y="376" fill="#316650" font-size="17" font-weight="600" text-anchor="middle" >同一环境标记</text>
+<path d="M 167 396 V 418" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-19-arrow)" />
+<rect x="379" y="354" width="198" height="32" rx="8" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="478" y="376" fill="#316650" font-size="17" font-weight="600" text-anchor="middle" >同一环境标记</text>
+<path d="M 478 396 V 418" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-19-arrow)" />
+<rect x="872" y="354" width="198" height="32" rx="8" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="971" y="376" fill="#316650" font-size="17" font-weight="600" text-anchor="middle" >同一环境标记</text>
+<path d="M 971 396 V 418" fill="none" stroke="#316650" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-19-arrow)" />
+<rect x="48" y="432" width="270" height="225" rx="16" fill="#E7EEF2" stroke="none" stroke-width="1"/>
+<text x="70" y="479" fill="#45677F" font-size="27" font-weight="650" text-anchor="start" >共享 Gateway</text>
+<text x="70" y="531" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >读取请求环境</text>
+<text x="70" y="568" fill="#6D7D75" font-size="24" font-weight="400" text-anchor="start" >RPC 客户端传递</text>
+<rect x="359" y="432" width="446" height="225" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="382" y="474" fill="#233C35" font-size="28" font-weight="650" text-anchor="start" >个人 Dispatcher</text>
+<rect x="381" y="497" width="402" height="52" rx="10" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="582" y="531" fill="#233C35" font-size="25" font-weight="550" text-anchor="middle" >入队：写入环境属性</text>
+<path d="M 582 556 V 580" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-19-arrow)" />
+<text x="605" y="576" fill="#316650" font-size="20" font-weight="500" text-anchor="start" >队列</text>
+<rect x="381" y="589" width="402" height="48" rx="10" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<text x="582" y="621" fill="#233C35" font-size="23" font-weight="550" text-anchor="middle" >消费：恢复环境，再发 RPC</text>
+<rect x="852" y="432" width="300" height="225" rx="16" fill="#FFFFFF" stroke="none" stroke-width="1"/>
+<text x="875" y="479" fill="#233C35" font-size="27" font-weight="650" text-anchor="start" >个人 Runtime</text>
+<text x="875" y="531" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >RPC 接收环境</text>
+<text x="875" y="567" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >选择对应的执行</text>
+<text x="875" y="603" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >继续传递给下游</text>
+<path d="M 326 523 H 350" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-19-arrow)" />
+<path d="M 813 613 H 844" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-19-arrow)" />
+<text x="600" y="686" fill="#233C35" font-size="24" font-weight="500" text-anchor="middle" >队列把上下文接回来，后续 RPC 仍然按同一环境选目标。</text>
+<rect x="48" y="704" width="534" height="238" rx="16" fill="#E5EDE2" stroke="none" stroke-width="1"/>
+<rect x="614" y="704" width="538" height="238" rx="16" fill="#F5E5D9" stroke="none" stroke-width="1"/>
+<text x="73" y="750" fill="#316650" font-size="28" font-weight="650" text-anchor="start" >允许共享的依赖</text>
+<text x="73" y="797" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >按声明复用共享服务</text>
+<text x="73" y="834" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >入口明确 DNS 不存在时，</text>
+<text x="73" y="871" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >才允许按策略选择共享入口。</text>
+<text x="640" y="750" fill="#B65D3D" font-size="28" font-weight="650" text-anchor="start" >关键调度与执行</text>
+<text x="640" y="797" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >必须命中同一环境</text>
+<text x="640" y="834" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >缺失、超时或上游错误，</text>
+<text x="640" y="871" fill="#233C35" font-size="24" font-weight="400" text-anchor="start" >都不能悄悄换成另一套执行。</text>
+<line x1="48" y1="1012" x2="1152" y2="1012" stroke="#D7DED5" stroke-width="2" />
+<circle cx="58" cy="1046" r="5" fill="#316650" stroke="none" stroke-width="1"/>
+<text x="76" y="1054" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >入口可以共享；这次任务要执行哪个版本，仍然必须明确。</text>
+</svg>
