@@ -4,9 +4,3 @@
 {{- $config := dict "websiteId" .Site.Params.analytics.websiteId "host" .Site.Params.analytics.host "path" .RelPermalink "article" (and .IsPage (eq .Section "posts")) "track" (ne .Kind "404") -}}
 <script type="application/json" id="blog-analytics-config">{{ $config | jsonify | safeJS }}</script>
 <script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
-{{- if eq .Type "stats" -}}
-  {{- $css := resources.Get "css/stats.css" | minify | fingerprint -}}
-  {{- $dashboard := resources.Get "js/stats-dashboard.js" | minify | fingerprint -}}
-  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-  <script defer src="{{ $dashboard.RelPermalink }}" integrity="{{ $dashboard.Data.Integrity }}"></script>
-{{- end -}}

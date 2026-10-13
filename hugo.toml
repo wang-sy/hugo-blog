@@ -37,7 +37,7 @@ enableEmoji = true
     enable = true
     # Custom content (HTML format is supported)
     # 自定义内容 (支持 HTML 格式)
-    custom = '<a href="/stats/">博客统计</a> · <a href="/privacy/">访问统计与隐私</a>'
+    custom = '<a href="/privacy/">访问统计与隐私</a>'
     # whether to show Hugo and theme info
     # 是否显示 Hugo 和主题信息
     hugo = true
@@ -199,11 +199,6 @@ enableEmoji = true
 # 菜单配置
 [menu]
   [[menu.main]]
-    weight = 4
-    identifier = "stats"
-    name = "统计"
-    url = "/stats/"
-  [[menu.main]]
     weight = 1
     identifier = "posts"
     # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
@@ -239,7 +234,6 @@ enableEmoji = true
 [params.analytics]
   websiteId = "dd0320cd-bbf6-4ec2-81cb-cf3c77493fa7"
   host = "https://stats.wangsaiyu.com"
-  shareURL = "https://stats.wangsaiyu.com/share/oC3FXSxNS57MtR41"
 
 # Hugo 解析文档的配置
 [markup]
