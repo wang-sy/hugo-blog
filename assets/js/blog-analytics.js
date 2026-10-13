@@ -42,18 +42,21 @@
 
   // Public, aggregate-only data. No Tencent API credential is delivered to browsers.
   if (counter || document.getElementById('public-stats')) {
-    window.blogStatsPromise = fetch(config.statsUrl, { credentials: 'omit', cache: 'no-cache' })
+    var controller = new AbortController();
+    var timeout = setTimeout(function () { controller.abort(); }, 10000);
+    window.blogStatsPromise = fetch(config.statsUrl, { credentials: 'omit', cache: 'no-cache', signal: controller.signal })
       .then(function (response) { if (!response.ok) throw new Error('统计数据暂不可用'); return response.json(); })
       .then(function (data) {
         if (data.version !== 1 || !data.articles || !data.periods) throw new Error('统计数据格式异常');
         if (counter) counter.textContent = number.format((data.articles[decodeURIComponent(config.path)] || {}).pageViews || 0);
         return data;
-      });
+      }).finally(function () { clearTimeout(timeout); });
     // Article counters fail quietly; the dashboard gives a visible retry action.
     window.blogStatsPromise.catch(function () { if (counter) counter.textContent = '—'; });
   }
 
   var localPreview = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && new URLSearchParams(location.search).get('analytics_preview') === '1';
+  var diagnostics = localPreview || new URLSearchParams(location.search).get('analytics_debug') === '1';
   var productionHost = /^(www\.)?wangsaiyu\.com$/.test(location.hostname);
   if ((!productionHost && !localPreview) || !config.track || optedOut || navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true) return;
   if (/bot|crawler|spider|headless|lighthouse/i.test(navigator.userAgent)) return;
@@ -72,6 +75,7 @@
   sdk.src = config.sdkUrl;
   sdk.async = true;
   sdk.onload = function () {
+    if (diagnostics) configNode.dataset.rumStatus = window.Aegis ? 'sdk-loaded' : 'sdk-unavailable';
     if (!window.Aegis) return;
     aegis = new window.Aegis({
       id: config.rumId, aid: visitor, uin: '', env: localPreview ? 'test' : 'production',
@@ -82,7 +86,7 @@
       pagePerformance: false, webVitals: false, consoleLog: false, clickElementLog: false,
       whiteListUrl: '', offlineLog: false, delay: 100, repeat: 0, random: 1,
       afterRequest: function (result) {
-        if (localPreview) {
+        if (diagnostics) {
           configNode.dataset.rumStatus = result.logType + ':' + (result.isErr ? 'failed' : 'sent');
           configNode.dataset.rumResponse = JSON.stringify(result.result).slice(0, 300);
         }
@@ -109,6 +113,7 @@
     updateVisibility();
     emit(false);
   };
+  sdk.onerror = function () { if (diagnostics) configNode.dataset.rumStatus = 'sdk-failed'; };
   document.head.appendChild(sdk);
 
   function emit(beacon) {

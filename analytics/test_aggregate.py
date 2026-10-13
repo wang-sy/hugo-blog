@@ -58,6 +58,13 @@ class AggregationTests(unittest.TestCase):
         a.apply_log(state,row,NOW)
         self.assertEqual(a.public_snapshot(state,NOW)['totals']['articleViews'],1)
 
+    def test_site_and_article_duration_have_separate_denominators(self):
+        state=a.empty_state(); a.apply_log(state,log(active=20000),NOW)
+        a.apply_log(state,log(visit='22222222-2222-4222-8222-222222222222',path='/',active=10000),NOW)
+        metrics=a.public_snapshot(state,NOW)['periods']['7']
+        self.assertEqual(metrics['pageActiveSeconds']/metrics['pageViews'],15)
+        self.assertEqual(metrics['activeSeconds']/metrics['measuredReads'],20)
+
     def test_archive_preserves_totals_and_removes_visitor_details(self):
         state = a.empty_state()
         a.apply_log(state, log(), NOW)

@@ -11,7 +11,7 @@
     seconds = Math.round(seconds);
     return seconds >= 60 ? Math.floor(seconds / 60) + '分' + (seconds % 60) + '秒' : seconds + '秒';
   }
-  function average(item) { return item.measuredReads ? duration(item.activeSeconds / item.measuredReads) : '—'; }
+  function average(item) { return item.pageViews ? duration(item.pageActiveSeconds / item.pageViews) : '—'; }
   function dateInChina(time) { return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(time); }
   function cell(tr, text) { var td = document.createElement('td'); td.textContent = text; tr.appendChild(td); return td; }
   function days() {

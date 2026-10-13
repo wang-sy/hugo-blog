@@ -87,6 +87,7 @@ def summarize(visits):
     values = list(visits)
     articles = [v for v in values if v['article']]
     return {'pageViews': len(values), 'uniqueVisitors': len({v['u'] for v in values}),
+            'pageActiveSeconds': round(sum(v['a'] for v in values) / 1000, 1),
             'articleViews': len(articles), 'activeSeconds': round(sum(v['a'] for v in articles) / 1000, 1),
             'measuredReads': len(articles)}
 
@@ -122,7 +123,7 @@ def public_snapshot(state, now):
                                     for date, visits in sorted(state['days'].items())]
     # The public document is constructed from an allowlist, never a redacted copy of private state.
     totals = {key: round(sum(d[key] for d in daily), 1) for key in
-              ('pageViews', 'articleViews', 'activeSeconds', 'measuredReads')}
+              ('pageViews', 'articleViews', 'pageActiveSeconds', 'activeSeconds', 'measuredReads')}
     cumulative = {path: dict(item) for path, item in state['archivedArticles'].items()}
     current = article_counts(v for values in state['days'].values() for v in values.values())
     for path, item in current.items():
