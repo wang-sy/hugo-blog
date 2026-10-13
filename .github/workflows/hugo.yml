@@ -34,7 +34,7 @@ jobs:
       - name: Verify analytics
         run: |
           python -m unittest discover -s analytics -p 'test_*.py'
-          node --test analytics/test_clock.cjs
+          node --test analytics/test_*.cjs
 
       - name: Build
         run: hugo --minify
