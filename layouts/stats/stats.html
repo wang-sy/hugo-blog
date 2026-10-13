@@ -1,0 +1,38 @@
+{{ define "title" }}博客统计 - {{ .Site.Title }}{{ end }}
+{{ define "content" }}
+<section class="stats-page" id="public-stats" aria-labelledby="stats-title">
+  <header class="stats-header">
+    <div><p class="stats-eyebrow">SAIYUDOC / OPEN ANALYTICS</p><h1 id="stats-title">博客统计<span class="stats-public">公开</span></h1>
+      <p class="stats-intro">访问趋势、文章阅读量与前台停留时长，每个人都可以查看。</p></div>
+    <div class="stats-update"><span class="stats-dot"></span><span id="stats-updated">正在读取统计数据…</span><small>北京时间 · 约每 10 分钟更新</small></div>
+  </header>
+  <div class="stats-toolbar"><div class="stats-periods" role="group" aria-label="统计时间范围">
+    <button type="button" data-period="7" aria-pressed="false">近 7 天</button>
+    <button type="button" data-period="30" aria-pressed="true">近 30 天</button>
+    <button type="button" data-period="90" aria-pressed="false">近 90 天</button>
+  </div><span id="stats-range"></span></div>
+  <p id="stats-notice" class="stats-notice" role="status">正在加载，请稍候。</p>
+  <div class="stats-cards">
+    <article class="stats-card"><p>浏览次数 <span>PV</span></p><strong id="metric-pv">—</strong><small>所选时段内，所有页面的打开次数</small></article>
+    <article class="stats-card"><p>独立访客 <span>UV</span></p><strong id="metric-uv">—</strong><small>所选时段内，按匿名浏览器去重</small></article>
+    <article class="stats-card"><p>平均前台停留</p><strong id="metric-duration">—</strong><small>文章可见且窗口获得焦点的时间</small></article>
+    <article class="stats-card stats-card-accent"><p>累计文章阅读</p><strong id="metric-total">—</strong><small id="stats-started">自统计启用以来</small></article>
+  </div>
+  <section class="stats-panel" aria-labelledby="trend-title">
+    <div class="stats-panel-heading"><div><h2 id="trend-title">访问趋势</h2><p>每天的浏览次数与独立访客</p></div><div class="stats-legend"><span class="pv-legend">浏览次数</span><span class="uv-legend">独立访客</span></div></div>
+    <div class="stats-chart" id="stats-chart" role="img" aria-label="访问趋势图，正在加载"></div>
+    <details class="stats-daily-details"><summary>查看每日数据</summary><div class="stats-table-scroll"><table><caption class="sr-only">每日访问统计</caption><thead><tr><th scope="col">日期</th><th scope="col">浏览次数</th><th scope="col">独立访客</th><th scope="col">文章阅读</th><th scope="col">平均前台停留</th></tr></thead><tbody id="stats-daily"></tbody></table></div></details>
+  </section>
+  <section class="stats-panel" aria-labelledby="articles-title">
+    <div class="stats-panel-heading stats-article-heading"><div><h2 id="articles-title">文章阅读排行</h2><p id="stats-article-subtitle">按所选时段的阅读次数排序</p></div><label class="stats-search"><span class="sr-only">搜索文章</span><input type="search" id="stats-search" placeholder="搜索文章标题" autocomplete="off"></label></div>
+    <div class="stats-table-scroll"><table class="stats-articles"><caption class="sr-only">文章阅读排行</caption><thead><tr><th scope="col">文章</th><th scope="col"><button type="button" data-sort="pageViews">阅读次数 ↓</button></th><th scope="col"><button type="button" data-sort="uniqueVisitors">独立访客</button></th><th scope="col"><button type="button" data-sort="duration">平均停留</button></th><th scope="col">累计阅读</th></tr></thead><tbody id="stats-articles"></tbody></table></div>
+    <p id="stats-articles-empty" class="stats-empty" hidden>没有找到匹配的文章。</p>
+  </section>
+  <footer class="stats-explanation"><h2>这些数字如何计算？</h2><p>刷新页面也会增加浏览次数；独立访客不等于精确人数。停留时长排除后台标签页和失焦窗口，不代表读完文章。两个域名的数据合并统计，接入之前的访问不会补记。</p><p>公开页面仅展示汇总数据。<a href="/privacy/">查看统计口径与隐私说明 →</a></p><button type="button" id="stats-retry" hidden>重新读取数据</button></footer>
+</section>
+{{- $articles := slice -}}
+{{- range where .Site.RegularPages "Section" "posts" -}}
+  {{- $articles = $articles | append (dict "path" .RelPermalink "title" .Title "date" (.PublishDate.Format "2006-01-02")) -}}
+{{- end -}}
+<script type="application/json" id="stats-article-index">{{ $articles | jsonify | safeJS }}</script>
+{{ end }}

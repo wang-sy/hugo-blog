@@ -38,7 +38,7 @@ enableEmoji = true
     enable = true
     # Custom content (HTML format is supported)
     # 自定义内容 (支持 HTML 格式)
-    custom = '<script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?c4b67d619017210e246bec7396f800e8";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>'
+    custom = '<a href="/stats/">博客统计</a> · <a href="/privacy/">访问统计与隐私</a>'
     # whether to show Hugo and theme info
     # 是否显示 Hugo 和主题信息
     hugo = true
@@ -200,6 +200,11 @@ enableEmoji = true
 # 菜单配置
 [menu]
   [[menu.main]]
+    weight = 4
+    identifier = "stats"
+    name = "统计"
+    url = "/stats/"
+  [[menu.main]]
     weight = 1
     identifier = "posts"
     # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
@@ -231,6 +236,10 @@ enableEmoji = true
   category = "categories"
   tag = "tags"
   series = "series"
+
+[params.rum]
+  id = "5GWQ1CeGPyjLLRLa4g"
+  statsURL = "https://saiyudoc-stats-1301596189.cos.ap-guangzhou.myqcloud.com/public/stats.json"
 
 # Hugo 解析文档的配置
 [markup]

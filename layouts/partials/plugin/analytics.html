@@ -1,0 +1,12 @@
+{{- $core := resources.Get "js/analytics-core.js" -}}
+{{- $client := resources.Get "js/blog-analytics.js" -}}
+{{- $script := slice $core $client | resources.Concat "js/blog-analytics.js" | minify | fingerprint -}}
+{{- $config := dict "rumId" .Site.Params.rum.id "statsUrl" .Site.Params.rum.statsURL "sdkUrl" "/vendor/aegis-1.41.16.min.js" "path" .RelPermalink "article" (and .IsPage (eq .Section "posts")) "track" (ne .Kind "404") -}}
+<script type="application/json" id="blog-analytics-config">{{ $config | jsonify | safeJS }}</script>
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
+{{- if eq .Type "stats" -}}
+  {{- $css := resources.Get "css/stats.css" | minify | fingerprint -}}
+  {{- $dashboard := resources.Get "js/stats-dashboard.js" | minify | fingerprint -}}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  <script defer src="{{ $dashboard.RelPermalink }}" integrity="{{ $dashboard.Data.Integrity }}"></script>
+{{- end -}}
