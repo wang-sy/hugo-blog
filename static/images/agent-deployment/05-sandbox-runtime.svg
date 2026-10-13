@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" role="img" aria-labelledby="title" font-family="Arial,Helvetica,PingFang SC,Microsoft YaHei,sans-serif">
+<title id="title">平台与沙箱内执行程序</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 L3 5Z" fill="#000"/></marker></defs>
+<rect width="1000" height="650" fill="#fff"/>
+<rect x="20" y="20" width="960" height="100" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="500.0" y="48" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Platform</text>
+<path d="M20 62 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="500.0" y="97.0" text-anchor="middle" font-size="20" font-weight="400" fill="#000">任务记录 / 项目与权限 / 调度与预算 / 事件与结果</text>
+<rect x="20" y="215" width="435" height="280" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="237.5" y="245" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Sandbox A</text>
+<path d="M134 134 L134 201" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="243" y="160" text-anchor="middle" font-size="19" font-weight="400" fill="#000">start / resume</text>
+<path d="M420 201 L420 134" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="370" y="193" text-anchor="middle" font-size="18" font-weight="400" fill="#000">events</text>
+<g data-node="45,270,385,52">
+<rect x="45" y="270" width="385" height="52" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="237.5" y="303.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Runner</text>
+</g>
+<path d="M135 335 L135 350" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<g data-node="45,363,180,62">
+<rect x="45" y="363" width="180" height="62" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="135.0" y="401.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Codex</text>
+</g>
+<rect x="278" y="353" width="152" height="88" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="354.0" y="381" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Workspace</text>
+<path d="M278 395 H430" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="354.0" y="423.4" text-anchor="middle" font-size="18" font-weight="400" fill="#000">文件 / 进程</text>
+<path d="M237 396 L266 396" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="253" y="385" text-anchor="middle" font-size="15" font-weight="400" fill="#000">工具</text>
+<path d="M135 438 V555" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<rect x="545" y="215" width="435" height="280" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="762.5" y="245" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Sandbox B</text>
+<path d="M659 134 L659 201" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="768" y="160" text-anchor="middle" font-size="19" font-weight="400" fill="#000">start / resume</text>
+<path d="M945 201 L945 134" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="895" y="193" text-anchor="middle" font-size="18" font-weight="400" fill="#000">events</text>
+<g data-node="570,270,385,52">
+<rect x="570" y="270" width="385" height="52" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="762.5" y="303.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Runner</text>
+</g>
+<path d="M660 335 L660 350" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<g data-node="570,363,180,62">
+<rect x="570" y="363" width="180" height="62" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="660.0" y="401.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Codex</text>
+</g>
+<rect x="803" y="353" width="152" height="88" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="879.0" y="381" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Workspace</text>
+<path d="M803 395 H955" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="879.0" y="423.4" text-anchor="middle" font-size="18" font-weight="400" fill="#000">文件 / 进程</text>
+<path d="M762 396 L791 396" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="778" y="385" text-anchor="middle" font-size="15" font-weight="400" fill="#000">工具</text>
+<path d="M660 438 V555" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<path d="M135 555 H775" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="500" y="541" text-anchor="middle" font-size="20" font-weight="400" fill="#000">网络调用</text>
+<path d="M230 555 L230 572" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M775 555 L775 572" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<g data-node="20,585,425,50">
+<rect x="20" y="585" width="425" height="50" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="232.5" y="617.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Model API</text>
+</g>
+<g data-node="555,585,425,50">
+<rect x="555" y="585" width="425" height="50" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="767.5" y="617.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">素材 / 发布等业务服务</text>
+</g>
+</svg>

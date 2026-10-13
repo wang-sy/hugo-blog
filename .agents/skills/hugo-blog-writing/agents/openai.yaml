@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hugo 技术博客写作"
+  short_description: "按 LevelDB 系列风格撰写技术博客，组织段落并绘制 SVG 原理图"
+  default_prompt: "使用 $hugo-blog-writing，参照本项目 LevelDB 系列的行文和配图方式，完成这篇技术博客。"

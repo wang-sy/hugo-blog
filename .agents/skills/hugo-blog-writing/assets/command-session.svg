@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title" font-family="Arial,Helvetica,PingFang SC,Microsoft YaHei,sans-serif">
+<title id="title">命令执行会话</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 L3 5Z" fill="#000"/></marker></defs>
+<rect width="1000" height="530" fill="#fff"/>
+<g data-node="120,20,250,60">
+<rect x="120" y="20" width="250" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="245.0" y="57.480000000000004" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Runtime</text>
+</g>
+<g data-node="645,20,280,60">
+<rect x="645" y="20" width="280" height="60" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="785.0" y="57.480000000000004" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Sandbox Exec</text>
+</g>
+<path d="M245 92 V483" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<path d="M785 92 V483" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
+<rect x="777" y="145" width="16" height="293" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<path d="M245 145 L777 145" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="513" y="129" text-anchor="middle" font-size="21" font-weight="400" fill="#000">exec_command(cmd)</text>
+<path d="M785 235 L245 235" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="513" y="219" text-anchor="middle" font-size="21" font-weight="400" fill="#000">session_id = s7, running = true</text>
+<path d="M245 330 L777 330" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="513" y="314" text-anchor="middle" font-size="21" font-weight="400" fill="#000">write_stdin(s7)</text>
+<path d="M785 440 L245 440" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="513" y="424" text-anchor="middle" font-size="21" font-weight="400" fill="#000">exit_code = 0, output = ...</text>
+<text x="890" y="278" text-anchor="middle" font-size="18" font-weight="400" fill="#000">同一命令进程</text>
+<text x="500" y="514" text-anchor="middle" font-size="21" font-weight="400" fill="#000">s7 关联 Sandbox 与实际命令进程</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="550" viewBox="0 0 1000 550" role="img" aria-labelledby="title" font-family="Arial,Helvetica,PingFang SC,Microsoft YaHei,sans-serif">
+<title id="title">沙箱重建后的恢复过程</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 L3 5Z" fill="#000"/></marker></defs>
+<rect width="1000" height="550" fill="#fff"/>
+<rect x="20" y="45" width="360" height="115" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="200.0" y="73" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Workspace Snapshot</text>
+<path d="M20 87 H380" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="200.0" y="117.33333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">源码 / 未提交修改</text>
+<text x="200.0" y="141.66666666666666" text-anchor="middle" font-size="20" font-weight="400" fill="#000">文件检查点</text>
+<rect x="20" y="225" width="360" height="115" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="200.0" y="253" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Codex State</text>
+<path d="M20 267 H380" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="200.0" y="297.3333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">会话编号 / 引擎版本</text>
+<text x="200.0" y="321.6666666666667" text-anchor="middle" font-size="20" font-weight="400" fill="#000">运行配置 / 恢复文件</text>
+<rect x="20" y="410" width="360" height="110" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="200.0" y="438" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Operation Record</text>
+<path d="M20 452 H380" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="200.0" y="480.6666666666667" text-anchor="middle" font-size="20" font-weight="400" fill="#000">operation_id</text>
+<text x="200.0" y="503.3333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">业务操作状态</text>
+<rect x="570" y="25" width="410" height="370" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="775.0" y="55" text-anchor="middle" font-size="22" font-weight="600" fill="#000">New Sandbox</text>
+<g data-node="600,85,350,65">
+<rect x="600" y="85" width="350" height="65" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="775.0" y="124.98" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Workspace</text>
+</g>
+<g data-node="600,215,350,65">
+<rect x="600" y="215" width="350" height="65" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="775.0" y="254.98" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Codex</text>
+</g>
+<g data-node="600,334,350,45">
+<rect x="600" y="334" width="350" height="45" fill="#f5f5f5" stroke="#666666" stroke-width="1.6"/>
+<text x="775.0" y="363.98" text-anchor="middle" font-size="22" font-weight="400" fill="#000">命令 / 预览进程</text>
+</g>
+<path d="M393 113 L586 113" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="489" y="98" text-anchor="middle" font-size="19" font-weight="400" fill="#000">恢复文件</text>
+<path d="M393 275 H490 V247 H586" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="489" y="232" text-anchor="middle" font-size="19" font-weight="400" fill="#000">恢复会话</text>
+<path d="M775 163 L775 202" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+<text x="857" y="188" text-anchor="middle" font-size="18" font-weight="400" fill="#000">核对进度</text>
+<path d="M775 293 L775 321" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="860" y="316" text-anchor="middle" font-size="18" font-weight="400" fill="#000">按需重启</text>
+<g data-node="570,440,410,80">
+<rect x="570" y="440" width="410" height="80" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="775.0" y="472.52000000000004" text-anchor="middle" font-size="22" font-weight="400" fill="#000">业务服务</text>
+<text x="775.0" y="502.44000000000005" text-anchor="middle" font-size="22" font-weight="400" fill="#000">按原 operation_id 查询</text>
+</g>
+<path d="M393 477 L557 477" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="475" y="461" text-anchor="middle" font-size="19" font-weight="400" fill="#000">核对结果</text>
+</svg>

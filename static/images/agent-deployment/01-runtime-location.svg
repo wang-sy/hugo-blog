@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title" font-family="Arial,Helvetica,PingFang SC,Microsoft YaHei,sans-serif">
+<title id="title">两种 Agent 部署方式</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 L3 5Z" fill="#000"/></marker></defs>
+<rect width="1000" height="500" fill="#fff"/>
+<text x="25" y="25" text-anchor="start" font-size="22" font-weight="600" fill="#000">中心服务</text>
+<rect x="25" y="65" width="290" height="175" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="170.0" y="95" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Runtime</text>
+<g data-node="55,130,230,55">
+<rect x="55" y="130" width="230" height="55" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="170.0" y="164.98" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Agent Loop</text>
+</g>
+<rect x="480" y="65" width="270" height="175" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="615.0" y="95" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Sandbox</text>
+<g data-node="500,133,230,62">
+<rect x="500" y="133" width="230" height="62" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="615.0" y="156.51999999999998" text-anchor="middle" font-size="22" font-weight="400" fill="#000">工程目录</text>
+<text x="615.0" y="186.44" text-anchor="middle" font-size="22" font-weight="400" fill="#000">命令进程</text>
+</g>
+<g data-node="835,113,140,75">
+<rect x="835" y="113" width="140" height="75" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="905.0" y="143.01999999999998" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Model</text>
+<text x="905.0" y="172.94" text-anchor="middle" font-size="22" font-weight="400" fill="#000">API</text>
+</g>
+<path d="M170 65 V42 H905 V101" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="790" y="30" text-anchor="middle" font-size="18" font-weight="400" fill="#000">模型调用</text>
+<path d="M328 118 L468 118" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="398" y="105" text-anchor="middle" font-size="18" font-weight="400" fill="#000">工具调用</text>
+<path d="M468 199 L328 199" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="398" y="224" text-anchor="middle" font-size="18" font-weight="400" fill="#000">执行结果</text>
+<text x="25" y="289" text-anchor="start" font-size="22" font-weight="600" fill="#000">Sandbox 内 Codex</text>
+<g data-node="25,335,220,110">
+<rect x="25" y="335" width="220" height="110" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="135.0" y="382.52000000000004" text-anchor="middle" font-size="22" font-weight="400" fill="#000">平台服务</text>
+<text x="135.0" y="412.44000000000005" text-anchor="middle" font-size="22" font-weight="400" fill="#000">任务 / 调度</text>
+</g>
+<rect x="480" y="305" width="270" height="173" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="615.0" y="335" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Sandbox</text>
+<g data-node="505,354,220,50">
+<rect x="505" y="354" width="220" height="50" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="615.0" y="386.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Codex</text>
+</g>
+<text x="615" y="449" text-anchor="middle" font-size="19" font-weight="400" fill="#000">工程目录 / 命令进程</text>
+<g data-node="835,350,140,75">
+<rect x="835" y="350" width="140" height="75" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="905.0" y="380.02000000000004" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Model</text>
+<text x="905.0" y="409.94000000000005" text-anchor="middle" font-size="22" font-weight="400" fill="#000">API</text>
+</g>
+<path d="M258 356 L468 356" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="362" y="342" text-anchor="middle" font-size="18" font-weight="400" fill="#000">任务 / 输入</text>
+<path d="M468 423 L258 423" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="362" y="449" text-anchor="middle" font-size="18" font-weight="400" fill="#000">事件 / 结果</text>
+<path d="M763 388 L823 388" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+</svg>

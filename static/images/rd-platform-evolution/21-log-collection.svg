@@ -1,54 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1194" viewBox="0 0 1200 1194" role="img" aria-labelledby="rdfig-21-title rdfig-21-desc" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif">
-<title id="rdfig-21-title">两条采集通道，汇入同一个日志系统</title>
-<desc id="rdfig-21-desc">使用通用服务角色和示例编号说明具体机制，不包含内部资源标识。</desc>
-<defs>
-<marker id="rdfig-21-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#316650" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-<marker id="rdfig-21-warm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#B65D3D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
-</defs>
-<rect width="1200" height="1194" rx="22" fill="#F7F7F2"/>
-<rect x="48" y="36" width="94" height="32" rx="8" fill="#233C35" stroke="none" stroke-width="1"/>
-<text x="95" y="58" fill="#DCEBB1" font-size="17" font-weight="600" text-anchor="middle" >FIG. 11</text>
-<text x="164" y="59" fill="#6D7D75" font-size="17" font-weight="500" text-anchor="start" letter-spacing="2">ENGINEERING / FIELD NOTES</text>
-<text x="48" y="119" fill="#233C35" font-size="40" font-weight="650" text-anchor="start" >两条采集通道，汇入同一个日志系统</text>
-<text x="50" y="159" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >Go 服务直接通过日志后端上报；Nginx 先写文件，再由采集进程读取。</text>
-<rect x="48" y="215" width="528" height="518" rx="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
-<rect x="624" y="215" width="528" height="518" rx="18" fill="#FFFFFF" stroke="none" stroke-width="1"/>
-<rect x="72" y="239" width="132" height="32" rx="8" fill="#E5EDE2" stroke="none" stroke-width="1"/>
-<text x="138" y="261" fill="#316650" font-size="17" font-weight="600" text-anchor="middle" >业务服务</text>
-<rect x="648" y="239" width="152" height="32" rx="8" fill="#E7EEF2" stroke="none" stroke-width="1"/>
-<text x="724" y="261" fill="#45677F" font-size="17" font-weight="600" text-anchor="middle" >Nginx 入口</text>
-<rect x="72" y="310" width="480" height="104" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
-<text x="96" y="350" fill="#233C35" font-size="27" font-weight="650" text-anchor="start" >业务代码 / 已接入的 SDK</text>
-<text x="96" y="390" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >写入日志与请求、任务上下文</text>
-<path d="M 312 424 V 440" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-21-arrow)" />
-<rect x="72" y="453" width="480" height="104" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
-<text x="96" y="493" fill="#233C35" font-size="27" font-weight="650" text-anchor="start" >公共日志库</text>
-<text x="96" y="533" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >补充服务、运行环境和调用位置</text>
-<path d="M 312 567 V 583" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-21-arrow)" />
-<rect x="72" y="596" width="480" height="104" rx="12" fill="#E5EDE2" stroke="none" stroke-width="1"/>
-<text x="96" y="636" fill="#233C35" font-size="27" font-weight="650" text-anchor="start" >SLS 日志后端</text>
-<text x="96" y="676" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >缓冲 · 异步批量发送</text>
-<rect x="648" y="310" width="480" height="104" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
-<text x="672" y="350" fill="#45677F" font-size="27" font-weight="650" text-anchor="start" >访问日志 / 错误日志</text>
-<text x="672" y="390" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >结构化字段 · 请求与上游耗时</text>
-<path d="M 888 424 V 440" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-21-arrow)" />
-<rect x="648" y="453" width="480" height="104" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
-<text x="672" y="493" fill="#45677F" font-size="27" font-weight="650" text-anchor="start" >本地日志文件</text>
-<text x="672" y="533" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >Nginx 写入，采集进程读取</text>
-<path d="M 888 567 V 583" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-21-arrow)" />
-<rect x="648" y="596" width="480" height="104" rx="12" fill="#E7EEF2" stroke="none" stroke-width="1"/>
-<text x="672" y="636" fill="#45677F" font-size="27" font-weight="650" text-anchor="start" >日志采集进程</text>
-<text x="672" y="676" fill="#6D7D75" font-size="23" font-weight="400" text-anchor="start" >解析 · 脱敏 · 批量发送</text>
-<path d="M 312 745 V 779 H 600 V 811" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-21-arrow)" />
-<path d="M 888 745 V 779 H 600" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  />
-<rect x="248" y="825" width="704" height="98" rx="14" fill="#233C35" stroke="none" stroke-width="1"/>
-<text x="600" y="866" fill="#DCEBB1" font-size="30" font-weight="650" text-anchor="middle" >SLS：存储、索引与检索</text>
-<text x="600" y="902" fill="#FFFFFF" font-size="23" font-weight="400" text-anchor="middle" >服务 · 运行环境 · 实例 · 请求 / 任务标识</text>
-<path d="M 600 935 V 968" fill="none" stroke="#316650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#rdfig-21-arrow)" />
-<rect x="48" y="982" width="1104" height="101" rx="14" fill="#E5EDE2" stroke="none" stroke-width="1"/>
-<text x="600" y="1023" fill="#233C35" font-size="28" font-weight="650" text-anchor="middle" >平台按部署目标限定查询范围</text>
-<text x="600" y="1061" fill="#316650" font-size="24" font-weight="400" text-anchor="middle" >固定时间窗口，返回记录继续核对归属</text>
-<line x1="48" y1="1122" x2="1152" y2="1122" stroke="#D7DED5" stroke-width="2" />
-<circle cx="58" cy="1156" r="5" fill="#316650" stroke="none" stroke-width="1"/>
-<text x="76" y="1164" fill="#233C35" font-size="23" font-weight="500" text-anchor="start" >采集成功、索引可用、查询命中，需要分别验证。</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title" font-family="Arial,Helvetica,PingFang SC,Microsoft YaHei,sans-serif">
+<title id="title">业务日志与入口日志采集</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 L3 5Z" fill="#000"/></marker></defs>
+<rect width="1000" height="480" fill="#fff"/>
+<g data-node="20,25,260,70">
+<rect x="20" y="25" width="260" height="70" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="150.0" y="67.48" text-anchor="middle" font-size="22" font-weight="400" fill="#000">Go 业务服务</text>
+</g>
+<g data-node="360,25,280,70">
+<rect x="360" y="25" width="280" height="70" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="500.0" y="53.2" text-anchor="middle" font-size="20" font-weight="400" fill="#000">公共日志库</text>
+<text x="500.0" y="80.4" text-anchor="middle" font-size="20" font-weight="400" fill="#000">补字段 / 异步批量</text>
+</g>
+<g data-node="20,210,260,90">
+<rect x="20" y="210" width="260" height="90" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="150.0" y="248.20000000000002" text-anchor="middle" font-size="20" font-weight="400" fill="#000">Nginx</text>
+<text x="150.0" y="275.40000000000003" text-anchor="middle" font-size="20" font-weight="400" fill="#000">访问 / 错误日志</text>
+</g>
+<g data-node="360,210,280,90">
+<rect x="360" y="210" width="280" height="90" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="500.0" y="248.54" text-anchor="middle" font-size="19" font-weight="400" fill="#000">JSON 文件与采集进程</text>
+<text x="500.0" y="274.38" text-anchor="middle" font-size="19" font-weight="400" fill="#000">解析 / 脱敏 / 批量</text>
+</g>
+<path d="M293 60 L347 60" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M293 255 L347 255" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="780" y="130" width="200" height="160" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="880.0" y="158" text-anchor="middle" font-size="22" font-weight="600" fill="#000">SLS</text>
+<path d="M780 172 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="880.0" y="217.33333333333334" text-anchor="middle" font-size="20" font-weight="400" fill="#000">接收 / 索引</text>
+<text x="880.0" y="256.6666666666667" text-anchor="middle" font-size="20" font-weight="400" fill="#000">日志查询</text>
+<path d="M653 60 H706 V179 H767" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M653 255 H706 V237 H767" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="20" y="351" text-anchor="start" font-size="22" font-weight="600" fill="#000">LogRecord（公共字段示意）</text>
+<g data-node="20,371,192,85">
+<rect x="20" y="371" width="192" height="85" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="116.0" y="407.03999999999996" text-anchor="middle" font-size="19" font-weight="400" fill="#000">service</text>
+<text x="116.0" y="432.88" text-anchor="middle" font-size="19" font-weight="400" fill="#000">服务</text>
+</g>
+<g data-node="212,371,192,85">
+<rect x="212" y="371" width="192" height="85" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="308.0" y="407.03999999999996" text-anchor="middle" font-size="19" font-weight="400" fill="#000">runtime_env</text>
+<text x="308.0" y="432.88" text-anchor="middle" font-size="19" font-weight="400" fill="#000">进程环境</text>
+</g>
+<g data-node="404,371,192,85">
+<rect x="404" y="371" width="192" height="85" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="500.0" y="407.03999999999996" text-anchor="middle" font-size="19" font-weight="400" fill="#000">instance</text>
+<text x="500.0" y="432.88" text-anchor="middle" font-size="19" font-weight="400" fill="#000">运行实例</text>
+</g>
+<g data-node="596,371,192,85">
+<rect x="596" y="371" width="192" height="85" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="692.0" y="407.03999999999996" text-anchor="middle" font-size="19" font-weight="400" fill="#000">request_id</text>
+<text x="692.0" y="432.88" text-anchor="middle" font-size="19" font-weight="400" fill="#000">请求</text>
+</g>
+<g data-node="788,371,192,85">
+<rect x="788" y="371" width="192" height="85" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
+<text x="884.0" y="407.03999999999996" text-anchor="middle" font-size="19" font-weight="400" fill="#000">task_id</text>
+<text x="884.0" y="432.88" text-anchor="middle" font-size="19" font-weight="400" fill="#000">任务</text>
+</g>
 </svg>
