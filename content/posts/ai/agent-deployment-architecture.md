@@ -1,7 +1,7 @@
 ---
 title: "Agent 部署方式：中心服务与 Sandbox"
 date: 2026-10-13T17:00:00+08:00
-draft: true
+draft: false
 description: "分析中心运行时与沙箱内 Codex 的组成、数据存储、工具调用和恢复过程，并结合现有游戏 Agent 的实现说明各自需要解决的问题。"
 categories:
   - AI
