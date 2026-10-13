@@ -27,14 +27,15 @@
     var meta = document.querySelector('.post-meta-line:last-child');
     if (meta) {
       var link = document.createElement('a');
-      link.className = 'article-view-count'; link.href = '/stats/';
+      link.className = 'article-view-count'; link.href = config.host + '/';
+      link.target = '_blank'; link.rel = 'noopener';
       link.title = 'Umami 接入以来的累计浏览次数，约每分钟更新';
       link.appendChild(document.createTextNode(' · 阅读 '));
       counter = document.createElement('span'); counter.textContent = '—';
       link.appendChild(counter); link.appendChild(document.createTextNode(' 次')); meta.appendChild(link);
     }
   }
-  if (counter || document.getElementById('public-stats')) {
+  if (counter) {
     var abort = new AbortController();
     var timeout = setTimeout(function () { abort.abort(); }, 10000);
     window.blogStatsPromise = fetch(config.host + '/public/articles.json', {credentials: 'omit', signal: abort.signal})
