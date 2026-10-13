@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img"><title>NAS 与本地工程副本的目录布局</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="660" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<rect x="35" y="60" width="405" height="545" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="237" y="99" font-size="22" text-anchor="middle" fill="#111" font-weight="600">NAS：持久工作区</text>
+<rect x="560" y="60" width="405" height="545" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="762" y="99" font-size="22" text-anchor="middle" fill="#111" font-weight="600">本地盘：当前 Runtime</text>
+<text x="237" y="131" font-size="20" text-anchor="middle" fill="#111">/workspace/game</text>
+<text x="762" y="131" font-size="20" text-anchor="middle" fill="#111">/local/game/project</text>
+<rect x="60" y="153" width="355" height="145" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="237" y="190" font-size="22" text-anchor="middle" fill="#111">src/ · public/</text>
+<text x="237" y="230" font-size="20" text-anchor="middle" fill="#111">package.json · 锁文件</text>
+<text x="237" y="270" font-size="20" text-anchor="middle" fill="#111">构建配置 · build.sh</text>
+<rect x="585" y="153" width="355" height="145" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="762" y="191" font-size="22" text-anchor="middle" fill="#111">本轮源码与配置的副本</text>
+<text x="762" y="235" font-size="20" text-anchor="middle" fill="#111">保留相对目录关系</text>
+<text x="762" y="273" font-size="20" text-anchor="middle" fill="#111">构建前刷新</text>
+<path d="M 440 226 H 560" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="500" y="207" font-size="20" text-anchor="middle" fill="#111">同步</text>
+<rect x="60" y="328" width="355" height="64" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="237" y="368" font-size="20" text-anchor="middle" fill="#111">.git/ · .combos/ 状态</text>
+<rect x="585" y="328" width="355" height="152" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="762" y="368" font-size="20" text-anchor="middle" fill="#111">node_modules/ · .pnpm</text>
+<text x="762" y="412" font-size="20" text-anchor="middle" fill="#111">包缓存 · 编译缓存</text>
+<text x="762" y="451" font-size="20" text-anchor="middle" fill="#111">依赖安装与编译均在本地</text>
+<rect x="60" y="421" width="355" height="59" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="237" y="457" font-size="20" text-anchor="middle" fill="#111">node_modules → 本地目录</text>
+<path d="M 440 451 H 490 V 365 H 560" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="518" y="410" font-size="18" text-anchor="middle" fill="#111">链接</text>
+<rect x="60" y="516" width="355" height="58" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="237" y="552" font-size="20" text-anchor="middle" fill="#111">dist/：完整构建结果</text>
+<rect x="585" y="516" width="355" height="58" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="762" y="552" font-size="20" text-anchor="middle" fill="#111">dist/：本轮构建输出</text>
+<path d="M 560 545 H 440" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="500" y="505" font-size="18" text-anchor="middle" fill="#111">成功回写</text>
+<text x="500" y="639" font-size="20" text-anchor="middle" fill="#111">本地目录可重建，持久工作区保留输入与完成后的产物</text>
+</g></svg>

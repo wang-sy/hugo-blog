@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="790" viewBox="0 0 1000 790" role="img"><title>Git 仓库存储与 Sandbox 工程工作区</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="790" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<text x="40" y="44" font-size="22" text-anchor="start" fill="#111" font-weight="600">Git 版本：通过 Gitea 保存</text>
+<rect x="40" y="80" width="250" height="145" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="165" y="116" font-size="21" text-anchor="middle" fill="#111" font-weight="600">Sandbox / Git 客户端</text>
+<text x="165" y="159" font-size="20" text-anchor="middle" fill="#111">初始代码已提交</text>
+<text x="165" y="200" font-size="20" text-anchor="middle" fill="#111">准备待推送的对象</text>
+<rect x="380" y="80" width="240" height="145" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="500" y="116" font-size="21" text-anchor="middle" fill="#111" font-weight="600">Gitea 服务端</text>
+<text x="500" y="159" font-size="20" text-anchor="middle" fill="#111">接收对象</text>
+<text x="500" y="200" font-size="20" text-anchor="middle" fill="#111">处理分支更新</text>
+<rect x="710" y="80" width="250" height="145" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="835" y="116" font-size="21" text-anchor="middle" fill="#111" font-weight="600">NAS / Git 仓库</text>
+<rect x="733" y="136" width="204" height="64" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="835" y="161" font-size="20" text-anchor="middle" fill="#111">objects · refs</text>
+<text x="835" y="186" font-size="18" text-anchor="middle" fill="#111">已提交的版本</text>
+<path d="M 290 170 H 380" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="335" y="153" font-size="18" text-anchor="middle" fill="#111">git push</text>
+<path d="M 620 170 H 710" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="665" y="153" font-size="18" text-anchor="middle" fill="#111">文件 I/O</text>
+<text x="500" y="266" font-size="20" text-anchor="middle" fill="#111">推送等待包含客户端、网络与服务端处理</text>
+<path d="M 40 298 H 960" fill="none" stroke="#888" stroke-width="1.6" stroke-dasharray="6 5"/>
+<text x="40" y="339" font-size="22" text-anchor="start" fill="#111" font-weight="600">工程文件：Sandbox 直接挂载工作区</text>
+<rect x="40" y="375" width="330" height="125" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="205" y="413" font-size="22" text-anchor="middle" fill="#111" font-weight="600">Sandbox r7</text>
+<text x="205" y="451" font-size="20" text-anchor="middle" fill="#111">编辑代码 · 安装依赖 · 构建</text>
+<text x="205" y="484" font-size="19" text-anchor="middle" fill="#111">文件操作通过挂载目录</text>
+<rect x="40" y="550" width="330" height="130" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="205" y="589" font-size="22" text-anchor="middle" fill="#111" font-weight="600">Sandbox r8</text>
+<text x="205" y="630" font-size="20" text-anchor="middle" fill="#111">新实例继续处理同一个项目</text>
+<text x="205" y="664" font-size="19" text-anchor="middle" fill="#111">重新访问原来的工程文件</text>
+<rect x="625" y="375" width="335" height="305" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="792" y="411" font-size="22" text-anchor="middle" fill="#111" font-weight="600">NAS / 项目工作区</text>
+<path d="M 625 428 H 960" fill="none" stroke="#111" stroke-width="1.6"/>
+<text x="792" y="463" font-size="21" text-anchor="middle" fill="#111">src/ · 素材</text>
+<text x="792" y="496" font-size="20" text-anchor="middle" fill="#111">package.json · 锁文件</text>
+<rect x="651" y="516" width="283" height="62" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="792" y="541" font-size="20" text-anchor="middle" fill="#111">node_modules/</text>
+<text x="792" y="566" font-size="18" text-anchor="middle" fill="#111">依赖安装与构建读取</text>
+<text x="792" y="618" font-size="21" text-anchor="middle" fill="#111">dist/ · 构建输出</text>
+<text x="792" y="654" font-size="21" text-anchor="middle" fill="#111">.git/ · 运行状态</text>
+<path d="M 370 439 H 625" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="497" y="422" font-size="20" text-anchor="middle" fill="#111">NFS 目录访问</text>
+<path d="M 370 613 H 625" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="497" y="594" font-size="20" text-anchor="middle" fill="#111">新实例重新挂载</text>
+<text x="500" y="740" font-size="20" text-anchor="middle" fill="#111">两处目录可以位于不同文件系统，分别计时与选型</text>
+</g></svg>

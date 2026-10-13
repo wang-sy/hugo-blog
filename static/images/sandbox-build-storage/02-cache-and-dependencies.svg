@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img"><title>缓存与项目依赖目录是两个不同位置</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="500" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<rect x="35" y="65" width="425" height="365" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="248" y="104" font-size="22" text-anchor="middle" fill="#111" font-weight="600">Sandbox 本地盘</text>
+<rect x="610" y="65" width="355" height="365" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="788" y="104" font-size="22" text-anchor="middle" fill="#111" font-weight="600">NAS 工作区</text>
+<rect x="70" y="135" width="350" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="245" y="171" font-size="22" text-anchor="middle" fill="#111">pnpm store / npm cache</text>
+<text x="245" y="205" font-size="20" text-anchor="middle" fill="#111">已下载、可复用的包内容</text>
+<rect x="640" y="135" width="295" height="90" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="787" y="171" font-size="22" text-anchor="middle" fill="#111">node_modules/</text>
+<text x="787" y="205" font-size="20" text-anchor="middle" fill="#111">.pnpm / 依赖目录</text>
+<path d="M 420 181 H 640" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="526" y="162" font-size="20" text-anchor="middle" fill="#111">提供包内容</text>
+<rect x="70" y="298" width="350" height="95" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="245" y="337" font-size="22" text-anchor="middle" fill="#111">安装器 / 构建工具</text>
+<text x="245" y="374" font-size="20" text-anchor="middle" fill="#111">建立依赖树、解析模块</text>
+<rect x="640" y="285" width="295" height="108" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="787" y="321" font-size="19" text-anchor="middle" fill="#111">LOOKUP · GETATTR</text>
+<text x="787" y="354" font-size="19" text-anchor="middle" fill="#111">CREATE · SYMLINK</text>
+<text x="787" y="383" font-size="18" text-anchor="middle" fill="#111">以及文件内容读写</text>
+<path d="M 420 347 H 640" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="527" y="326" font-size="18" text-anchor="middle" fill="#111">目录与文件操作</text>
+<path d="M 786 225 V 285" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="500" y="473" font-size="20" text-anchor="middle" fill="#111">缓存命中后，NAS 上的依赖目录仍有文件与元数据操作</text>
+</g></svg>

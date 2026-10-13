@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:ns4="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="1000" height="470" viewBox="0 0 1000 470" version="1.1" role="img">
+ <title>补充实验：安装 166 秒与 31 秒，构建 6.05 秒与 4.29 秒</title><metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:date>2026-10-13T18:46:04.623510</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.9.4, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 470  L 1000 470  L 1000 0  L 0 0  z " style="fill: #ffffff" />
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 150 366.6  L 450 366.6  L 450 98.7  L 150 98.7  z " style="fill: #ffffff" />
+   </g>
+   <g id="patch_3">
+    <path d="M 150 202.44  L 387.142857 202.44  L 387.142857 154.56  L 150 154.56  z " clip-path="url(#pfe4a9fd293)" style="fill: #f5f5f5; stroke: #111111; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_4">
+    <path d="M 150 316.44  L 194.285714 316.44  L 194.285714 268.56  L 150 268.56  z " clip-path="url(#pfe4a9fd293)" style="fill: #b0e3e6; stroke: #0e8088; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m45949986be" d="M 0 0  L 0 3.5  " style="stroke: #000000" />
+      </defs>
+      <g>
+       <use ns4:href="#m45949986be" x="150" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="150" y="391.777187" transform="rotate(-0 150 391.777187)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use ns4:href="#m45949986be" x="235.714286" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="235.714286" y="391.777187" transform="rotate(-0 235.714286 391.777187)">60</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use ns4:href="#m45949986be" x="321.428571" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="321.428571" y="391.777187" transform="rotate(-0 321.428571 391.777187)">120</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use ns4:href="#m45949986be" x="407.142857" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="407.142857" y="391.777187" transform="rotate(-0 407.142857 391.777187)">180</text>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="300" y="425.101875" transform="rotate(-0 300 425.101875)">耗时（秒）</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_5" />
+     <g id="text_6">
+      <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="140" y="185.657812" transform="rotate(-0 140 185.657812)">NFS</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_6" />
+     <g id="text_7">
+      <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="140" y="300.771875" transform="rotate(-0 140 300.771875)">本地 /tmp</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_5">
+    <path d="M 150 366.6  L 450 366.6  " style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="text_8">
+    <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="394.642857" y="183.665625" transform="rotate(-0 394.642857 183.665625)">166</text>
+   </g>
+   <g id="text_9">
+    <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="201.785714" y="297.665625" transform="rotate(-0 201.785714 297.665625)">31</text>
+   </g>
+   <g id="text_10">
+    <text style="font: 24px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="150" y="79.7" transform="rotate(-0 150 79.7)">依赖安装</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_6">
+    <path d="M 660 366.6  L 930 366.6  L 930 98.7  L 660 98.7  z " style="fill: #ffffff" />
+   </g>
+   <g id="patch_7">
+    <path d="M 660 202.44  L 861.666667 202.44  L 861.666667 154.56  L 660 154.56  z " clip-path="url(#p7700846796)" style="fill: #f5f5f5; stroke: #111111; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="patch_8">
+    <path d="M 660 316.44  L 803 316.44  L 803 268.56  L 660 268.56  z " clip-path="url(#p7700846796)" style="fill: #b0e3e6; stroke: #0e8088; stroke-width: 1.4; stroke-linejoin: miter" />
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_5">
+     <g id="line2d_7">
+      <g>
+       <use ns4:href="#m45949986be" x="660" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_11">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="660" y="391.777187" transform="rotate(-0 660 391.777187)">0</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_8">
+      <g>
+       <use ns4:href="#m45949986be" x="726.666667" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_12">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="726.666667" y="391.777187" transform="rotate(-0 726.666667 391.777187)">2</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_9">
+      <g>
+       <use ns4:href="#m45949986be" x="793.333333" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_13">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="793.333333" y="391.777187" transform="rotate(-0 793.333333 391.777187)">4</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_10">
+      <g>
+       <use ns4:href="#m45949986be" x="860" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_14">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="860" y="391.777187" transform="rotate(-0 860 391.777187)">6</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_11">
+      <g>
+       <use ns4:href="#m45949986be" x="926.666667" y="366.6" style="stroke: #000000" />
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font: 18px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="926.666667" y="391.777187" transform="rotate(-0 926.666667 391.777187)">8</text>
+     </g>
+    </g>
+    <g id="text_16">
+     <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="795" y="425.101875" transform="rotate(-0 795 425.101875)">耗时（秒）</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4">
+    <g id="ytick_3">
+     <g id="line2d_12" />
+     <g id="text_17">
+      <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="650" y="185.657812" transform="rotate(-0 650 185.657812)">NFS</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_13" />
+     <g id="text_18">
+      <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: end" x="650" y="300.771875" transform="rotate(-0 650 300.771875)">本地 /tmp</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_9">
+    <path d="M 660 366.6  L 930 366.6  " style="fill: none; stroke: #000000; stroke-width: 1.1; stroke-linejoin: miter; stroke-linecap: square" />
+   </g>
+   <g id="text_19">
+    <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="868.416667" y="183.665625" transform="rotate(-0 868.416667 183.665625)">6.05</text>
+   </g>
+   <g id="text_20">
+    <text style="font: 20px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="809.75" y="297.665625" transform="rotate(-0 809.75 297.665625)">4.29</text>
+   </g>
+   <g id="text_21">
+    <text style="font: 24px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: start" x="660" y="79.7" transform="rotate(-0 660 79.7)">Vite build</text>
+   </g>
+  </g>
+  <g id="text_22">
+   <text style="font: 23px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="500" y="28.2" transform="rotate(-0 500 28.2)">431 个依赖 · 22,302 个文件</text>
+  </g>
+  <g id="text_23">
+   <text style="font: 19px 'DejaVu Sans', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Arial', 'Helvetica', 'Avant Garde', sans-serif; text-anchor: middle" x="500" y="451.2" transform="rotate(-0 500 451.2)">本地路径为容器 overlay；两个子图使用独立刻度</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pfe4a9fd293">
+   <rect x="150" y="98.7" width="300" height="267.9" />
+  </clipPath>
+  <clipPath id="p7700846796">
+   <rect x="660" y="98.7" width="270" height="267.9" />
+  </clipPath>
+ </defs>
+</svg>

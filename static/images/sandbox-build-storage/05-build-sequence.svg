@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img"><title>本地构建和持久产物的交接顺序</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="690" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<path d="M 125 92 V 620" fill="none" stroke="#777" stroke-width="1.6" stroke-dasharray="6 5"/>
+<path d="M 365 92 V 620" fill="none" stroke="#777" stroke-width="1.6" stroke-dasharray="6 5"/>
+<path d="M 605 92 V 620" fill="none" stroke="#777" stroke-width="1.6" stroke-dasharray="6 5"/>
+<path d="M 865 92 V 620" fill="none" stroke="#777" stroke-width="1.6" stroke-dasharray="6 5"/>
+<rect x="30" y="32" width="190" height="52" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="125" y="66" font-size="22" text-anchor="middle" fill="#111" font-weight="600">构建入口</text>
+<rect x="270" y="32" width="190" height="52" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="365" y="66" font-size="22" text-anchor="middle" fill="#111" font-weight="600">NAS 输入</text>
+<rect x="510" y="32" width="190" height="52" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="605" y="66" font-size="22" text-anchor="middle" fill="#111" font-weight="600">本地工程</text>
+<rect x="770" y="32" width="190" height="52" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="865" y="66" font-size="22" text-anchor="middle" fill="#111" font-weight="600">NAS 产物</text>
+<rect x="58" y="107" width="134" height="45" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="125" y="137" font-size="19" text-anchor="middle" fill="#111">取得构建锁</text>
+<path d="M 125 184 H 365" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="245" y="170" font-size="20" text-anchor="middle" fill="#111">读取本轮输入</text>
+<path d="M 365 250 H 605" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="485" y="234" font-size="20" text-anchor="middle" fill="#111">同步源码与锁文件</text>
+<path d="M 125 307 H 605" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="365" y="291" font-size="20" text-anchor="middle" fill="#111">核对并准备本地依赖</text>
+<rect x="514" y="332" width="182" height="125" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="605" y="365" font-size="20" text-anchor="middle" fill="#111">本地安装</text>
+<text x="605" y="402" font-size="20" text-anchor="middle" fill="#111">执行 build</text>
+<text x="605" y="438" font-size="20" text-anchor="middle" fill="#111">生成 dist</text>
+<path d="M 605 502 H 865" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="735" y="484" font-size="20" text-anchor="middle" fill="#111">复制成功产物</text>
+<rect x="770" y="527" width="190" height="67" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="865" y="553" font-size="18" text-anchor="middle" fill="#111">暂存目录复制完成</text>
+<text x="865" y="580" font-size="20" text-anchor="middle" fill="#111">重命名为 dist</text>
+<path d="M 865 635 H 125" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="495" y="619" font-size="20" text-anchor="middle" fill="#111">返回产物路径，进入上传与版本流程</text>
+</g></svg>
