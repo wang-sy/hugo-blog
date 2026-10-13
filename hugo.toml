@@ -16,7 +16,6 @@ languageName = "简体中文"
 hasCJKLanguage = true
 
 # 默认每页列表显示的文章数目
-paginate = 10
 
 # 是否使用 robots.txt
 enableRobotsTXT = true
@@ -237,9 +236,10 @@ enableEmoji = true
   tag = "tags"
   series = "series"
 
-[params.rum]
-  id = "5GWQ1CeGPyjLLRLa4g"
-  statsURL = "https://saiyudoc-stats-1301596189.cos.ap-guangzhou.myqcloud.com/public/stats.json"
+[params.analytics]
+  websiteId = "dd0320cd-bbf6-4ec2-81cb-cf3c77493fa7"
+  host = "https://stats.wangsaiyu.com"
+  shareURL = "https://stats.wangsaiyu.com/share/oC3FXSxNS57MtR41"
 
 # Hugo 解析文档的配置
 [markup]

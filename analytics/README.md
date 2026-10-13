@@ -1,61 +1,60 @@
-# 博客公开统计
+# SaiyuDoc · Umami 统计
 
-上线范围：腾讯 RUM（广州）→ 每 10 分钟运行一次的云函数 → COS 公开汇总 JSON → 博客 `/stats/` 与文章阅读数。
+博客主地址 `https://www.wangsaiyu.com/`，根域名同样直接访问。两个域名统一上报到同一 Umami 网站，不对博客主机作迁移。
 
-## 资源
+## 线上资源
 
-| 资源 | 标识 |
-| --- | --- |
-| RUM 业务系统 | `rum-DDsO7rS3Mgd9qZ` |
-| RUM 应用 | `159725`，上报 ID `5GWQ1CeGPyjLLRLa4g`（公开项目标识，不是云 API 密钥） |
-| 地域 | `ap-guangzhou` |
-| 云函数 | `saiyudoc-analytics`，Python 3.10，256 MB，120 秒超时 |
-| 定时器 | `aggregate-every-10-minutes`，`0 */10 * * * * *` |
-| 执行角色 | `SaiyuDocAnalyticsRole`，ID `4611686018449591489` |
-| 权限策略 | `SaiyuDocAnalyticsAccess`，ID `289674693` |
-| 统计专用存储桶 | `saiyudoc-stats-1301596189` |
-| 私有状态 | `private/state.json.gz` |
-| 公开数据 | `https://saiyudoc-stats-1301596189.cos.ap-guangzhou.myqcloud.com/public/stats.json` |
+- Umami 3.4.0：`https://stats.wangsaiyu.com`，管理入口 `/login`。
+- 公开分享：`https://stats.wangsaiyu.com/share/oC3FXSxNS57MtR41?locale=zh-CN`，嵌入博客 `/stats/`。
+- 网站 ID：`dd0320cd-bbf6-4ec2-81cb-cf3c77493fa7`。公开标识，无管理权限。
+- 广州轻量服务器：`lhins-if4y3vqn`，`134.175.20.232`；2 核 4GB、60GB SSD、5Mbps、每月 500GB 流量；月付 65 元。首次购买至 2026-11-13，手动续费。
+- PostgreSQL 17、Umami 使用 Docker Compose；配置在 `/opt/saiyudoc-umami`，持久卷 `saiyudoc-umami_db-data`。仅 Nginx 暴露 80/443，应用端口 3000 只绑定回环，数据库不映射公网端口。
+- Let's Encrypt 免费证书，由 certbot 定时续期。
+- `/public/articles.json` 是每分钟生成的匿名汇总，缓存 60 秒。定时任务 `/etc/cron.d/saiyudoc-umami`，失败保留上次成功文件，前端在超过 10 分钟未更新时提示延迟。
+- 加密异地备份：COS `saiyudoc-stats-1301596189/private/umami-backups/`，生命周期 30 天。每天服务器时间 03:30 备份，服务器本地保留 7 天。专用 CAM 子用户 `saiyudoc_umami_backup` 仅有此目录的 PutObject 权限，策略 `289678676`，无控制台登录权限。
 
-专用桶与网站发布桶分开，网站 CI 的清理上传不会删掉统计历史。桶只放行公开 JSON 的匿名 GET；私有状态不可匿名读取。COS CORS 仅允许 GET/HEAD。浏览器不持有云 API 密钥；云函数使用执行角色颁发的临时凭证。
+管理员密码、SSH 私钥、数据库密码和备份解密密钥仅保存在部署主机及操作者本机私有目录，不进入 Git、网页或 CI。操作者本机目录：`~/.local/share/saiyudoc-umami/`；`credentials.json` 是应用凭证，`server-key` 是 SSH 私钥，`backup.key` 是备份解密密钥。目录权限 700，凭证文件 600。
 
-RUM 的 `DescribeRumLogDetailsV2` 实际鉴权返回资源 `*`，不支持按项目限定该 API；角色只授予这一个只读 API，代码固定读取博客项目。COS 权限精确限定两个对象的读写。并发内存配额 256 MB 限制同时最多一个实例，不开预置实例、不创建公网入口、不创建 CLS 日志主题；异常可从云函数调用结果和监控查看。
+## 指标
 
-## 数据口径与边界
+- 原生看板显示访客、访问次数、浏览量、每日趋势、页面排名、来源和设备等。只开放 overview/breakdown，sessions/realtime/events 及原始事件属性不共享。
+- 一次页面打开只发送一个 pageview。所有查询参数、片段和来源路径被移除，hostname 统一为 `www.wangsaiyu.com`。旧 RUM 标识 Cookie 自动删除，不新增身份 Cookie；保留退出统计的偏好 Cookie。
+- 原生 UV 使用 Umami 的匿名会话摘要，盐按月轮换，不等于精确人数，跨月可能重复计数。分享页日期按浏览器时区；文章阅读表固定北京时间。
+- `blog_read` 事件上报每次页面打开的临时 ID 和累计前台毫秒数，页面初始的零时长存在 pageview 数据中。聚合按同一临时 ID、路径和匿名会话取最大值，排除重复心跳；按初次事件日期归属。平均前台时长 = 累计前台秒数 / 同期 PV。脚本或退出请求被拦截时会低估。单次最多四小时。
+- 心跳不增加 PV；它属于互动事件，会影响 Umami 跳出率。Umami 自带的会话时长仍基于页面浏览间隔，不等于前台阅读时长；单页访问可能为零。
+- 访客量和每日趋势在原生看板中；文章累计量与每篇文章阅读时长由附加汇总读取同一个数据库。没有云 API 密钥、管理员 token 或数据库密码发给浏览器。
+- 统计从此次接入开始；旧系统数据保留，不伪造历史补数。客户端统计无法防止有意伪造访问，不用于计费结算。
 
-- 从 2026-10-13 开始采集，无历史访问补数。PV 是页面打开次数；UV 是随机浏览器标识的去重数量，不等于精确人数。
-- 通过同域 Cookie 合并 www 和根域名，查询参数不参与 URL 分组，也不发送给 RUM。禁止额外错误、接口、资源、点击与录屏采集；允许 SDK 的项目配置查询和 PV、自定义统计日志。
-- 每次页面打开生成独立 visit ID。每分钟和失焦/隐藏/退出时上报累计前台时长；汇总取同一 visit 的最大值，重试、重复拉取不会重复计数。前台时间要求页面可见且窗口获焦，休眠中超过 5 秒的计时间隔不累加，单次上限 4 小时。
-- 北京时间按访问开始日归属。周期包含今天；7/30/90 天 UV 是周期内重新去重，不是每日 UV 相加。跨午夜的长阅读归在开始日。
-- 每次汇总延后 2 分钟，并重读前 15 分钟防止短暂入库延迟。超过该窗口才入库的迟到事件可能漏计。脚本拦截、DNT/GPC、退出上报失败也会造成低估。
-- 私有状态只保留加盐不可逆访客摘要、visit ID、路径、文章标记和累计时长，按北京时间保留最近 90 天；每日汇总和文章累计量长期保留。公开 JSON 从字段白名单重新构造，不含 IP、访客 ID、visit ID 或盐。
-- 数据 45 分钟不更新时，看板提示延迟；API 拉取异常不会推进检查点。单轮最多 4,000 条原始日志，超过时保留检查点并报错，需调小批次时间窗或提高汇总频率后追平。
-- RUM 上报 ID 是公开的，普通客户端分析不能抵御有意伪造访问；这些数字用于博客流量观察，不作为结算依据。
+## 发布与维护
 
-## 验证与发布
+前端沿用 GitHub master → Hugo → COS → CDN 刷新。修改源码后：
 
 ```sh
+node --test analytics/test_*.cjs
 python3 -m unittest discover -s analytics -p 'test_*.py'
-node --test analytics/test_clock.cjs
 hugo --minify
 ```
 
-网站沿用 GitHub `master` 发布流水线。后端修改需使用当前已登录的 tccli 凭证手动更新：
+服务器文件来自 `analytics/umami/`；备份上传还依赖 `analytics/cloud.py`。服务启动：
 
 ```sh
-python3 analytics/deploy.py update
-python3 analytics/deploy.py status
-python3 analytics/deploy.py invoke
+sudo docker compose --project-directory /opt/saiyudoc-umami up -d
+sudo python3 /opt/saiyudoc-umami/export.py
+sudo sh /opt/saiyudoc-umami/backup.sh
 ```
 
-`deploy.py` 的 storage/role/create/schedule 子命令用于明确创建或配置资源，不能作为无审核的常规构建步骤。凭证只从当前进程环境或 tccli 登录文件读取，不写入代码包和仓库。
+只替换需要更新的文件，保留 `.env`、`site.json`、`backup.key`、`backup-credentials.json` 与数据卷。不要直接以仓库中的 HTTP 模板覆盖已由 certbot 添加 TLS 的线上 Nginx 配置。升级前先备份，固定版本更新并验证分享权限、采集和数据库兼容性。禁止 `docker compose down -v`。
 
-本地预览默认不上报；`?analytics_preview=1` 使用 test 环境并在配置节点的 data 属性记录调试结果。生产 RUM 域名白名单会拒绝 localhost 上报；不要为本地预览放开生产白名单。完整验收在生产页面实际打开、等待、切换焦点后，核对 RUM 日志和下一轮公开汇总。测试环境日志不会进入公开数字。
+恢复加密备份：
 
-回滚网站可撤回统计相关提交并重新发布；停用后台可关闭博客定时触发器。保留专用 COS 私有状态即可保留累计历史，勿删除存储桶。禁用统计不影响静态文章阅读。
+```sh
+openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 \
+  -pass file:/opt/saiyudoc-umami/backup.key -in backup.dump.enc -out backup.dump
+# 对准备好的空数据库执行；不直接覆盖当前生产数据库
+sudo docker compose --project-directory /opt/saiyudoc-umami exec -T db \
+  pg_restore -U umami -d restore_database --exit-on-error < backup.dump
+```
 
-## 费用
+备份包含数据库，不包含 TLS 私钥和应用环境密钥；后两者分别通过证书重签与私有配置恢复。查看服务状态用 `docker compose ps`，日志用 `docker compose logs --tail 50`；汇总与备份日志按周轮转。
 
-按量计费，低流量预估 2～5 元/月只是预算估算，10 元不是硬上限。RUM 广州免费日志额度与账号其他应用共享，超过额度及 COS 请求/流量、云函数执行均可产生费用。未开 CLS 日志主题和预置实例，避免固定空闲开销。真实费用以腾讯云账单为准。
-
-官方说明：[RUM 计费](https://cloud.tencent.com/document/product/248/87074)、[云函数计费](https://cloud.tencent.com/document/product/583/12281)、[RUM 查询字段](https://cloud.tencent.com/document/product/248/87223)。
+旧 RUM 实施记录在 `rum-legacy.md`，相关部署脚本仅作历史参考，不应再次启用。COS 桶继续复用作加密备份。低流量下除服务器外只有少量 COS 开销；超过套餐流量另按腾讯云规则计费。
