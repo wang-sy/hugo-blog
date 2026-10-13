@@ -1,5 +1,5 @@
 ---
-title: "Sandbox 性能优化：从 Git 推送到本地盘编译"
+title: "Sandbox 存储性能优化：NAS 选型与本地盘构建"
 date: 2026-10-13T18:00:00+08:00
 draft: false
 description: "新项目准备时，近一半等待花在初始 Git 推送上。从这次排查出发，回顾 NAS、CPFS 选型测试，以及把 node_modules 和编译移到本地盘的过程。"
