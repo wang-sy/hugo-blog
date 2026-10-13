@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="660" viewBox="0 0 1000 660" role="img">
-<title>环境快照与当前版本指针的提交顺序</title>
+<title>环境快照保存与启用的顺序</title>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
 <rect width="1000" height="660" fill="white"/>
 <g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
@@ -20,18 +20,18 @@
 <rect x="268" y="193" width="174" height="54" fill="#b0e3e6" stroke="#111" stroke-width="1.6"/>
 <text x="355" y="225" font-size="18" text-anchor="middle">协调并发与写入</text>
 <path d="M 355 286 H 600" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
-<text x="478" y="269" font-size="18" text-anchor="middle">取得一致视图，保存 v8</text>
+<text x="478" y="269" font-size="18" text-anchor="middle">取得一致视图，保存快照</text>
 <rect x="510" y="310" width="180" height="61" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
-<text x="600" y="335" font-size="18" text-anchor="middle">完整数据可恢复</text>
-<text x="600" y="358" font-size="19" text-anchor="middle">v8 = READY</text>
+<text x="600" y="335" font-size="18" text-anchor="middle">数据与元信息齐全</text>
+<text x="600" y="358" font-size="19" text-anchor="middle">快照已可恢复</text>
 <path d="M 600 401 H 355" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
 <text x="478" y="386" font-size="20" text-anchor="middle">保存成功</text>
 <path d="M 355 463 H 865" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
-<text x="610" y="445" font-size="20" text-anchor="middle">比较当前版本与写入权，v7 → v8</text>
+<text x="610" y="445" font-size="20" text-anchor="middle">校验当前版本与写入权，更新环境</text>
 <rect x="50" y="505" width="628" height="65" fill="#f8cecc" stroke="#111" stroke-width="1.6"/>
-<text x="364" y="544" font-size="21" text-anchor="middle">保存或提交失败：本任务不切换 current</text>
+<text x="364" y="544" font-size="21" text-anchor="middle">保存或提交失败：本任务不更新项目环境</text>
 <rect x="757" y="503" width="216" height="70" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
-<text x="865" y="532" font-size="21" text-anchor="middle">current = v8</text>
-<text x="865" y="559" font-size="18" text-anchor="middle">下次按 v8 恢复</text>
-<text x="500" y="623" font-size="20" text-anchor="middle">v8 已保存且本次提交仍有效，才更新项目当前环境版本</text>
+<text x="865" y="532" font-size="21" text-anchor="middle">当前环境已更新</text>
+<text x="865" y="559" font-size="18" text-anchor="middle">下次从新快照恢复</text>
+<text x="500" y="623" font-size="20" text-anchor="middle">快照已保存且本次提交仍有效，才更新项目当前环境</text>
 </g></svg>

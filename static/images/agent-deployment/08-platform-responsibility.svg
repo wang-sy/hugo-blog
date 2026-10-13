@@ -6,7 +6,7 @@
 <g data-node="20,45,240,73">
 <rect x="20" y="45" width="240" height="73" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <text x="140.0" y="74.02" text-anchor="middle" font-size="22" font-weight="400" fill="#000">run_id</text>
-<text x="140.0" y="103.94" text-anchor="middle" font-size="22" font-weight="400" fill="#000">r1</text>
+<text x="140.0" y="103.94" text-anchor="middle" font-size="22" font-weight="400" fill="#000">关联本次运行</text>
 </g>
 <g data-node="260,45,240,73">
 <rect x="260" y="45" width="240" height="73" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>

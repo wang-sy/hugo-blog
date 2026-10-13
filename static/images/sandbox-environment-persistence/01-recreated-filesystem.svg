@@ -4,14 +4,14 @@
 <rect width="1000" height="690" fill="white"/>
 <g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
 <rect x="35" y="45" width="400" height="365" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
-<text x="235" y="84" font-size="22" text-anchor="middle" font-weight="600">旧 Sandbox r7</text>
+<text x="235" y="84" font-size="22" text-anchor="middle" font-weight="600">原 Sandbox</text>
 <rect x="60" y="107" width="350" height="76" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
-<text x="235" y="139" font-size="22" text-anchor="middle">基础镜像 A</text>
+<text x="235" y="139" font-size="22" text-anchor="middle">基础镜像</text>
 <text x="235" y="166" font-size="20" text-anchor="middle">初始系统与公共工具</text>
 <rect x="565" y="45" width="400" height="365" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
-<text x="765" y="84" font-size="22" text-anchor="middle" font-weight="600">新 Sandbox r8</text>
+<text x="765" y="84" font-size="22" text-anchor="middle" font-weight="600">新 Sandbox</text>
 <rect x="590" y="107" width="350" height="76" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
-<text x="765" y="139" font-size="22" text-anchor="middle">基础镜像 A</text>
+<text x="765" y="139" font-size="22" text-anchor="middle">基础镜像</text>
 <text x="765" y="166" font-size="20" text-anchor="middle">初始系统与公共工具</text>
 <rect x="60" y="211" width="350" height="91" fill="#b0e3e6" stroke="#111" stroke-width="1.6"/>
 <text x="235" y="246" font-size="22" text-anchor="middle">本次实例的可写层</text>

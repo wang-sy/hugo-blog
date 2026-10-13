@@ -24,11 +24,11 @@
 <path d="M 40 298 H 960" fill="none" stroke="#888" stroke-width="1.6" stroke-dasharray="6 5"/>
 <text x="40" y="339" font-size="22" text-anchor="start" fill="#111" font-weight="600">工程文件：Sandbox 直接挂载工作区</text>
 <rect x="40" y="375" width="330" height="125" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
-<text x="205" y="413" font-size="22" text-anchor="middle" fill="#111" font-weight="600">Sandbox r7</text>
+<text x="205" y="413" font-size="22" text-anchor="middle" fill="#111" font-weight="600">原 Sandbox</text>
 <text x="205" y="451" font-size="20" text-anchor="middle" fill="#111">编辑代码 · 安装依赖 · 构建</text>
 <text x="205" y="484" font-size="19" text-anchor="middle" fill="#111">文件操作通过挂载目录</text>
 <rect x="40" y="550" width="330" height="130" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
-<text x="205" y="589" font-size="22" text-anchor="middle" fill="#111" font-weight="600">Sandbox r8</text>
+<text x="205" y="589" font-size="22" text-anchor="middle" fill="#111" font-weight="600">新 Sandbox</text>
 <text x="205" y="630" font-size="20" text-anchor="middle" fill="#111">新实例继续处理同一个项目</text>
 <text x="205" y="664" font-size="19" text-anchor="middle" fill="#111">重新访问原来的工程文件</text>
 <rect x="625" y="375" width="335" height="305" fill="#ffffff" stroke="#111" stroke-width="1.6"/>

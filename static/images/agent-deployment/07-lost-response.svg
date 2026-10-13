@@ -13,18 +13,18 @@
 <path d="M135 92 V515" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
 <path d="M610 92 V515" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
 <path d="M135 140 L610 140" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="373" y="123" text-anchor="middle" font-size="21" font-weight="400" fill="#000">generate(op-42)</text>
+<text x="373" y="123" text-anchor="middle" font-size="21" font-weight="400" fill="#000">携带操作标识，发起生成</text>
 <rect x="760" y="175" width="220" height="125" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
-<text x="870.0" y="203" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Operation</text>
+<text x="870.0" y="203" text-anchor="middle" font-size="22" font-weight="600" fill="#000">操作记录</text>
 <path d="M760 217 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="870.0" y="250.06666666666666" text-anchor="middle" font-size="18" font-weight="400" fill="#000">op-42 → t7</text>
+<text x="870.0" y="250.06666666666666" text-anchor="middle" font-size="18" font-weight="400" fill="#000">关联操作标识与素材任务</text>
 <text x="870.0" y="277.7333333333333" text-anchor="middle" font-size="18" font-weight="400" fill="#000">已接单 / 已登记费用</text>
 <path d="M610 155 V202 H747" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <path d="M610 290 H135" fill="none" stroke="#b85450" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
 <path d="M359 278 L383 302 M383 278 L359 302" fill="none" stroke="#b85450" stroke-width="1.6" stroke-linejoin="round"/>
 <text x="373" y="272" text-anchor="middle" font-size="20" font-weight="400" fill="#b85450">回复丢失</text>
 <path d="M135 380 L610 380" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="373" y="363" text-anchor="middle" font-size="20" font-weight="400" fill="#000">query(op-42) / retry(op-42)</text>
+<text x="373" y="363" text-anchor="middle" font-size="20" font-weight="400" fill="#000">按原操作标识查询或重试</text>
 <path d="M610 470 L135 470" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
-<text x="373" y="453" text-anchor="middle" font-size="20" font-weight="400" fill="#000">task_id = t7, status = running</text>
+<text x="373" y="453" text-anchor="middle" font-size="20" font-weight="400" fill="#000">返回原任务与当前状态</text>
 </svg>

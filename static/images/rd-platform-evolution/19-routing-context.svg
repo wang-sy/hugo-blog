@@ -7,13 +7,13 @@
 <rect x="60" y="88" width="370" height="120" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
 <text x="245.0" y="116" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Request Context</text>
 <path d="M60 130 H430" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="245.0" y="162.0" text-anchor="middle" font-size="20" font-weight="400" fill="#000">request_id = r1</text>
-<text x="245.0" y="188.0" text-anchor="middle" font-size="20" font-weight="400" fill="#000">route_env = a</text>
+<text x="245.0" y="162.0" text-anchor="middle" font-size="20" font-weight="400" fill="#000">请求标识</text>
+<text x="245.0" y="188.0" text-anchor="middle" font-size="20" font-weight="400" fill="#000">本次请求选择的环境</text>
 <rect x="650" y="25" width="330" height="190" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <text x="815.0" y="53" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Service Discovery</text>
 <path d="M650 67 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="815.0" y="121.73333333333335" text-anchor="middle" font-size="18" font-weight="400" fill="#000">key = service + route_env</text>
-<text x="815.0" y="171.0666666666667" text-anchor="middle" font-size="18" font-weight="400" fill="#000">target = a-dispatcher</text>
+<text x="815.0" y="121.73333333333335" text-anchor="middle" font-size="18" font-weight="400" fill="#000">服务名称 + 请求环境</text>
+<text x="815.0" y="171.0666666666667" text-anchor="middle" font-size="18" font-weight="400" fill="#000">对应环境的调度服务</text>
 <path d="M483 131 L637 131" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <text x="560" y="114" text-anchor="middle" font-size="18" font-weight="400" fill="#000">RPC 元数据</text>
 <path d="M245 243 L245 302" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
@@ -21,13 +21,13 @@
 <rect x="20" y="315" width="450" height="145" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <text x="245.0" y="343" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Message</text>
 <path d="M20 357 H470" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="245.0" y="397.3333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">properties.route_env = a</text>
+<text x="245.0" y="397.3333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">消息携带请求环境</text>
 <text x="245.0" y="431.6666666666667" text-anchor="middle" font-size="20" font-weight="400" fill="#000">任务编号 / 消息内容</text>
 <rect x="650" y="315" width="330" height="145" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
 <text x="815.0" y="343" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Consumer</text>
 <path d="M650 357 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="815.0" y="397.3333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">恢复 route_env = a</text>
-<text x="815.0" y="431.6666666666667" text-anchor="middle" font-size="20" font-weight="400" fill="#000">选择 a-runtime</text>
+<text x="815.0" y="397.3333333333333" text-anchor="middle" font-size="20" font-weight="400" fill="#000">恢复请求环境</text>
+<text x="815.0" y="431.6666666666667" text-anchor="middle" font-size="20" font-weight="400" fill="#000">选择对应的执行服务</text>
 <path d="M483 387 L637 387" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <text x="560" y="370" text-anchor="middle" font-size="19" font-weight="400" fill="#000">消费</text>
 </svg>

@@ -132,7 +132,7 @@ CI 在部署时把环境身份写入实例配置；调度队列也逐步从命�
 
 回收时还要处理资源名称复用的问题。
 
-{{< image src="/images/rd-platform-evolution/10-lifecycle.svg" alt="环境名称可以复用，回收操作通过代次和资源 UID 区分旧实例与新实例" caption="图 5：环境代次与资源身份，编号为示意" width="1000" height="430" >}}
+{{< image src="/images/rd-platform-evolution/10-lifecycle.svg" alt="环境名称可以复用，回收操作通过创建记录和资源身份区分旧环境与新环境" caption="图 5：同名环境重建后，旧回收任务只能处理原来的资源" width="1000" height="430" >}}
 
 同名环境关闭后重新创建，已经是另一代资源。旧回收任务如果延迟执行，不能仅根据名称删除新环境。
 

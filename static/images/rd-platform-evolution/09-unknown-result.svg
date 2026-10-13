@@ -18,16 +18,16 @@
 </g>
 <path d="M850 93 V480" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
 <path d="M150 140 L500 140" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="325" y="123" text-anchor="middle" font-size="20" font-weight="400" fill="#000">提交 request_id = r7</text>
+<text x="325" y="123" text-anchor="middle" font-size="20" font-weight="400" fill="#000">携带请求标识提交发布</text>
 <path d="M500 205 L850 205" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="675" y="188" text-anchor="middle" font-size="20" font-weight="400" fill="#000">执行 op-7</text>
+<text x="675" y="188" text-anchor="middle" font-size="20" font-weight="400" fill="#000">执行发布操作</text>
 <rect x="842" y="206" width="16" height="266" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
 <path d="M500 280 H150" fill="none" stroke="#b85450" stroke-width="1.6" stroke-linejoin="round" stroke-dasharray="6 5"/>
 <text x="325" y="263" text-anchor="middle" font-size="20" font-weight="400" fill="#b85450">响应丢失</text>
 <path d="M313 269 L337 291 M337 269 L313 291" fill="none" stroke="#b85450" stroke-width="1.6" stroke-linejoin="round"/>
 <path d="M150 370 L500 370" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
-<text x="325" y="353" text-anchor="middle" font-size="20" font-weight="400" fill="#000">按 r7 查询原操作</text>
+<text x="325" y="353" text-anchor="middle" font-size="20" font-weight="400" fill="#000">按原请求查询发布进度</text>
 <path d="M500 450 L150 450" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
-<text x="325" y="433" text-anchor="middle" font-size="19" font-weight="400" fill="#000">op-7 / 进度 / 目标 / 制品</text>
+<text x="325" y="433" text-anchor="middle" font-size="19" font-weight="400" fill="#000">原操作 / 进度 / 目标 / 制品</text>
 <text x="739" y="336" text-anchor="middle" font-size="19" font-weight="400" fill="#000">同一操作持续执行</text>
 </svg>

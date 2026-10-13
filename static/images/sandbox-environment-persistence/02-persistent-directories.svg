@@ -16,7 +16,7 @@
 <rect x="570" y="50" width="395" height="445" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
 <text x="767" y="91" font-size="22" text-anchor="middle" font-weight="600">独立持久存储</text>
 <rect x="610" y="214" width="315" height="181" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
-<text x="767" y="255" font-size="22" text-anchor="middle" font-weight="600">项目目录 W</text>
+<text x="767" y="255" font-size="22" text-anchor="middle" font-weight="600">项目持久目录</text>
 <text x="767" y="303" font-size="21" text-anchor="middle">源码与项目文件</text>
 <text x="767" y="346" font-size="20" text-anchor="middle">明确安装在此的用户工具</text>
 <text x="767" y="377" font-size="18" text-anchor="middle">卷标识、路径、权限需匹配</text>

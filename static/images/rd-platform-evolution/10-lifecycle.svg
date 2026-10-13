@@ -5,21 +5,21 @@
 <rect x="20" y="30" width="405" height="225" fill="#f5f5f5" stroke="#666666" stroke-width="1.6"/>
 <text x="222.5" y="58" text-anchor="middle" font-size="22" font-weight="600" fill="#000">旧环境</text>
 <path d="M20 72 H425" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="222.5" y="124.35" text-anchor="middle" font-size="22" font-weight="400" fill="#000">name = feature-x</text>
-<text x="222.5" y="170.1" text-anchor="middle" font-size="22" font-weight="400" fill="#000">generation = 7</text>
-<text x="222.5" y="215.85" text-anchor="middle" font-size="22" font-weight="400" fill="#000">uid = u1</text>
+<text x="222.5" y="124.35" text-anchor="middle" font-size="22" font-weight="400" fill="#000">复用相同环境名称</text>
+<text x="222.5" y="170.1" text-anchor="middle" font-size="22" font-weight="400" fill="#000">原环境的创建记录</text>
+<text x="222.5" y="215.85" text-anchor="middle" font-size="22" font-weight="400" fill="#000">原资源身份</text>
 <rect x="575" y="30" width="405" height="225" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
 <text x="777.5" y="58" text-anchor="middle" font-size="22" font-weight="600" fill="#000">新环境</text>
 <path d="M575 72 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="777.5" y="124.35" text-anchor="middle" font-size="22" font-weight="400" fill="#000">name = feature-x</text>
-<text x="777.5" y="170.1" text-anchor="middle" font-size="22" font-weight="400" fill="#000">generation = 8</text>
-<text x="777.5" y="215.85" text-anchor="middle" font-size="22" font-weight="400" fill="#000">uid = u2</text>
+<text x="777.5" y="124.35" text-anchor="middle" font-size="22" font-weight="400" fill="#000">复用相同环境名称</text>
+<text x="777.5" y="170.1" text-anchor="middle" font-size="22" font-weight="400" fill="#000">新环境的创建记录</text>
+<text x="777.5" y="215.85" text-anchor="middle" font-size="22" font-weight="400" fill="#000">新资源身份</text>
 <path d="M438 139 L562 139" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <text x="500" y="122" text-anchor="middle" font-size="18" font-weight="400" fill="#000">关闭 / 重建</text>
 <g data-node="20,325,405,75">
 <rect x="20" y="325" width="405" height="75" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
 <text x="222.5" y="355.7" text-anchor="middle" font-size="20" font-weight="400" fill="#000">迟到的回收任务</text>
-<text x="222.5" y="382.9" text-anchor="middle" font-size="20" font-weight="400" fill="#000">Delete(generation=7, uid=u1)</text>
+<text x="222.5" y="382.9" text-anchor="middle" font-size="20" font-weight="400" fill="#000">仅回收原创建记录中的资源</text>
 </g>
 <g data-node="575,325,405,75">
 <rect x="575" y="325" width="405" height="75" fill="#f8cecc" stroke="#b85450" stroke-width="1.6"/>

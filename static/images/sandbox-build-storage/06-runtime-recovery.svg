@@ -3,7 +3,7 @@
 <rect width="1000" height="570" fill="white"/>
 <g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
 <rect x="35" y="73" width="285" height="180" fill="#f5f5f5" stroke="#666" stroke-width="1.6"/>
-<text x="177" y="111" font-size="22" text-anchor="middle" fill="#111" font-weight="600">旧 Runtime r7</text>
+<text x="177" y="111" font-size="22" text-anchor="middle" fill="#111" font-weight="600">原运行实例</text>
 <text x="177" y="155" font-size="20" text-anchor="middle" fill="#111">实例已经回收</text>
 <rect x="67" y="178" width="221" height="49" fill="#f8cecc" stroke="#b85450" stroke-width="1.6"/>
 <text x="177" y="209" font-size="20" text-anchor="middle" fill="#111">本地依赖不存在</text>
@@ -11,16 +11,16 @@
 <text x="675" y="93" font-size="22" text-anchor="middle" fill="#111" font-weight="600">NAS 仍然保存</text>
 <path d="M 385 111 H 965" fill="none" stroke="#111" stroke-width="1.6"/>
 <text x="675" y="148" font-size="22" text-anchor="middle" fill="#111">源码 · package.json · 锁文件</text>
-<text x="675" y="193" font-size="20" text-anchor="middle" fill="#111">deps-status = SUCCEEDED</text>
-<text x="675" y="237" font-size="20" text-anchor="middle" fill="#111">runtime_id = r7（旧记录）</text>
+<text x="675" y="193" font-size="20" text-anchor="middle" fill="#111">上次依赖准备成功</text>
+<text x="675" y="237" font-size="20" text-anchor="middle" fill="#111">记录属于已回收的实例</text>
 <rect x="35" y="348" width="930" height="153" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
-<text x="61" y="379" font-size="22" text-anchor="start" fill="#111" font-weight="600">新 Runtime r8</text>
+<text x="61" y="379" font-size="22" text-anchor="start" fill="#111" font-weight="600">新运行实例</text>
 <rect x="65" y="409" width="260" height="63" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
 <text x="195" y="448" font-size="20" text-anchor="middle" fill="#111">重建本地工程副本</text>
 <rect x="370" y="409" width="260" height="63" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
 <text x="500" y="448" font-size="20" text-anchor="middle" fill="#111">安装并验证依赖</text>
 <rect x="675" y="409" width="260" height="63" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
-<text x="805" y="448" font-size="20" text-anchor="middle" fill="#111">更新链接与 r8 标记</text>
+<text x="805" y="448" font-size="20" text-anchor="middle" fill="#111">更新链接与实例记录</text>
 <path d="M 325 439 H 370" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
 <path d="M 630 439 H 675" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
 <path d="M 520 273 V 316 H 290 V 409" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>

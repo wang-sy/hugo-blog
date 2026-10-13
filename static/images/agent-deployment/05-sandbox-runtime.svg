@@ -7,7 +7,7 @@
 <path d="M20 62 H980" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
 <text x="500.0" y="97.0" text-anchor="middle" font-size="20" font-weight="400" fill="#000">任务记录 / 项目与权限 / 调度与预算 / 事件与结果</text>
 <rect x="20" y="215" width="435" height="280" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
-<text x="237.5" y="245" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Sandbox A</text>
+<text x="237.5" y="245" text-anchor="middle" font-size="22" font-weight="600" fill="#000">项目沙箱</text>
 <path d="M134 134 L134 201" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <text x="243" y="160" text-anchor="middle" font-size="19" font-weight="400" fill="#000">start / resume</text>
 <path d="M420 201 L420 134" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
@@ -29,7 +29,7 @@
 <text x="253" y="385" text-anchor="middle" font-size="15" font-weight="400" fill="#000">工具</text>
 <path d="M135 438 V555" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round"/>
 <rect x="545" y="215" width="435" height="280" fill="#ffffff" stroke="#000000" stroke-width="1.6"/>
-<text x="762.5" y="245" text-anchor="middle" font-size="22" font-weight="600" fill="#000">Sandbox B</text>
+<text x="762.5" y="245" text-anchor="middle" font-size="22" font-weight="600" fill="#000">另一项目的沙箱</text>
 <path d="M659 134 L659 201" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
 <text x="768" y="160" text-anchor="middle" font-size="19" font-weight="400" fill="#000">start / resume</text>
 <path d="M945 201 L945 134" fill="none" stroke="#000" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
