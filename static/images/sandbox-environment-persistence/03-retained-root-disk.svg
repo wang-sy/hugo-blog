@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img">
+<title>保留运行磁盘的停止与恢复流程</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="620" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<rect x="35" y="55" width="290" height="175" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="180" y="94" font-size="22" text-anchor="middle" font-weight="600">旧计算实例 r7</text>
+<text x="180" y="141" font-size="21" text-anchor="middle">安装软件、修改配置</text>
+<text x="180" y="202" font-size="19" text-anchor="middle">停止后释放 CPU / 内存</text>
+<rect x="675" y="55" width="290" height="175" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="820" y="94" font-size="22" text-anchor="middle" font-weight="600">恢复计算实例 r8</text>
+<text x="820" y="141" font-size="21" text-anchor="middle">继续使用原环境</text>
+<text x="820" y="202" font-size="20" text-anchor="middle">启动进程并检查软件</text>
+<path d="M 325 131 H 675" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="500" y="111" font-size="20" text-anchor="middle">确认 r7 停止写入，再恢复 r8</text>
+<path d="M 180 230 V 390 H 270" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="204" y="282" font-size="20" text-anchor="start">安装结果落盘</text>
+<path d="M 730 390 H 820 V 230" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="842" y="282" font-size="20" text-anchor="start">恢复使用</text>
+<text x="500" y="292" font-size="21" text-anchor="middle">项目始终关联 disk-17</text>
+<rect x="270" y="325" width="460" height="151" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
+<text x="500" y="366" font-size="22" text-anchor="middle" font-weight="600">系统磁盘 / 完整可写部分</text>
+<text x="500" y="412" font-size="21" text-anchor="middle">软件文件 · 包记录 · 用户配置</text>
+<text x="500" y="449" font-size="20" text-anchor="middle">与匹配的基础镜像一起保留</text>
+<path d="M 500 476 V 519" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="300" y="519" width="400" height="49" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="500" y="550" font-size="20" text-anchor="middle">删除项目时，再按策略回收磁盘</text>
+<text x="500" y="603" font-size="20" text-anchor="middle">需要独立持久的磁盘，才能覆盖原计算节点故障</text>
+</g></svg>

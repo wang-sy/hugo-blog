@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img">
+<title>从环境快照创建新的 Sandbox</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="700" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<rect x="40" y="55" width="270" height="210" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="175" y="97" font-size="22" text-anchor="middle" font-weight="600">Sandbox r7</text>
+<rect x="365" y="55" width="270" height="210" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
+<text x="500" y="97" font-size="22" text-anchor="middle" font-weight="600">环境快照 v8</text>
+<rect x="690" y="55" width="270" height="210" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="825" y="97" font-size="22" text-anchor="middle" font-weight="600">Sandbox r8</text>
+<text x="175" y="148" font-size="21" text-anchor="middle">基础镜像 A</text>
+<text x="175" y="194" font-size="21" text-anchor="middle">已安装 Graphviz</text>
+<text x="175" y="236" font-size="20" text-anchor="middle">本次修改已完成</text>
+<text x="500" y="148" font-size="21" text-anchor="middle">绑定基础镜像 A</text>
+<text x="500" y="194" font-size="21" text-anchor="middle">文件变化与元数据</text>
+<text x="500" y="236" font-size="19" text-anchor="middle">包含新增、修改、删除</text>
+<text x="825" y="148" font-size="21" text-anchor="middle">基础镜像 A + v8</text>
+<text x="825" y="194" font-size="21" text-anchor="middle">恢复安装结果</text>
+<text x="825" y="236" font-size="20" text-anchor="middle">重新启动进程</text>
+<path d="M 310 173 H 365" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="337" y="152" font-size="18" text-anchor="middle">保存</text>
+<path d="M 635 173 H 690" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="662" y="152" font-size="18" text-anchor="middle">恢复</text>
+<text x="500" y="333" font-size="21" text-anchor="middle">快照保存成功后，原实例可以删除</text>
+<text x="500" y="378" font-size="20" text-anchor="middle">基础镜像与快照依赖必须一起保留</text>
+<rect x="250" y="490" width="500" height="136" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
+<text x="500" y="533" font-size="22" text-anchor="middle" font-weight="600">NAS 工作区 W</text>
+<text x="500" y="575" font-size="21" text-anchor="middle">源码 · 素材 · 依赖声明</text>
+<text x="500" y="609" font-size="19" text-anchor="middle">单独挂载，不包含在本例的 RootFS 快照中</text>
+<path d="M 175 265 V 557 H 250" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 825 265 V 557 H 750" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="201" y="450" font-size="20" text-anchor="start">原实例挂载</text>
+<text x="852" y="450" font-size="20" text-anchor="start">新实例挂载</text>
+<text x="500" y="673" font-size="20" text-anchor="middle">文件系统快照保存环境文件；进程内存需要另外的恢复机制</text>
+</g></svg>

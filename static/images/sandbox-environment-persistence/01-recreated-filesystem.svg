@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img">
+<title>实例重建时系统环境与 NAS 工作区的恢复路径</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#111"/></marker></defs>
+<rect width="1000" height="690" fill="white"/>
+<g font-family="Arial, Helvetica, PingFang SC, Microsoft YaHei, sans-serif" fill="#111" font-size="22">
+<rect x="35" y="45" width="400" height="365" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="235" y="84" font-size="22" text-anchor="middle" font-weight="600">旧 Sandbox r7</text>
+<rect x="60" y="107" width="350" height="76" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="235" y="139" font-size="22" text-anchor="middle">基础镜像 A</text>
+<text x="235" y="166" font-size="20" text-anchor="middle">初始系统与公共工具</text>
+<rect x="565" y="45" width="400" height="365" fill="#ffffff" stroke="#111" stroke-width="1.6"/>
+<text x="765" y="84" font-size="22" text-anchor="middle" font-weight="600">新 Sandbox r8</text>
+<rect x="590" y="107" width="350" height="76" fill="#f5f5f5" stroke="#111" stroke-width="1.6"/>
+<text x="765" y="139" font-size="22" text-anchor="middle">基础镜像 A</text>
+<text x="765" y="166" font-size="20" text-anchor="middle">初始系统与公共工具</text>
+<rect x="60" y="211" width="350" height="91" fill="#b0e3e6" stroke="#111" stroke-width="1.6"/>
+<text x="235" y="246" font-size="22" text-anchor="middle">本次实例的可写层</text>
+<text x="235" y="280" font-size="20" text-anchor="middle">新增 Graphviz 与包记录</text>
+<rect x="590" y="211" width="350" height="91" fill="#f8cecc" stroke="#111" stroke-width="1.6"/>
+<text x="765" y="246" font-size="22" text-anchor="middle">新的可写层</text>
+<text x="765" y="280" font-size="20" text-anchor="middle">没有恢复后来安装的软件</text>
+<rect x="60" y="337" width="350" height="48" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
+<text x="235" y="368" font-size="21" text-anchor="middle">/workspace → NAS</text>
+<rect x="590" y="337" width="350" height="48" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
+<text x="765" y="368" font-size="21" text-anchor="middle">/workspace → NAS</text>
+<path d="M 435 256 H 565" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="500" y="220" font-size="18" text-anchor="middle">销毁旧实例</text>
+<text x="500" y="241" font-size="18" text-anchor="middle">重新创建</text>
+<rect x="315" y="500" width="370" height="131" fill="#d5e8d4" stroke="#111" stroke-width="1.6"/>
+<text x="500" y="538" font-size="22" text-anchor="middle" font-weight="600">独立保存的 NAS 工作区</text>
+<text x="500" y="578" font-size="21" text-anchor="middle">源码 · 已生成的图片</text>
+<text x="500" y="612" font-size="20" text-anchor="middle">不随本次计算实例删除</text>
+<path d="M 235 385 V 562 H 315" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 765 385 V 562 H 685" fill="none" stroke="#111" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="298" y="457" font-size="20" text-anchor="middle">持续保存</text>
+<text x="828" y="457" font-size="20" text-anchor="middle">重新挂载</text>
+<text x="500" y="674" font-size="20" text-anchor="middle">同一个项目恢复了工作区，系统环境仍可能换成初始状态</text>
+</g></svg>
