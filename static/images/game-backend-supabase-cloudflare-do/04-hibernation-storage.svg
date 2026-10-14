@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc"><title id="title">DO 休眠与状态恢复</title><desc id="desc">内存回收后通过已写入的存储与连接附件恢复，未保存的状态不会自动持久化。</desc><rect width="1000" height="570" fill="#fff"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#202020"/></marker></defs><style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020;font-size:22px}.small{font-size:19px}.label{font-weight:600}.box{fill:#fff;stroke:#202020;stroke-width:1.6}.line{fill:none;stroke:#202020;stroke-width:1.6;marker-end:url(#arrow)}.divider{stroke:#202020;stroke-width:1.2}.group{fill:none;stroke:#555;stroke-width:1.6;stroke-dasharray:7 5}</style><text x="40" y="42" text-anchor="start" class="label"><tspan x="40" dy="0">同一个房间 AB23CD</tspan></text>
+<rect x="60" y="69" width="880" height="55" fill="#f5f5f5" stroke="#202020" stroke-width="1.6"/>
+<text x="500" y="104" text-anchor="middle" class=""><tspan x="500" dy="0">Hibernation 期间可保留的 WebSocket 与连接附件</tspan></text>
+<rect x="60" y="181" width="270" height="135" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="195" y="220" text-anchor="middle" class=""><tspan x="195" dy="0">运行中的内存</tspan><tspan x="195" dy="30">位置 · 输入队列</tspan><tspan x="195" dy="30">临时连接索引</tspan></text>
+<rect x="395" y="197" width="210" height="103" fill="#f8cecc" stroke="#b85450" stroke-width="1.6"/>
+<text x="500" y="236" text-anchor="middle" class=""><tspan x="500" dy="0">进入休眠</tspan><tspan x="500" dy="30">内存回收</tspan></text>
+<rect x="670" y="181" width="270" height="135" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="805" y="220" text-anchor="middle" class=""><tspan x="805" dy="0">唤醒后的新内存</tspan><tspan x="805" dy="30">重新运行构造函数</tspan><tspan x="805" dy="30">恢复连接与房间状态</tspan></text>
+<path class="line" d="M 330 249 L 395 249"/>
+<path class="line" d="M 605 249 L 670 249"/>
+<rect x="230" y="423" width="540" height="83" fill="#d5e8d4" stroke="#202020" stroke-width="1.6"/>
+<text x="500" y="456" text-anchor="middle" class=""><tspan x="500" dy="0">DO 持久存储</tspan><tspan x="500" dy="30">已确认的快照 / 结果 / 幂等记录</tspan></text>
+<path class="line" d="M 195 316 L 195 464 L 230 464"/>
+<text x="177" y="365" text-anchor="end" class="small"><tspan x="177" dy="0">按策略</tspan><tspan x="177" dy="26">保存</tspan></text>
+<path class="line" d="M 770 464 L 805 464 L 805 316"/>
+<text x="826" y="365" text-anchor="start" class="small"><tspan x="826" dy="0">读取并</tspan><tspan x="826" dy="26">恢复</tspan></text>
+<text x="500" y="548" text-anchor="middle" class="small"><tspan x="500" dy="0">未保存的内存变化不会因为对象名称保持不变而自动恢复。</tspan></text></svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="610" viewBox="0 0 1000 610" role="img" aria-labelledby="title desc"><title id="title">按项目隔离的 Supabase 后台</title><desc id="desc">早期平台为各游戏项目准备独立托管 Supabase，中心服务保留绑定和管理状态。</desc><rect width="1000" height="610" fill="#fff"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#202020"/></marker></defs><style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020;font-size:22px}.small{font-size:19px}.label{font-weight:600}.box{fill:#fff;stroke:#202020;stroke-width:1.6}.line{fill:none;stroke:#202020;stroke-width:1.6;marker-end:url(#arrow)}.divider{stroke:#202020;stroke-width:1.2}.group{fill:none;stroke:#555;stroke-width:1.6;stroke-dasharray:7 5}</style><rect x="70" y="40" width="860" height="110" fill="#f5f5f5" stroke="#202020" stroke-width="1.6"/>
+<text x="500" y="79" text-anchor="middle" class="label"><tspan x="500" dy="0">平台控制面</tspan></text>
+<text x="500" y="118" text-anchor="middle" class=""><tspan x="500" dy="0">项目与实例绑定 · 开通状态 · 玩家访问身份</tspan></text>
+<path class="line" d="M 275 150 L 275 230"/>
+<path class="line" d="M 725 150 L 725 230"/>
+<text x="300" y="200" text-anchor="start" class="small"><tspan x="300" dy="0">开通 / 管理</tspan></text>
+<text x="750" y="200" text-anchor="start" class="small"><tspan x="750" dy="0">开通 / 管理</tspan></text>
+<rect x="55" y="230" width="410" height="210" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="260" y="273" text-anchor="middle" class="label"><tspan x="260" dy="0">游戏 A 的 Supabase 项目</tspan></text>
+<rect x="75" y="299" width="370" height="55" fill="#d5e8d4" stroke="#202020" stroke-width="1.6"/>
+<text x="260" y="334" text-anchor="middle" class=""><tspan x="260" dy="0">PostgreSQL：房间、成员、记录</tspan></text>
+<rect x="75" y="371" width="176" height="47" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="163" y="401" text-anchor="middle" class=""><tspan x="163" dy="0">Realtime</tspan></text>
+<rect x="269" y="371" width="176" height="47" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="357" y="401" text-anchor="middle" class=""><tspan x="357" dy="0">Storage</tspan></text>
+<rect x="130" y="520" width="260" height="64" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="260" y="560" text-anchor="middle" class=""><tspan x="260" dy="0">游戏 A 的玩家</tspan></text>
+<path class="line" d="M 260 520 L 260 440"/>
+<text x="280" y="484" text-anchor="start" class="small"><tspan x="280" dy="0">数据 / 消息</tspan></text>
+<rect x="535" y="230" width="410" height="210" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="740" y="273" text-anchor="middle" class="label"><tspan x="740" dy="0">游戏 B 的 Supabase 项目</tspan></text>
+<rect x="555" y="299" width="370" height="55" fill="#d5e8d4" stroke="#202020" stroke-width="1.6"/>
+<text x="740" y="334" text-anchor="middle" class=""><tspan x="740" dy="0">PostgreSQL：房间、成员、记录</tspan></text>
+<rect x="555" y="371" width="176" height="47" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="643" y="401" text-anchor="middle" class=""><tspan x="643" dy="0">Realtime</tspan></text>
+<rect x="749" y="371" width="176" height="47" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="837" y="401" text-anchor="middle" class=""><tspan x="837" dy="0">Storage</tspan></text>
+<rect x="610" y="520" width="260" height="64" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="740" y="560" text-anchor="middle" class=""><tspan x="740" dy="0">游戏 B 的玩家</tspan></text>
+<path class="line" d="M 740 520 L 740 440"/>
+<text x="760" y="484" text-anchor="start" class="small"><tspan x="760" dy="0">数据 / 消息</tspan></text></svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img" aria-labelledby="title desc"><title id="title">Worker 管理链路和玩家运行链路</title><desc id="desc">平台部署各游戏 Worker，玩家经分发入口访问对应 Worker，再按房间路由进入 Durable Object。</desc><rect width="1000" height="690" fill="#fff"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#202020"/></marker></defs><style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020;font-size:22px}.small{font-size:19px}.label{font-weight:600}.box{fill:#fff;stroke:#202020;stroke-width:1.6}.line{fill:none;stroke:#202020;stroke-width:1.6;marker-end:url(#arrow)}.divider{stroke:#202020;stroke-width:1.2}.group{fill:none;stroke:#555;stroke-width:1.6;stroke-dasharray:7 5}</style><rect x="35" y="30" width="930" height="222" fill="none" stroke="#666" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="60" y="67" text-anchor="start" class="label"><tspan x="60" dy="0">后台管理：创建与部署</tspan></text>
+<rect x="65" y="109" width="200" height="96" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="165" y="149" text-anchor="middle" class=""><tspan x="165" dy="0">Agent / CLI</tspan><tspan x="165" dy="30">后端源码</tspan></text>
+<rect x="378" y="109" width="250" height="96" fill="#f5f5f5" stroke="#202020" stroke-width="1.6"/>
+<text x="503" y="149" text-anchor="middle" class=""><tspan x="503" dy="0">平台资源服务</tspan><tspan x="503" dy="30">权限 · 版本 · 操作记录</tspan></text>
+<rect x="750" y="109" width="185" height="96" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="842" y="149" text-anchor="middle" class=""><tspan x="842" dy="0">Cloudflare</tspan><tspan x="842" dy="30">管理 API</tspan></text>
+<path class="line" d="M 265 157 L 378 157"/>
+<text x="321" y="139" text-anchor="middle" class="small"><tspan x="321" dy="0">管理请求</tspan></text>
+<path class="line" d="M 628 157 L 750 157"/>
+<text x="689" y="139" text-anchor="middle" class="small"><tspan x="689" dy="0">部署模块</tspan></text>
+<rect x="35" y="302" width="930" height="358" fill="none" stroke="#666" stroke-width="1.6" stroke-dasharray="7 5"/>
+<text x="60" y="339" text-anchor="start" class="label"><tspan x="60" dy="0">游戏运行：处理玩家请求</tspan></text>
+<rect x="65" y="379" width="175" height="90" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="152" y="433" text-anchor="middle" class=""><tspan x="152" dy="0">游戏客户端</tspan></text>
+<rect x="329" y="379" width="225" height="90" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="441" y="417" text-anchor="middle" class=""><tspan x="441" dy="0">Dispatcher</tspan><tspan x="441" dy="30">选择游戏 Worker</tspan></text>
+<rect x="675" y="379" width="250" height="90" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="800" y="417" text-anchor="middle" class=""><tspan x="800" dy="0">游戏 Worker</tspan><tspan x="800" dy="30">校验入口 · 房间路由</tspan></text>
+<path class="line" d="M 240 424 L 329 424"/>
+<text x="285" y="368" text-anchor="middle" class="small"><tspan x="285" dy="0">HTTP / WSS</tspan></text>
+<path class="line" d="M 554 424 L 675 424"/>
+<text x="615" y="405" text-anchor="middle" class="small"><tspan x="615" dy="0">转发</tspan></text>
+<rect x="329" y="555" width="225" height="75" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="441" y="584" text-anchor="middle" class="small"><tspan x="441" dy="0">DO：AB23CD</tspan><tspan x="441" dy="30">房间状态</tspan></text>
+<rect x="675" y="555" width="250" height="75" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="800" y="584" text-anchor="middle" class="small"><tspan x="800" dy="0">DO：AB23CE</tspan><tspan x="800" dy="30">另一房间状态</tspan></text>
+<path class="line" d="M 730 469 L 730 505 L 441 505 L 441 555"/>
+<path class="line" d="M 855 469 L 855 555"/>
+<text x="554" y="494" text-anchor="middle" class="small"><tspan x="554" dy="0">按房间号选对象</tspan></text>
+<text x="868" y="522" text-anchor="start" class="small"><tspan x="868" dy="0">另一房间</tspan></text></svg>

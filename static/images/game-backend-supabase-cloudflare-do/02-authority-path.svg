@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img" aria-labelledby="title desc"><title id="title">游戏权威逻辑的迁移</title><desc id="desc">旧路径将消息转发到房主裁决后再广播。新路径把房间裁决放在 Durable Object 中。该图不表示实测延迟。</desc><rect width="1000" height="600" fill="#fff"/><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#202020"/></marker></defs><style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020;font-size:22px}.small{font-size:19px}.label{font-weight:600}.box{fill:#fff;stroke:#202020;stroke-width:1.6}.line{fill:none;stroke:#202020;stroke-width:1.6;marker-end:url(#arrow)}.divider{stroke:#202020;stroke-width:1.2}.group{fill:none;stroke:#555;stroke-width:1.6;stroke-dasharray:7 5}</style><text x="40" y="48" text-anchor="start" class="label"><tspan x="40" dy="0">旧实现：房主客户端执行裁决</tspan></text>
+<rect x="35" y="103" width="130" height="100" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="100" y="162" text-anchor="middle" class=""><tspan x="100" dy="0">玩家 A</tspan></text>
+<rect x="235" y="103" width="130" height="100" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="300" y="145" text-anchor="middle" class=""><tspan x="300" dy="0">Supabase</tspan><tspan x="300" dy="30">Realtime</tspan></text>
+<rect x="435" y="103" width="130" height="100" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="500" y="145" text-anchor="middle" class=""><tspan x="500" dy="0">房主客户端</tspan><tspan x="500" dy="30">游戏裁决</tspan></text>
+<rect x="635" y="103" width="130" height="100" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="700" y="145" text-anchor="middle" class=""><tspan x="700" dy="0">Supabase</tspan><tspan x="700" dy="30">Realtime</tspan></text>
+<rect x="835" y="103" width="130" height="100" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="900" y="162" text-anchor="middle" class=""><tspan x="900" dy="0">玩家 B</tspan></text>
+<path class="line" d="M 165 154 L 235 154"/>
+<text x="200" y="136" text-anchor="middle" class="small"><tspan x="200" dy="0">输入</tspan></text>
+<path class="line" d="M 365 154 L 435 154"/>
+<text x="400" y="136" text-anchor="middle" class="small"><tspan x="400" dy="0">转发</tspan></text>
+<path class="line" d="M 565 154 L 635 154"/>
+<text x="600" y="136" text-anchor="middle" class="small"><tspan x="600" dy="0">结果</tspan></text>
+<path class="line" d="M 765 154 L 835 154"/>
+<text x="800" y="136" text-anchor="middle" class="small"><tspan x="800" dy="0">广播</tspan></text>
+<text x="500" y="254" text-anchor="middle" class="small"><tspan x="500" dy="0">两处 Realtime 表示同一服务在这条路径中的两次转发。</tspan></text>
+<line class="divider" x1="35" y1="295" x2="965" y2="295"/>
+<text x="40" y="344" text-anchor="start" class="label"><tspan x="40" dy="0">新实现：房间 DO 执行裁决</tspan></text>
+<rect x="60" y="398" width="180" height="95" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="150" y="455" text-anchor="middle" class=""><tspan x="150" dy="0">玩家 A</tspan></text>
+<rect x="380" y="382" width="240" height="130" fill="#b0e3e6" stroke="#202020" stroke-width="1.6"/>
+<text x="500" y="422" text-anchor="middle" class="label"><tspan x="500" dy="0">房间 AB23CD</tspan><tspan x="500" dy="30">DO：状态与裁决</tspan></text>
+<rect x="760" y="398" width="180" height="95" fill="#fff" stroke="#202020" stroke-width="1.6"/>
+<text x="850" y="455" text-anchor="middle" class=""><tspan x="850" dy="0">玩家 B</tspan></text>
+<path class="line" d="M 240 445 L 380 445"/>
+<text x="310" y="427" text-anchor="middle" class="small"><tspan x="310" dy="0">操作意图</tspan></text>
+<path class="line" d="M 620 445 L 760 445"/>
+<text x="690" y="427" text-anchor="middle" class="small"><tspan x="690" dy="0">权威结果</tspan></text>
+<text x="500" y="556" text-anchor="middle" class="small"><tspan x="500" dy="0">Worker 负责入口与房间路由；DO 接收连接并向房间玩家发送结果。</tspan></text></svg>
