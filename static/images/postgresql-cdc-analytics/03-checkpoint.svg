@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+  <title id="title">目标数据、断点与源端确认的顺序</title>
+  <desc id="desc">Reader 先提交业务副本，再校验 epoch 并提交 offset 和快照完成标记，随后确认源端日志消费位置。若在数据提交与 offset 提交之间退出，恢复时允许幂等重放。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#222"/></marker></defs>
+  <style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;font-size:22px;fill:#222}.small{font-size:19px}.head{font-weight:600}.box{fill:#fff;stroke:#222;stroke-width:1.6}.line{fill:none;stroke:#222;stroke-width:1.6;marker-end:url(#arrow)}.life{stroke:#888;stroke-width:1.2;stroke-dasharray:5 5}</style>
+  <rect width="1000" height="570" fill="#fff"/>
+  <rect class="box" x="22" y="25" width="164" height="60"/>
+  <text class="head" x="104" y="63" text-anchor="middle">源 PostgreSQL</text>
+  <rect x="250" y="25" width="164" height="60" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+  <text class="head" x="332" y="63" text-anchor="middle">Reader</text>
+  <rect class="box" x="545" y="25" width="164" height="60"/>
+  <text class="head" x="627" y="63" text-anchor="middle">ADB 数据表</text>
+  <rect class="box" x="812" y="25" width="164" height="60"/>
+  <text class="head" x="894" y="63" text-anchor="middle">ADB offset</text>
+  <path class="life" d="M104 85V490M332 85V490M627 85V490M894 85V490"/>
+  <path class="line" d="M332 145H627"/>
+  <text class="small" x="480" y="130" text-anchor="middle">1. upsert id = 42</text>
+  <path class="line" stroke-dasharray="6 4" d="M627 197H332"/>
+  <text class="small" x="480" y="184" text-anchor="middle">数据事务提交成功</text>
+  <rect x="263" y="224" width="526" height="53" fill="#f8cecc" stroke="#b85450" stroke-width="1.4"/>
+  <text class="small" x="526" y="257" text-anchor="middle">若此处退出：数据已写入，断点尚未保存</text>
+  <path class="line" d="M332 331H894"/>
+  <text class="small" x="614" y="314" text-anchor="middle">2. 校验 epoch，保存 offset 与快照完成状态</text>
+  <path class="line" stroke-dasharray="6 4" d="M894 386H332"/>
+  <text class="small" x="614" y="371" text-anchor="middle">断点事务提交成功</text>
+  <path class="line" d="M332 459H104"/>
+  <text class="small" x="218" y="433" text-anchor="middle">3. 确认日志消费位置</text>
+  <path d="M22 509H976" stroke="#666" stroke-width="1.2"/>
+  <text class="small" x="500" y="541" text-anchor="middle">恢复可能再次写入 id = 42；依靠主键 upsert 幂等重放，不承诺端到端 exactly-once</text>
+</svg>

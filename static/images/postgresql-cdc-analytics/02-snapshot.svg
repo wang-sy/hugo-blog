@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="title desc">
+  <title id="title">分块快照与 WAL 变化的协调</title>
+  <desc id="desc">快照窗口中读到 id 42 的 draft 记录，WAL 同时捕获它更新为 published。Debezium 去掉同主键的旧快照记录，目标写入 published。恢复断点记录表、主键边界与日志位置。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#222"/></marker></defs>
+  <style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;font-size:22px;fill:#222}.small{font-size:19px}.head{font-weight:600}.box{fill:#fff;stroke:#222;stroke-width:1.6}.line{fill:none;stroke:#222;stroke-width:1.6;marker-end:url(#arrow)}</style>
+  <rect width="1000" height="440" fill="#fff"/>
+  <text class="head" x="168" y="42" text-anchor="middle">同一快照窗口</text>
+  <rect class="box" x="28" y="66" width="280" height="109"/>
+  <text x="168" y="99" text-anchor="middle">分块读取主键区间</text>
+  <text x="168" y="143" text-anchor="middle">id = 42，status = draft</text>
+  <rect class="box" x="28" y="214" width="280" height="109"/>
+  <text x="168" y="248" text-anchor="middle">WAL 更新事件</text>
+  <text x="168" y="289" text-anchor="middle">id = 42 → published</text>
+  <rect x="416" y="129" width="270" height="140" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+  <text class="head" x="551" y="166" text-anchor="middle">Debezium 协调</text>
+  <text x="551" y="205" text-anchor="middle">比较窗口内的主键</text>
+  <text class="small" x="551" y="240" text-anchor="middle">去掉 id = 42 的旧快照记录</text>
+  <path class="line" d="M308 121H362V165H416"/>
+  <path class="line" d="M308 267H362V234H416"/>
+  <rect x="776" y="129" width="196" height="140" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+  <text class="head" x="874" y="166" text-anchor="middle">目标行</text>
+  <text x="874" y="205" text-anchor="middle">id = 42</text>
+  <text x="874" y="240" text-anchor="middle">published</text>
+  <path class="line" d="M686 199H776"/>
+  <text class="small" x="731" y="183" text-anchor="middle">upsert</text>
+  <path d="M28 359H972" stroke="#666" stroke-width="1.2"/>
+  <text class="small" x="500" y="392" text-anchor="middle">恢复断点：当前表 + 主键边界 + LSN　　中断后从最后提交的分块继续</text>
+</svg>

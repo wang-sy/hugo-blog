@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="title desc">
+  <title id="title">GamePlatform CDC 的控制与数据流</title>
+  <desc id="desc">平台控制账本向 analytics 管理进程提供计划和租约。两个数据库分别通过独立 reader 读取存量及 WAL，并通过 JDBC 写入 ADB 的业务副本与恢复元数据。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#222"/></marker></defs>
+  <style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;font-size:22px;fill:#222}.small{font-size:19px}.head{font-weight:600}.box{fill:#fff;stroke:#222;stroke-width:1.6}.line{fill:none;stroke:#222;stroke-width:1.6;marker-end:url(#arrow)}</style>
+  <rect width="1000" height="580" fill="#fff"/>
+  <rect class="box" x="280" y="22" width="440" height="106"/>
+  <text class="head" x="500" y="57" text-anchor="middle">GamePlatform 控制账本</text>
+  <text x="500" y="94" text-anchor="middle">接入意图 · 计划 · 租约 · 操作记录</text>
+  <path class="line" stroke-dasharray="6 5" d="M500 128V190"/>
+  <text class="small" x="517" y="166">调度与校验</text>
+  <rect class="box" x="22" y="190" width="246" height="310"/>
+  <text class="head" x="145" y="230" text-anchor="middle">源 PostgreSQL 实例</text>
+  <rect class="box" x="42" y="256" width="206" height="94"/>
+  <text x="145" y="282" text-anchor="middle">数据库 A</text>
+  <text class="small" x="145" y="310" text-anchor="middle">业务表</text>
+  <text class="small" x="145" y="335" text-anchor="middle">publication · slot</text>
+  <rect class="box" x="42" y="367" width="206" height="94"/>
+  <text x="145" y="393" text-anchor="middle">数据库 B</text>
+  <text class="small" x="145" y="421" text-anchor="middle">业务表</text>
+  <text class="small" x="145" y="446" text-anchor="middle">publication · slot</text>
+  <rect class="box" x="368" y="190" width="264" height="310"/>
+  <text class="head" x="500" y="230" text-anchor="middle">analytics 容器</text>
+  <rect x="388" y="256" width="224" height="94" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+  <text x="500" y="291" text-anchor="middle">Reader A</text>
+  <text class="small" x="500" y="323" text-anchor="middle">Debezium + JDBC</text>
+  <rect x="388" y="367" width="224" height="94" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+  <text x="500" y="402" text-anchor="middle">Reader B</text>
+  <text class="small" x="500" y="434" text-anchor="middle">Debezium + JDBC</text>
+  <path class="line" d="M248 303H388"/>
+  <text class="small" x="318" y="284" text-anchor="middle">存量 + WAL</text>
+  <path class="line" d="M248 414H388"/>
+  <text class="small" x="318" y="395" text-anchor="middle">存量 + WAL</text>
+  <rect class="box" x="732" y="190" width="246" height="310"/>
+  <text class="head" x="855" y="230" text-anchor="middle">ADB PostgreSQL</text>
+  <rect x="752" y="256" width="206" height="94" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+  <text x="855" y="291" text-anchor="middle">public</text>
+  <text class="small" x="855" y="323" text-anchor="middle">统一命名的业务副本</text>
+  <rect class="box" x="752" y="367" width="206" height="94"/>
+  <text x="855" y="393" text-anchor="middle">_game_analytics</text>
+  <text class="small" x="855" y="421" text-anchor="middle">offset · epoch</text>
+  <text class="small" x="855" y="446" text-anchor="middle">快照完成状态</text>
+  <path class="line" d="M612 303H752"/>
+  <text class="small" x="682" y="284" text-anchor="middle">目标写入</text>
+  <path class="line" d="M612 414H662V335H752"/>
+  <path class="line" stroke-dasharray="6 5" d="M632 482H706V414H752"/>
+  <text class="small" x="500" y="546" text-anchor="middle">每库独立 reader，共享容器预算；原生恢复信息保存于目标元数据 schema</text>
+</svg>
