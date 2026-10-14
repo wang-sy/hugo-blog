@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+<title id="title">按依赖生成流水线</title><desc id="desc">变更映射到受影响的模块，各自完成检查、构建和发布。跨服务依赖须显式声明。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="500" fill="white"/>
+<path d="M 205 245 H 275" class="edge" marker-end="url(#arrow)"/>
+<path d="M 445 245 H 475 V 115 H 510" class="edge" marker-end="url(#arrow)"/>
+<path d="M 475 245 V 355 H 510" class="edge" marker-end="url(#arrow)"/>
+<path d="M 730 115 H 805" class="edge" marker-end="url(#arrow)"/>
+<path d="M 730 355 H 805" class="edge" marker-end="url(#arrow)"/>
+<g data-node="true">
+<rect x="35" y="200" width="170" height="90" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="120.0" y="238.0" font-size="22" text-anchor="middle" font-weight="600">代码变更</text>
+<text x="120.0" y="269.0" font-size="19" text-anchor="middle" font-weight="400">业务代码与依赖</text>
+</g>
+<g data-node="true">
+<rect x="275" y="200" width="170" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="360.0" y="238.0" font-size="22" text-anchor="middle" font-weight="600">影响范围</text>
+<text x="360.0" y="269.0" font-size="19" text-anchor="middle" font-weight="400">目录与依赖声明</text>
+</g>
+<g data-node="true">
+<rect x="510" y="65" width="220" height="100" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="620.0" y="108.0" font-size="22" text-anchor="middle" font-weight="600">任务服务</text>
+<text x="620.0" y="139.0" font-size="19" text-anchor="middle" font-weight="400">检查 + 构建</text>
+</g>
+<g data-node="true">
+<rect x="510" y="305" width="220" height="100" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="620.0" y="348.0" font-size="22" text-anchor="middle" font-weight="600">调用网关</text>
+<text x="620.0" y="379.0" font-size="19" text-anchor="middle" font-weight="400">检查 + 构建</text>
+</g>
+<g data-node="true">
+<rect x="805" y="65" width="160" height="100" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="885.0" y="108.0" font-size="20" text-anchor="middle" font-weight="600">发布任务服务</text>
+<text x="885.0" y="139.0" font-size="19" text-anchor="middle" font-weight="400">登记制品 → 发布</text>
+</g>
+<g data-node="true">
+<rect x="805" y="305" width="160" height="100" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="885.0" y="348.0" font-size="20" text-anchor="middle" font-weight="600">发布网关</text>
+<text x="885.0" y="379.0" font-size="19" text-anchor="middle" font-weight="400">登记制品 → 发布</text>
+</g>
+<text x="620" y="238" font-size="20" text-anchor="middle" font-weight="400">独立路径可并行执行</text>
+<text x="500" y="465" font-size="20" text-anchor="middle" font-weight="400">需配套发布的服务另行声明部署顺序</text>
+</svg>

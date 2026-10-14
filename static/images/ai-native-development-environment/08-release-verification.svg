@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="title desc">
+<title id="title">发布核对与业务验收</title><desc id="desc">平台受理、执行、部署核对、业务验收分别有结果。客户端超时后保留原操作查询账本。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="580" fill="white"/>
+<path d="M 240 145 H 285" class="edge" marker-end="url(#arrow)"/>
+<path d="M 485 145 H 530" class="edge" marker-end="url(#arrow)"/>
+<path d="M 730 145 H 775" class="edge" marker-end="url(#arrow)"/>
+<g data-node="true">
+<rect x="40" y="100" width="200" height="90" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="140.0" y="138.0" font-size="22" text-anchor="middle" font-weight="600">发布受理</text>
+<text x="140.0" y="169.0" font-size="19" text-anchor="middle" font-weight="400">原操作已登记</text>
+</g>
+<g data-node="true">
+<rect x="285" y="100" width="200" height="90" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="385.0" y="138.0" font-size="22" text-anchor="middle" font-weight="600">平台执行</text>
+<text x="385.0" y="169.0" font-size="19" text-anchor="middle" font-weight="400">更新运行目标</text>
+</g>
+<g data-node="true">
+<rect x="530" y="100" width="200" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="630.0" y="138.0" font-size="22" text-anchor="middle" font-weight="600">部署核对</text>
+<text x="630.0" y="169.0" font-size="19" text-anchor="middle" font-weight="400">版本 · 实例</text>
+</g>
+<g data-node="true">
+<rect x="775" y="100" width="185" height="90" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="867.5" y="138.0" font-size="22" text-anchor="middle" font-weight="600">业务验证</text>
+<text x="867.5" y="169.0" font-size="19" text-anchor="middle" font-weight="400">接口 · 最终结果</text>
+</g>
+<text x="140" y="235" font-size="20" text-anchor="middle" font-weight="400">取得发布记录</text>
+<text x="385" y="235" font-size="20" text-anchor="middle" font-weight="400">查询最终状态</text>
+<text x="630" y="235" font-size="20" text-anchor="middle" font-weight="400">保存各项检查</text>
+<text x="867" y="235" font-size="20" text-anchor="middle" font-weight="400">记录业务断言</text>
+<rect x="55" y="323" width="890" height="204" fill="#f5f5f5" stroke="#666666" stroke-width="1.6"/>
+<text x="80" y="361" font-size="22" text-anchor="start" font-weight="600">等待超时后的恢复</text>
+<path d="M 295 430 H 395" class="edge" marker-end="url(#arrow)"/>
+<path d="M 605 430 H 705" class="edge" marker-end="url(#arrow)"/>
+<g data-node="true">
+<rect x="85" y="395" width="210" height="70" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="190.0" y="438.0" font-size="21" text-anchor="middle" font-weight="600">保留原操作</text>
+</g>
+<g data-node="true">
+<rect x="395" y="395" width="210" height="70" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="500.0" y="438.0" font-size="21" text-anchor="middle" font-weight="600">查询平台账本</text>
+</g>
+<g data-node="true">
+<rect x="705" y="395" width="210" height="70" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="810.0" y="438.0" font-size="21" text-anchor="middle" font-weight="600">继续等待或取结果</text>
+</g>
+<text x="500" y="504" font-size="20" text-anchor="middle" font-weight="400">再次提交时仍使用原操作，避免重复创建发布</text>
+</svg>

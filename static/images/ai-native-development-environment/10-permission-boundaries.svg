@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580" role="img" aria-labelledby="title desc">
+<title id="title">工具权限与基础设施凭据</title><desc id="desc">员工和CI通过平台校验发起发布。业务数据诊断使用独立受控入口，入口与数据库账号共同限制权限。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="580" fill="white"/>
+<path d="M 265 105 H 385" class="edge" marker-end="url(#arrow)"/>
+<path d="M 265 255 H 385" class="edge" marker-end="url(#arrow)"/>
+<path d="M 655 105 H 785" class="edge" marker-end="url(#arrow)"/>
+<path d="M 265 450 H 385" class="edge" marker-end="url(#arrow)"/>
+<path d="M 655 450 H 785" class="edge" marker-end="url(#arrow)"/>
+<text x="325" y="87" font-size="19" text-anchor="middle" font-weight="400">授权操作</text>
+<text x="325" y="237" font-size="19" text-anchor="middle" font-weight="400">构建证明</text>
+<text x="720" y="87" font-size="19" text-anchor="middle" font-weight="400">执行</text>
+<g data-node="true">
+<rect x="35" y="60" width="230" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="150.0" y="98.0" font-size="22" text-anchor="middle" font-weight="600">Agent</text>
+<text x="150.0" y="129.0" font-size="19" text-anchor="middle" font-weight="400">员工身份 · 任务范围</text>
+</g>
+<g data-node="true">
+<rect x="35" y="210" width="230" height="90" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="150.0" y="248.0" font-size="22" text-anchor="middle" font-weight="600">CI</text>
+<text x="150.0" y="279.0" font-size="19" text-anchor="middle" font-weight="400">构建身份 · 来源证明</text>
+</g>
+<g data-node="true">
+<rect x="385" y="45" width="270" height="255" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="520.0" y="79" font-size="22" text-anchor="middle" font-weight="600">研发平台</text>
+<path d="M 385 96 H 655" class="edge"/>
+<text x="409" y="121.0" font-size="21" text-anchor="start" font-weight="400">校验身份与操作</text>
+<text x="409" y="168.5" font-size="21" text-anchor="start" font-weight="400">检查制品与环境</text>
+<text x="409" y="216.0" font-size="21" text-anchor="start" font-weight="400">记录意图与结果</text>
+<text x="409" y="263.5" font-size="21" text-anchor="start" font-weight="400">持有执行所需凭据</text>
+</g>
+<g data-node="true">
+<rect x="785" y="60" width="180" height="90" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="875.0" y="98.0" font-size="21" text-anchor="middle" font-weight="600">运行资源</text>
+<text x="875.0" y="129.0" font-size="19" text-anchor="middle" font-weight="400">实例与云资源</text>
+</g>
+<text x="500" y="370" font-size="22" text-anchor="middle" font-weight="600">业务数据诊断</text>
+<g data-node="true">
+<rect x="35" y="405" width="230" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="150.0" y="443.0" font-size="22" text-anchor="middle" font-weight="600">Agent</text>
+<text x="150.0" y="474.0" font-size="19" text-anchor="middle" font-weight="400">已授权的只读排查</text>
+</g>
+<g data-node="true">
+<rect x="385" y="405" width="270" height="90" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="520.0" y="443.0" font-size="22" text-anchor="middle" font-weight="600">受控查询入口</text>
+<text x="520.0" y="474.0" font-size="19" text-anchor="middle" font-weight="400">只读事务 · 超时 · 范围</text>
+</g>
+<g data-node="true">
+<rect x="785" y="405" width="180" height="90" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="875.0" y="443.0" font-size="21" text-anchor="middle" font-weight="600">业务数据库</text>
+<text x="875.0" y="474.0" font-size="19" text-anchor="middle" font-weight="400">账号权限限制</text>
+</g>
+<text x="500" y="547" font-size="20" text-anchor="middle" font-weight="400">查询入口的限制，还需要数据库账号权限配合</text>
+</svg>

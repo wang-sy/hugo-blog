@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="510" viewBox="0 0 1000 510" role="img" aria-labelledby="title desc">
+<title id="title">测试请求的环境和数据范围</title><desc id="desc">共享入口传递环境标记，RPC和消息选择个人服务实例。实例隔离后仍需明确数据库与消费范围。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="510" fill="white"/>
+<rect x="345" y="75" width="625" height="220" fill="#f5f5f5" stroke="#666666" stroke-width="1.6"/>
+<text x="370" y="111" font-size="22" text-anchor="start" font-weight="600">个人运行环境</text>
+<path d="M 165 45 V 145" class="edge" marker-end="url(#arrow)"/>
+<text x="190" y="65" font-size="20" text-anchor="start" font-weight="400">测试请求</text>
+<text x="190" y="96" font-size="19" text-anchor="start" font-weight="400">携带环境信息</text>
+<path d="M 270 190 H 395" class="edge" marker-end="url(#arrow)"/>
+<text x="315" y="173" font-size="19" text-anchor="middle" font-weight="400">RPC</text>
+<path d="M 605 190 H 730" class="edge" marker-end="url(#arrow)"/>
+<text x="667" y="173" font-size="18" text-anchor="middle" font-weight="400">消息 · 环境</text>
+<path d="M 500 235 V 365" class="edge" marker-end="url(#arrow)"/>
+<path d="M 835 235 V 365" class="edge" marker-end="url(#arrow)"/>
+<g data-node="true">
+<rect x="60" y="145" width="210" height="90" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="165.0" y="183.0" font-size="22" text-anchor="middle" font-weight="600">共享入口</text>
+<text x="165.0" y="214.0" font-size="19" text-anchor="middle" font-weight="400">读取环境信息</text>
+</g>
+<g data-node="true">
+<rect x="395" y="145" width="210" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="500.0" y="183.0" font-size="22" text-anchor="middle" font-weight="600">任务服务</text>
+<text x="500.0" y="214.0" font-size="19" text-anchor="middle" font-weight="400">个人实例</text>
+</g>
+<g data-node="true">
+<rect x="730" y="145" width="210" height="90" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="835.0" y="183.0" font-size="22" text-anchor="middle" font-weight="600">后台 worker</text>
+<text x="835.0" y="214.0" font-size="19" text-anchor="middle" font-weight="400">个人实例</text>
+</g>
+<g data-node="true">
+<rect x="340" y="365" width="630" height="100" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="655.0" y="408.0" font-size="22" text-anchor="middle" font-weight="600">数据库 / 队列中的测试范围</text>
+<text x="655.0" y="439.0" font-size="19" text-anchor="middle" font-weight="400">专用账号 · 测试记录 · 消费范围</text>
+</g>
+<g data-node="true">
+<rect x="45" y="365" width="250" height="100" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="170.0" y="408.0" font-size="21" text-anchor="middle" font-weight="600">运行实例已隔离</text>
+<text x="170.0" y="439.0" font-size="19" text-anchor="middle" font-weight="400">测试数据仍需单独处理</text>
+</g>
+</svg>

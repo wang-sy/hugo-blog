@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="570" viewBox="0 0 1000 570" role="img" aria-labelledby="title desc">
+<title id="title">一次流水线的实测耗时</title><desc id="desc">总时长约四百一十秒，构建三百一十七点一秒。构建内部检查与编译并行，检查路径决定主要等待。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="570" fill="white"/>
+<text x="50" y="37" font-size="23" text-anchor="start" font-weight="600">一次发布：约 6 分 50 秒</text>
+<rect x="60" y="90" width="48.96" height="56" fill="#f5f5f5" stroke="#666666" stroke-width="1.6"/>
+<rect x="108.96" y="90" width="680.94" height="56" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<rect x="789.9" y="90" width="2.15" height="56" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<rect x="792.04" y="90" width="123.9" height="56" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<rect x="915.95" y="90" width="24.05" height="56" fill="#f5f5f5" stroke="#666666" stroke-width="1.6"/>
+<text x="449.4289897510981" y="125" font-size="22" text-anchor="middle" font-weight="600">构建 317.1 秒</text>
+<text x="853.9970717423132" y="124" font-size="18" text-anchor="middle" font-weight="400">部署 57.7 秒</text>
+<path d="M 84.48023426061494 146 V 175 H 143" class="edge"/>
+<text x="150" y="182" font-size="18" text-anchor="start" font-weight="400">准备 22.8 秒</text>
+<path d="M 790.971205466081 90 V 64 H 812" class="edge"/>
+<text x="820" y="69" font-size="18" text-anchor="start" font-weight="400">排队 1.0 秒</text>
+<path d="M 927.9746217667154 146 V 182 H 835" class="edge"/>
+<text x="825" y="188" font-size="18" text-anchor="end" font-weight="400">收尾 11.2 秒</text>
+<rect x="50" y="245" width="900" height="276" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="76" y="282" font-size="22" text-anchor="start" font-weight="600">构建任务内部</text>
+<path d="M 207 348 H 270" class="edge" marker-end="url(#arrow)"/>
+<path d="M 207 348 V 442 H 270" class="edge" marker-end="url(#arrow)"/>
+<path d="M 640 348 H 742 V 397 H 797" class="edge" marker-end="url(#arrow)"/>
+<path d="M 640 442 H 742 V 397" class="edge" marker-end="url(#arrow)"/>
+<text x="185" y="394" font-size="20" text-anchor="end" font-weight="400">并行</text>
+<g data-node="true">
+<rect x="270" y="318" width="370" height="60" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="455.0" y="356.0" font-size="22" text-anchor="middle" font-weight="600">检查 257.4 秒</text>
+</g>
+<g data-node="true">
+<rect x="270" y="411" width="370" height="62" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="455.0" y="450.0" font-size="19" text-anchor="middle" font-weight="600">编译 42.4 秒 + 进程验收 32.2 秒</text>
+</g>
+<g data-node="true">
+<rect x="797" y="360" width="130" height="80" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="862.0" y="393.0" font-size="18" text-anchor="middle" font-weight="600">导出与推送</text>
+<text x="862.0" y="424.0" font-size="19" text-anchor="middle" font-weight="400">等待检查完成</text>
+</g>
+<text x="500" y="552" font-size="19" text-anchor="middle" font-weight="400">上方按时间比例；下方只表示依赖关系</text>
+</svg>

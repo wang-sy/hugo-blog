@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">异步任务业务测试时序</title><desc id="desc">测试提交后按返回的任务标识查询，worker写入结果，测试核对终态、结果和归属并清理数据。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="540" fill="white"/>
+<path d="M 130 100 V 475" class="edge" stroke-dasharray="6 5"/>
+<path d="M 370 100 V 475" class="edge" stroke-dasharray="6 5"/>
+<path d="M 610 100 V 475" class="edge" stroke-dasharray="6 5"/>
+<path d="M 860 100 V 475" class="edge" stroke-dasharray="6 5"/>
+<path d="M 130 147 H 370" class="edge" marker-end="url(#arrow)"/>
+<text x="250" y="135" font-size="20" text-anchor="middle" font-weight="400">提交任务</text>
+<path d="M 370 202 H 610" class="edge" marker-end="url(#arrow)"/>
+<text x="490" y="190" font-size="19" text-anchor="middle" font-weight="400">进入异步执行</text>
+<path d="M 370 245 H 130" class="edge" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="250" y="233" font-size="19" text-anchor="middle" font-weight="400">返回任务标识</text>
+<path d="M 610 303 H 860" class="edge" marker-end="url(#arrow)"/>
+<text x="735" y="291" font-size="19" text-anchor="middle" font-weight="400">写入终态与结果</text>
+<path d="M 130 360 H 370" class="edge" marker-end="url(#arrow)"/>
+<text x="250" y="348" font-size="19" text-anchor="middle" font-weight="400">查询任务状态</text>
+<path d="M 370 404 H 860" class="edge" marker-end="url(#arrow)"/>
+<text x="735" y="392" font-size="19" text-anchor="middle" font-weight="400">读取状态与结果</text>
+<path d="M 860 437 H 370" class="edge" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<path d="M 370 470 H 130" class="edge" marker-end="url(#arrow)" stroke-dasharray="6 5"/>
+<text x="250" y="458" font-size="19" text-anchor="middle" font-weight="400">返回状态与结果</text>
+<g data-node="true">
+<rect x="40" y="35" width="180" height="65" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="130.0" y="75.5" font-size="22" text-anchor="middle" font-weight="600">测试用例</text>
+</g>
+<g data-node="true">
+<rect x="280" y="35" width="180" height="65" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="370.0" y="75.5" font-size="22" text-anchor="middle" font-weight="600">任务接口</text>
+</g>
+<g data-node="true">
+<rect x="520" y="35" width="180" height="65" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="610.0" y="75.5" font-size="22" text-anchor="middle" font-weight="600">后台 worker</text>
+</g>
+<g data-node="true">
+<rect x="760" y="35" width="200" height="65" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="860.0" y="75.5" font-size="22" text-anchor="middle" font-weight="600">业务数据库</text>
+</g>
+<rect x="40" y="490" width="920" height="38" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="500" y="516" font-size="20" text-anchor="middle" font-weight="400">限定等待时间 · 检查归属与结果 · 清理测试数据</text>
+</svg>

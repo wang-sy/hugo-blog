@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="540" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+<title id="title">从失败请求选择排查入口</title><desc id="desc">根据故障表现选择日志、业务状态或指标，然后按发现的线索检查队列、租约、缓存或外部结果。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#222"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;fill:#202020} .edge{fill:none;stroke:#222;stroke-width:1.6;stroke-linejoin:round} .node{stroke-width:1.6} </style>
+<rect width="1000" height="540" fill="white"/>
+<path d="M 430 125 V 167 H 170 V 220" class="edge" marker-end="url(#arrow)"/>
+<path d="M 500 125 V 220" class="edge" marker-end="url(#arrow)"/>
+<path d="M 570 125 V 167 H 830 V 220" class="edge" marker-end="url(#arrow)"/>
+<path d="M 170 350 V 465 H 245" class="edge" marker-end="url(#arrow)"/>
+<path d="M 500 350 V 425" class="edge" marker-end="url(#arrow)"/>
+<path d="M 830 350 V 465 H 755" class="edge" marker-end="url(#arrow)"/>
+<g data-node="true">
+<rect x="330" y="30" width="340" height="95" fill="#f8cecc" stroke="#b85450" stroke-width="1.6"/>
+<text x="500.0" y="70.5" font-size="22" text-anchor="middle" font-weight="600">失败请求</text>
+<text x="500.0" y="101.5" font-size="19" text-anchor="middle" font-weight="400">环境 · 时间 · 任务标识</text>
+</g>
+<text x="485" y="191" font-size="19" text-anchor="end" font-weight="400">按故障表现选择入口</text>
+<g data-node="true">
+<rect x="40" y="220" width="260" height="130" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="170.0" y="254" font-size="22" text-anchor="middle" font-weight="600">请求日志</text>
+<path d="M 40 271 H 300" class="edge"/>
+<text x="64" y="296.0" font-size="20" text-anchor="start" font-weight="400">接收 / 下游 / 错误</text>
+<text x="64" y="328.5" font-size="20" text-anchor="start" font-weight="400">解释执行过程</text>
+</g>
+<g data-node="true">
+<rect x="370" y="220" width="260" height="130" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.6"/>
+<text x="500.0" y="254" font-size="22" text-anchor="middle" font-weight="600">业务数据库</text>
+<path d="M 370 271 H 630" class="edge"/>
+<text x="394" y="296.0" font-size="20" text-anchor="start" font-weight="400">任务状态 · 更新时间</text>
+<text x="394" y="328.5" font-size="20" text-anchor="start" font-weight="400">确认停留阶段</text>
+</g>
+<g data-node="true">
+<rect x="700" y="220" width="260" height="130" fill="#ffffff" stroke="#222222" stroke-width="1.6"/>
+<text x="830.0" y="254" font-size="22" text-anchor="middle" font-weight="600">监控指标</text>
+<path d="M 700 271 H 960" class="edge"/>
+<text x="724" y="296.0" font-size="20" text-anchor="start" font-weight="400">错误率 / 延迟 / 积压</text>
+<text x="724" y="328.5" font-size="20" text-anchor="start" font-weight="400">判断影响范围</text>
+</g>
+<g data-node="true">
+<rect x="245" y="425" width="510" height="78" fill="#d5e8d4" stroke="#82b366" stroke-width="1.6"/>
+<text x="500.0" y="457.0" font-size="22" text-anchor="middle" font-weight="600">按线索继续查询</text>
+<text x="500.0" y="488.0" font-size="19" text-anchor="middle" font-weight="400">队列 · 租约 · 缓存 · 外部结果</text>
+</g>
+</svg>
