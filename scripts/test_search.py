@@ -48,6 +48,22 @@ class SearchTests(unittest.TestCase):
                   lambda *args: (200, b'{"error":401,"message":"invalid token"}'))
         self.assertFalse(self.state_path.exists())
 
+    @patch.dict(os.environ, {'BAIDU_TOKEN': 'test&token'})
+    def test_baidu_site_is_literal_and_token_is_encoded(self):
+        def send(url, *args):
+            self.assertEqual(url, 'http://data.zz.baidu.com/urls?site=https://www.wangsaiyu.com&token=test%26token')
+            return 400, b'{"error":400,"message":"site init fail"}'
+        with self.assertRaisesRegex(RuntimeError, 'site init fail'):
+            baidu(self.records, {}, self.state_path, send)
+        self.assertFalse(self.state_path.exists())
+
+    @patch.dict(os.environ, {'BAIDU_TOKEN': 'test-token'})
+    def test_unknown_baidu_message_cannot_echo_credentials(self):
+        with self.assertRaises(RuntimeError) as raised:
+            baidu(self.records, {}, self.state_path,
+                  lambda *args: (400, b'{"error":400,"message":"token=test-token"}'))
+        self.assertNotIn('test-token', str(raised.exception))
+
     def test_indexnow_202_is_pending_verification_not_indexed(self):
         (self.root / 'indexnow-key.txt').write_text('a' * 32)
         result = indexnow(self.records, {}, self.state_path, self.root,

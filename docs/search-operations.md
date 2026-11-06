@@ -44,6 +44,8 @@ python3 scripts/verify_search.py --live
 `http://data.zz.baidu.com/urls`：此接口目前的 HTTPS 证书不覆盖该域名。
 该接口以明文 HTTP 传送专用推送密钥和公开文章地址；博客本身、IndexNow 及线上检查仍使用严格验证的 HTTPS。
 网络错误只记录异常类型，不打印可能包含密钥的请求地址或原始异常文本。
+该接口不解码 `site` 参数：需保持 `site=https://www.wangsaiyu.com` 的原样格式，
+否则会返回 `site init fail`；只有可变的 token 参数进行 URL 编码。
 Google 的普通博客不能使用仅针对特定内容类型的 Indexing API 代替 Search Console。
 Google 站点验证与地图提交需使用站点所有者能登录的 Google 账号；公开 robots 地图声明仍然有效。
 

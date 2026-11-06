@@ -33,7 +33,9 @@ def baidu(records, state, path, send=request):
         raise RuntimeError('BAIDU_TOKEN is not configured')
     # Baidu documents HTTP for this endpoint; its TLS certificate does not cover
     # data.zz.baidu.com. Do not work around this by disabling TLS verification.
-    endpoint = 'http://data.zz.baidu.com/urls?' + urlencode({'site': BASE, 'token': token})
+    # This API does not decode the site parameter: encoded https%3A%2F%2F
+    # returns "site init fail". BASE is fixed; only encode the variable token.
+    endpoint = 'http://data.zz.baidu.com/urls?site=' + BASE + '&' + urlencode({'token': token})
     accepted = 0
     # Probe with one article; never send a full sitemap against an unknown quota.
     for record in records[:20]:
@@ -46,7 +48,13 @@ def baidu(records, state, path, send=request):
             print('::warning::Baidu quota unavailable; pending articles retained. Check the verified site quota.')
             return accepted, 'quota'
         if status != 200 or result.get('error') or result.get('success') != 1 or result.get('not_valid') or result.get('not_same_site'):
-            raise RuntimeError('Baidu rejected submission (HTTP %s, code %s)' % (status, result.get('error')))
+            known_messages = {'site init fail', 'token invalid', 'invalid token',
+                              'site error', 'site not verified'}
+            reason = result.get('message')
+            if reason not in known_messages:
+                reason = 'unrecognized response (details omitted)'
+            raise RuntimeError('Baidu rejected submission (HTTP %s, code %s): %s' %
+                               (status, result.get('error'), reason))
         state[record['url']] = record['hash']
         save_state(path, state)
         accepted += 1
