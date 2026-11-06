@@ -1,0 +1,16 @@
+{{- $params := .Scratch.Get "params" -}}
+{{- $description := $params.description -}}
+{{- if not $description -}}
+    {{- if and .IsPage (eq .Section "posts") -}}
+        {{- $description = .Summary | plainify | htmlUnescape | replaceRE "\\s+" " " | truncate 160 -}}
+    {{- else -}}
+        {{- $description = .Site.Params.description -}}
+    {{- end -}}
+{{- end -}}
+<meta name="description" content="{{ $description }}">
+{{- template "_internal/opengraph.html" . -}}
+{{- template "_internal/twitter_cards.html" . -}}
+<meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Params.app.title | default .Site.Title }}">
+{{- with .Site.Params.app.themeColor -}}<meta name="theme-color" content="{{ . }}">{{- end -}}
+{{- with .Site.Params.app.tileColor -}}<meta name="msapplication-TileColor" content="{{ . }}">{{- end -}}
