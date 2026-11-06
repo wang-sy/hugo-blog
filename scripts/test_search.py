@@ -4,9 +4,10 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+from urllib.error import URLError
 
 from search_common import parse_sitemap
-from submit_search import baidu, indexnow
+from submit_search import baidu, indexnow, request
 from verify_search import validate_page
 
 
@@ -59,6 +60,15 @@ class SearchTests(unittest.TestCase):
             indexnow(self.records, {}, self.state_path, self.root,
                      lambda *args: (403, b''))
         self.assertFalse(self.state_path.exists())
+
+    @patch('submit_search.urlopen')
+    def test_network_failure_does_not_expose_credential_url(self, open_url):
+        secret_url = 'http://data.zz.baidu.com/urls?token=private-test-token'
+        open_url.side_effect = URLError(OSError(secret_url))
+        with self.assertRaises(RuntimeError) as raised:
+            request(secret_url, b'https://www.wangsaiyu.com/', 'text/plain')
+        self.assertIn('OSError', str(raised.exception))
+        self.assertNotIn('private-test-token', str(raised.exception))
 
     def test_sitemap_rejects_external_duplicate_and_query_urls(self):
         template = '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{}</urlset>'

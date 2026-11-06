@@ -40,6 +40,10 @@ python3 scripts/verify_search.py --live
 ```
 
 百度密钥只使用现有 GitHub Secret `BAIDU_TOKEN`，不写入仓库或输出请求 URL。
+百度提交沿用其[官方公告](https://ziyuan.baidu.com/college/articleinfo?id=3019)指定的
+`http://data.zz.baidu.com/urls`：此接口目前的 HTTPS 证书不覆盖该域名。
+该接口以明文 HTTP 传送专用推送密钥和公开文章地址；博客本身、IndexNow 及线上检查仍使用严格验证的 HTTPS。
+网络错误只记录异常类型，不打印可能包含密钥的请求地址或原始异常文本。
 Google 的普通博客不能使用仅针对特定内容类型的 Indexing API 代替 Search Console。
 Google 站点验证与地图提交需使用站点所有者能登录的 Google 账号；公开 robots 地图声明仍然有效。
 
