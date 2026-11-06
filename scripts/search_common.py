@@ -16,6 +16,7 @@ class Page(HTMLParser):
         self.canonical = []
         self.meta = {}
         self.title = ''
+        self.links = []
         self.in_title = False
         self.feed(text)
 
@@ -23,6 +24,8 @@ class Page(HTMLParser):
         attrs = dict(attrs)
         if tag == 'link' and attrs.get('rel') == 'canonical':
             self.canonical.append(attrs.get('href'))
+        if tag == 'a' and attrs.get('href'):
+            self.links.append(attrs['href'])
         if tag == 'meta':
             key = attrs.get('name', attrs.get('http-equiv', '')).lower()
             self.meta[key] = attrs.get('content', '')

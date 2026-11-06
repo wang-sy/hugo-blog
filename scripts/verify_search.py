@@ -5,7 +5,8 @@ from pathlib import Path
 import socket
 import ssl
 from urllib.request import Request, urlopen
-from urllib.parse import quote
+from urllib.parse import quote, unquote, urljoin, urlsplit
+from urllib.robotparser import RobotFileParser
 
 from search_common import BASE, Page, parse_sitemap, page_file
 
@@ -29,6 +30,27 @@ def fetch(url):
         return response.read()
 
 
+def reachable_articles(public, articles):
+    """Follow static HTML links, including archive pagination, without JavaScript."""
+    visited, pending = set(), [BASE + '/']
+    while pending:
+        url = pending.pop()
+        if url in visited:
+            continue
+        visited.add(url)
+        file = page_file(public, url)
+        if not file.is_file() or file.suffix != '.html':
+            continue
+        for href in Page(file.read_text()).links:
+            target = urlsplit(urljoin(url, href))
+            if target.scheme in ('http', 'https') and target.netloc in ('wangsaiyu.com', 'www.wangsaiyu.com'):
+                path = unquote(target.path)
+                if '..' not in path.split('/'):
+                    pending.append(BASE + (path or '/'))
+    missing = {unquote(record['url']) for record in articles} - visited
+    assert not missing, 'Articles unreachable through static links: ' + ', '.join(sorted(missing))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--public', default='public')
@@ -45,6 +67,11 @@ def main():
     robots = (public / 'robots.txt').read_text()
     for name in ['sitemap.xml', 'sitemap-articles.xml']:
         assert 'Sitemap: ' + BASE + '/' + name in robots
+    parser = RobotFileParser()
+    parser.parse(robots.splitlines())
+    for bot in ['Googlebot', 'bingbot', 'Baiduspider']:
+        assert all(parser.can_fetch(bot, record['url']) for record in articles), 'Robots blocks ' + bot
+    reachable_articles(public, articles)
     print('Local validation:', len(all_urls), 'URLs;', len(articles), 'articles')
     if args.live:
         for host in ['www.wangsaiyu.com', 'wangsaiyu.com']:
