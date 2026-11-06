@@ -2,9 +2,19 @@ name: Build and deploy
 
 on:
   workflow_dispatch:
+  pull_request:
+  schedule:
+    - cron: '17 1 * * *'
   push:
     branches:
       - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -36,10 +46,17 @@ jobs:
           python -m unittest discover -s analytics -p 'test_*.py'
           node --test analytics/test_*.cjs
 
+      - name: Verify search submission behavior
+        run: python -m unittest discover -s scripts -p 'test_*.py'
+
       - name: Build
         run: hugo --minify
 
+      - name: Validate search metadata and sitemaps
+        run: python scripts/verify_search.py
+
       - name: Configure coscmd
+        if: github.event_name != 'pull_request' && github.event_name != 'schedule'
         uses: Bluefissure/tencent-cos-action@v0.1.1
         with:
           # COSCMD args, detail: https://cloud.tencent.com/document/product/436/10976
@@ -54,6 +71,7 @@ jobs:
           region: ${{ secrets.HUGO_COS_REGION }}
 
       - name: Flush CDN
+        if: github.event_name != 'pull_request' && github.event_name != 'schedule'
         env:
           SECRET_ID: ${{ secrets.COS_SECRETID }}
           SECRET_KEY: ${{ secrets.COS_SECRETKEY }}
@@ -61,9 +79,59 @@ jobs:
           pip install --upgrade tencentcloud-sdk-python
           python scripts/flush-dns.py -i $SECRET_ID -k $SECRET_KEY
 
-      - name: Registry to Baidu
-        env:
-          BAIDU_TOKEN: ${{  secrets.BAIDU_TOKEN }}
+      - name: Preserve built search inputs
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: published-site
+          path: public/
+          retention-days: 3
+
+  search:
+    needs: deploy
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: published-site
+          path: public/
+      - name: Verify live site and certificate expiry
+        id: live
         run: |
-          pip install requests lxml
-          python scripts/registry-to-baidu.py
+          for attempt in 1 2 3 4 5; do
+            if python scripts/verify_search.py --live; then exit 0; fi
+            if [ "$attempt" -lt 5 ]; then sleep 30; fi
+          done
+          exit 1
+      - uses: actions/cache/restore@v4
+        id: search-cache
+        with:
+          path: .search-state/
+          key: search-state-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: search-state-v1-
+      - name: Submit changed articles to IndexNow
+        id: indexnow
+        continue-on-error: true
+        run: python scripts/submit_search.py --engine indexnow
+      - name: Submit changed articles within Baidu quota
+        id: baidu
+        continue-on-error: true
+        env:
+          BAIDU_TOKEN: ${{ secrets.BAIDU_TOKEN }}
+        run: python scripts/submit_search.py --engine baidu
+      - name: Preserve successful submissions even when another engine fails
+        if: always() && steps.live.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: .search-state/
+          key: search-state-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Report incomplete search submissions
+        if: always() && (steps.indexnow.outcome == 'failure' || steps.baidu.outcome == 'failure')
+        run: |
+          echo '::error::Website deployment and search submissions have separate results. Inspect the engine summary; failed or quota-limited submissions are not indexing success.'
+          exit 1

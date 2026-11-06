@@ -6,7 +6,6 @@ theme = "LoveIt"
 # 网站标题
 title = "SaiyuDoc"
 # 网站描述, 用于 RSS, SEO, Open Graph 和 Twitter Cards
-description = "Saiyu Wang 的博客"
 
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
 languageCode = "zh-CN"
@@ -20,7 +19,7 @@ hasCJKLanguage = true
 # 是否使用 robots.txt
 enableRobotsTXT = true
 # 是否使用 git 信息
-#enableGitInfo = true
+enableGitInfo = true
 # 是否使用 emoji 代码
 enableEmoji = true
 
@@ -32,6 +31,21 @@ enableEmoji = true
 [author]
   name = "王赛宇"
   email = "panicwang@outlook.com"
+
+[params]
+  description = "王赛宇的技术博客，记录 AI Agent、后端架构、数据库、游戏开发与计算机基础的原理和工程实践。"
+
+[frontmatter]
+  lastmod = ["lastmod", ":git", "date"]
+
+[outputs]
+  home = ["HTML", "RSS", "ArticlesSitemap"]
+
+[outputFormats.ArticlesSitemap]
+  mediaType = "application/xml"
+  baseName = "sitemap-articles"
+  isPlainText = true
+  notAlternative = true
 
 [params.footer]
     enable = true

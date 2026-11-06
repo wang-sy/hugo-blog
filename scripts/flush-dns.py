@@ -32,3 +32,4 @@ try:
 
 except TencentCloudSDKException as err:
     print(err)
+    raise SystemExit(1)
