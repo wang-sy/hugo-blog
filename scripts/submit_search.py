@@ -20,15 +20,20 @@ def request(url, data, content_type):
             return response.status, response.read()
     except HTTPError as error:
         return error.code, error.read()
-    except (URLError, TimeoutError):
-        raise RuntimeError('Search submission network error (credentials omitted)') from None
+    except (URLError, TimeoutError) as error:
+        # Error text can contain the credential-bearing URL; expose only its type.
+        reason = error.reason if isinstance(error, URLError) else error
+        raise RuntimeError('Search submission network error: %s (credentials omitted)' %
+                           type(reason).__name__) from None
 
 
 def baidu(records, state, path, send=request):
     token = os.environ.get('BAIDU_TOKEN')
     if not token:
         raise RuntimeError('BAIDU_TOKEN is not configured')
-    endpoint = 'https://data.zz.baidu.com/urls?' + urlencode({'site': BASE, 'token': token})
+    # Baidu documents HTTP for this endpoint; its TLS certificate does not cover
+    # data.zz.baidu.com. Do not work around this by disabling TLS verification.
+    endpoint = 'http://data.zz.baidu.com/urls?' + urlencode({'site': BASE, 'token': token})
     accepted = 0
     # Probe with one article; never send a full sitemap against an unknown quota.
     for record in records[:20]:
